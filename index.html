@@ -5,20 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EdTech Agency - Маркетинг-партнёр для EdTech проектов</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
   <style>
     :root {
       --primary: #10b981;
       --primary-dark: #059669;
       --secondary: #34d399;
-      --dark: #1f2937;
-      --dark-light: #374151;
-      --dark-lighter: #4b5563;
-      --light: #f9fafb;
-      --text: #ffffff;
-      --text-muted: #d1d5db;
+      --dark: #ffffff;
+      --dark-light: #f8f9fa;
+      --dark-lighter: #e9ecef;
+      --light: #ffffff;
+      --text: #333333; /* Very dark grey, almost black */
+      --text-muted: #555555; /* Darker, more muted grey */
       --accent: #10b981;
       --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      --shadow: 0 10px 25px rgba(0,0,0,0.3);
+      --shadow: 0 10px 25px rgba(0,0,0,0.1);
       --border-radius: 12px;
     }
 
@@ -46,14 +47,14 @@
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(31, 41, 55, 0.95);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
       padding: 15px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 1000;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
     .logo {
@@ -70,24 +71,7 @@
       line-height: 1.2;
     }
 
-    .logo-zilly {
-      font-size: 4.8rem;
-      font-weight: 700;
-      font-style: italic;
-      font-family: 'Brush Script MT', cursive, 'Inter', sans-serif;
-      color: #10b981;
-      text-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
-    }
 
-    .logo-subtitle {
-      font-size: 0.9rem;
-      font-weight: 500;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-top: -2px;
-    }
 
     .nav-container {
       display: flex;
@@ -206,53 +190,49 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      text-align: center;
+      align-items: flex-start;
+      text-align: left;
       padding: 120px 20px 80px;
-      background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+      background: var(--light);
       position: relative;
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-      opacity: 0.3;
-    }
-
     .hero-content {
-      max-width: 900px;
+      max-width: 1200px;
+      width: 100%;
       position: relative;
       z-index: 2;
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(2.5rem, 6vw, 4rem);
       font-weight: 700;
       margin-bottom: 24px;
       line-height: 1.2;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--text);
     }
 
-    .hero-subtitle {
-      font-size: 1.25rem;
-      color: var(--text-muted);
+    .hero-description {
+      font-size: 1.2rem;
+      color: var(--text);
       margin-bottom: 40px;
       font-weight: 400;
+      line-height: 1.5;
     }
 
     .hero-cta {
       display: flex;
       gap: 20px;
-      justify-content: center;
+      justify-content: flex-start;
       flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-weight: 400;
     }
 
     /* Buttons */
@@ -710,22 +690,252 @@
       opacity: 1;
       transform: translateY(0);
     }
-  </style>
-</head>
-<body>
 
-<header>
+    /* Trusted By Section */
+    .trusted-by {
+      padding: 60px 20px;
+      background: var(--dark-light);
+      text-align: center;
+    }
+
+    .trusted-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .trusted-logos {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      opacity: 0.7;
+      padding-bottom: 10px; /* Add some padding for the scrollbar */
+      /* Hide scrollbar for different browsers */
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+
+    /* Hide scrollbar for Webkit browsers */
+    .trusted-logos::-webkit-scrollbar {
+      display: none;
+    }
+
+    .trusted-logo {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 15px 25px;
+      border: 2px solid var(--dark-lighter);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .trusted-logo:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      opacity: 1;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Trusted By Section */
+    .trusted-by {
+      padding: 60px 20px;
+      background: var(--dark-light);
+      text-align: center;
+    }
+
+    .trusted-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .trusted-logos {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      opacity: 0.7;
+      padding-bottom: 10px; /* Add some padding for the scrollbar */
+      min-width: max-content; /* Ensure content overflows */
+      /* Hide scrollbar for different browsers */
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+
+    /* Hide scrollbar for Webkit browsers */
+    .trusted-logos::-webkit-scrollbar {
+      display: none;
+    }
+
+    .trusted-logo {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 15px 25px;
+      border: 2px solid var(--dark-lighter);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .trusted-logo:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      opacity: 1;
+    }
+
+    /* Team Section */
+    .team {
+      padding: 80px 20px;
+      background: var(--light);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .team-member {
+      text-align: center;
+      padding: 20px;
+      border-radius: var(--border-radius);
+      transition: all 0.3s ease;
+    }
+
+    .team-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--dark-lighter);
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--text-muted);
+    }
+
+    .team-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .team-role {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1001; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+      backdrop-filter: blur(8px); /* Blur effect */
+      -webkit-backdrop-filter: blur(8px); /* Safari support */
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 40px;
+      border-radius: var(--border-radius);
+      max-width: 900px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      animation-name: animatemodal;
+      animation-duration: 0.4s;
+      overflow-y: auto; /* Enable scrolling for modal content */
+      max-height: 90vh; /* Limit height to viewport height */
+      color: var(--text); /* Use main text color */
+    }
+
+    .close-button {
+      color: var(--text-muted);
+      font-size: 35px;
+      font-weight: bold;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .close-button:hover,
+    .close-button:focus {
+      color: var(--primary);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Animation for modal */
+    @keyframes animatemodal {
+      from {top: -300px; opacity: 0}
+      to {top: 0; opacity: 1}
+    }
+
+    /* Blur background when modal is active */
+    body.modal-active > *:not(.modal-overlay) {
+      filter: blur(5px);
+      pointer-events: none; /* Disable interaction with blurred content */
+    }
+</style>
+<header style="background-color: white;">
   <div class="logo">
-    <div class="logo-text">
-      <div class="logo-zilly">Zilly</div>
-      <div class="logo-subtitle" data-ru="маркетинг-партнёр" data-en="marketing partner"></div>
-    </div>
+    <img src="logozlilly.png" alt="logozilly" style="height: 100px; width: 200px;">
+
   </div>
+
   <div class="menu-btn">☰</div>
   <div class="nav-container">
     <nav class="main-nav">
       <a href="#for"><span class="nav-number">1</span><span data-ru="Для кого" data-en="For Whom">Для кого</span></a>
-      <a href="#cases"><span class="nav-number">2</span><span data-ru="Кейсы" data-en="Cases">Кейсы</span></a>
+      <a href="javascript:void(0);" id="cases-nav-link"><span class="nav-number">2</span><span data-ru="Кейсы" data-en="Cases">Кейсы</span></a>
       <a href="#about"><span class="nav-number">3</span><span data-ru="О нас" data-en="About">О нас</span></a>
       <a href="#contact"><span class="nav-number">4</span><span data-ru="Связаться" data-en="Contact">Связаться</span></a>
     </nav>
@@ -740,15 +950,15 @@
 <section class="hero" id="hero">
   <div class="hero-content animate-on-scroll">
     <h1>
-      <span data-ru="Zilly — маркетинг-партнёр для EdTech-проектов: от привлечения лидов до построения систем удержания. Трафик — лишь часть нашей работы. Мы закрываем весь цикл роста" 
-            data-en="Zilly — marketing partner for EdTech projects: from lead generation to retention systems. Traffic is just part of our work. We cover the entire growth cycle">
-        Zilly — маркетинг-партнёр для EdTech-проектов: от привлечения лидов до построения систем удержания. Трафик — лишь часть нашей работы. Мы закрываем весь цикл роста
+      <span data-ru="Zilly — маркетинг-партнёр для EdTech-проектов: от привлечения лидов до построения систем удержания." 
+            data-en="Zilly — marketing partner for EdTech projects: from lead generation to retention systems.">
+        Zilly — маркетинг-партнёр для EdTech-проектов: от привлечения лидов до построения систем удержания.
       </span>
     </h1>
-    <p class="hero-subtitle">
-      <span data-ru="Для языковых школ, стартапов, блогеров и университетов" 
-            data-en="For language schools, startups, bloggers and universities">
-        Для языковых школ, стартапов, блогеров и университетов
+    <p class="hero-description">
+      <span data-ru="Трафик — лишь часть нашей работы. Мы закрываем весь цикл роста" 
+            data-en="Traffic is just part of our work. We cover the entire growth cycle">
+        Трафик — лишь часть нашей работы. Мы закрываем весь цикл роста
       </span>
     </p>
     <div class="hero-cta">
@@ -762,8 +972,16 @@
         <span data-ru="Посмотреть кейсы" data-en="View Cases">Посмотреть кейсы</span>
       </a>
     </div>
+    <p class="hero-subtitle">
+      <span data-ru="Для языковых школ, стартапов, блогеров и университетов" 
+            data-en="For language schools, startups, bloggers and universities">
+        Для языковых школ, стартапов, блогеров и университетов
+      </span>
+    </p>
   </div>
 </section>
+
+
 
 <section id="for" class="animate-on-scroll">
   <h2 class="section-title" data-ru="Для кого мы работаем" data-en="Who We Work For">Для кого мы работаем</h2>
@@ -792,6 +1010,18 @@
       <span class="card-icon">🎓</span>
       <h3 class="card-title" data-ru="Университеты" data-en="Universities">Университеты</h3>
       <p class="card-description" data-ru="Digital-переход и глобальные студенты" data-en="Digital transition and global students">Digital-переход и глобальные студенты</p>
+    </div>
+    
+    <div class="card">
+      <span class="card-icon">🏢</span>
+      <h3 class="card-title" data-ru="Корпорации" data-en="Corporations">Корпорации</h3>
+      <p class="card-description" data-ru="Корпоративное обучение и развитие персонала" data-en="Corporate training and staff development">Корпоративное обучение и развитие персонала</p>
+    </div>
+    
+    <div class="card">
+      <span class="card-icon">🚀</span>
+      <h3 class="card-title" data-ru="EdTech платформы" data-en="EdTech Platforms">EdTech платформы</h3>
+      <p class="card-description" data-ru="Масштабирование образовательных платформ" data-en="Scaling educational platforms">Масштабирование образовательных платформ</p>
     </div>
   </div>
   
@@ -877,64 +1107,8 @@
   </div>
 </section>
 
-<section id="cases" class="animate-on-scroll">
-  <h2 class="section-title" data-ru="Результаты" data-en="Results">Результаты</h2>
-  <p class="section-subtitle" data-ru="Кейсы наших клиентов" data-en="Our client cases">Кейсы наших клиентов</p>
-  
-  <div class="cards">
-    <div class="card expandable-card">
-      <span class="expand-indicator">+</span>
-      <span class="card-icon">🧠</span>
-      <h3 class="card-title">Vadym.ai</h3>
-      <p class="card-description" data-ru="Курс по ИИ Автоматизации для бизнеса - 5500 лидов за месяц!" data-en="AI Automation Course for Business - 5500 leads per month!">Курс по ИИ Автоматизации для бизнеса - 5500 лидов за месяц!</p>
-      <div class="card-expanded">
-        <p data-ru="Запустили комплексную кампанию по продвижению курса ИИ автоматизации. Результат: 5500+ лидов, конверсия в продажи 12%, ROI 340%." 
-           data-en="Launched comprehensive campaign for AI automation course. Result: 5500+ leads, 12% sales conversion, ROI 340%.">
-          Запустили комплексную кампанию по продвижению курса ИИ автоматизации. Результат: 5500+ лидов, конверсия в продажи 12%, ROI 340%.
-        </p>
-      </div>
-    </div>
-    
-    <div class="card expandable-card">
-      <span class="expand-indicator">+</span>
-      <span class="card-icon">🌟</span>
-      <h3 class="card-title">YesCenter</h3>
-      <p class="card-description" data-ru="Поступление в университеты заграницу - 850+ успешных заявок!" data-en="University admission abroad - 850+ successful applications!">Поступление в университеты заграницу - 850+ успешных заявок!</p>
-      <div class="card-expanded">
-        <p data-ru="Помогли образовательному центру масштабировать услуги поступления в зарубежные университеты. Результат: 850+ успешных заявок, увеличение выручки на 280%." 
-           data-en="Helped educational center scale university admission services abroad. Result: 850+ successful applications, 280% revenue increase.">
-          Помогли образовательному центру масштабировать услуги поступления в зарубежные университеты. Результат: 850+ успешных заявок, увеличение выручки на 280%.
-        </p>
-      </div>
-    </div>
-    
-    <div class="card expandable-card">
-      <span class="expand-indicator">+</span>
-      <span class="card-icon">💎</span>
-      <h3 class="card-title">Web3 & Crypto 2025</h3>
-      <p class="card-description" data-ru="Запуск под ключ - от 0 до 10,000 студентов" data-en="Turnkey launch - from 0 to 10,000 students">Запуск под ключ - от 0 до 10,000 студентов</p>
-      <div class="card-expanded">
-        <p data-ru="Полный запуск образовательной платформы по Web3 и криптовалютам. За 6 месяцев привлекли 10,000+ студентов, выручка $2.5M." 
-           data-en="Full launch of Web3 and cryptocurrency educational platform. In 6 months attracted 10,000+ students, revenue $2.5M.">
-          Полный запуск образовательной платформы по Web3 и криптовалютам. За 6 месяцев привлекли 10,000+ студентов, выручка $2.5M.
-        </p>
-      </div>
-    </div>
-    
-    <div class="card expandable-card">
-      <span class="expand-indicator">+</span>
-      <span class="card-icon">🏆</span>
-      <h3 class="card-title" data-ru="Языковая школа Premium" data-en="Premium Language School">Языковая школа Premium</h3>
-      <p class="card-description" data-ru="Заполнение групп и удержание студентов - 95% заполненность" data-en="Group filling and student retention - 95% occupancy">Заполнение групп и удержание студентов - 95% заполненность</p>
-      <div class="card-expanded">
-        <p data-ru="Построили систему привлечения и удержания студентов для языковой школы. Результат: 95% заполненность групп, снижение оттока на 60%." 
-           data-en="Built student attraction and retention system for language school. Result: 95% group occupancy, 60% churn reduction.">
-          Построили систему привлечения и удержания студентов для языковой школы. Результат: 95% заполненность групп, снижение оттока на 60%.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+
+
 
 <section id="about" class="animate-on-scroll">
   <h2 class="section-title" data-ru="Почему мы?" data-en="Why Us?">Почему мы?</h2>
@@ -1058,6 +1232,53 @@
   </div>
 </section>
 
+<section class="trusted-by animate-on-scroll">
+  <h3 class="trusted-title" data-ru="Нам доверяют" data-en="Trusted by">Нам доверяют</h3>
+  <div class="trusted-logos">
+    <div class="trusted-logo">Vadym.ai</div>
+    <div class="trusted-logo">YesCenter</div>
+    <div class="trusted-logo">Web3 Academy</div>
+    <div class="trusted-logo">EduTech Pro</div>
+    <div class="trusted-logo">Language Plus</div>
+    <div class="trusted-logo">Vadym.ai</div>
+    <div class="trusted-logo">YesCenter</div>
+    <div class="trusted-logo">Web3 Academy</div>
+    <div class="trusted-logo">EduTech Pro</div>
+    <div class="trusted-logo">Language Plus</div>
+  </div>
+</section>
+
+<section id="team" class="team animate-on-scroll">
+  <h2 class="section-title" data-ru="Команда" data-en="Team">Команда</h2>
+  <p class="section-subtitle" data-ru="Профессионалы, которые работают над вашим успехом" data-en="Professionals working on your success">Профессионалы, которые работают над вашим успехом</p>
+  
+  <div class="team-grid">
+    <div class="team-member">
+      <div class="team-photo">👨‍💼</div>
+      <h3 class="team-name" data-ru="Алексей Иванов" data-en="Alex Ivanov">Алексей Иванов</h3>
+      <p class="team-role" data-ru="Стратегический директор" data-en="Strategic Director">Стратегический директор</p>
+    </div>
+    
+    <div class="team-member">
+      <div class="team-photo">👩‍💻</div>
+      <h3 class="team-name" data-ru="Мария Петрова" data-en="Maria Petrova">Мария Петрова</h3>
+      <p class="team-role" data-ru="Руководитель маркетинга" data-en="Marketing Director">Руководитель маркетинга</p>
+    </div>
+    
+    <div class="team-member">
+      <div class="team-photo">👨‍🎨</div>
+      <h3 class="team-name" data-ru="Дмитрий Козлов" data-en="Dmitry Kozlov">Дмитрий Козлов</h3>
+      <p class="team-role" data-ru="Креативный директор" data-en="Creative Director">Креативный директор</p>
+    </div>
+    
+    <div class="team-member">
+      <div class="team-photo">👩‍📊</div>
+      <h3 class="team-name" data-ru="Анна Смирнова" data-en="Anna Smirnova">Анна Смирнова</h3>
+      <p class="team-role" data-ru="Аналитик данных" data-en="Data Analyst">Аналитик данных</p>
+    </div>
+  </div>
+</section>
+
 <section id="contact" class="animate-on-scroll">
   <h2 class="section-title" data-ru="Готовы обсудить ваш проект?" data-en="Ready to discuss your project?">Готовы обсудить ваш проект?</h2>
   <p class="section-subtitle" data-ru="Выберите удобное время для звонка прямо сейчас, время автоматически подстраивается под нашу временную зону" data-en="Choose a convenient time for a call right now, time automatically adjusts to our time zone">Выберите удобное время для звонка прямо сейчас, время автоматически подстраивается под нашу временную зону</p>
@@ -1149,6 +1370,33 @@
         }
       }
     });
+
+    // Cases Modal Functionality
+    const casesNavLink = document.getElementById('cases-nav-link');
+    const casesModal = document.getElementById('cases-modal');
+    const closeButton = casesModal.querySelector('.close-button');
+    const body = document.body;
+
+    if (casesNavLink && casesModal) {
+      casesNavLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        casesModal.style.display = 'flex'; // Show the modal
+        body.classList.add('modal-active'); // Add class to blur background
+      });
+
+      closeButton.addEventListener('click', () => {
+        casesModal.style.display = 'none'; // Hide the modal
+        body.classList.remove('modal-active'); // Remove blur class
+      });
+
+      // Close modal if clicked outside content
+      casesModal.addEventListener('click', (e) => {
+        if (e.target === casesModal) {
+          casesModal.style.display = 'none';
+          body.classList.remove('modal-active');
+        }
+      });
+    }
   });
 
   // FAQ Toggle
@@ -1241,16 +1489,123 @@
     observer.observe(el);
   });
 
-  // Header Background on Scroll
+  // Trusted By automatic scroll
+  const trustedLogosContainer = document.querySelector('.trusted-logos');
+  if (trustedLogosContainer) {
+    let scrollAmount = 0;
+    const scrollSpeed = 0.5; // Adjust scroll speed as needed
+
+    function autoScroll() {
+      scrollAmount += scrollSpeed;
+      if (scrollAmount >= trustedLogosContainer.scrollWidth - trustedLogosContainer.clientWidth) {
+        scrollAmount = 0; // Loop back to the beginning
+      }
+      trustedLogosContainer.scrollLeft = scrollAmount;
+      requestAnimationFrame(autoScroll);
+    }
+
+    // Start scrolling after a short delay
+    setTimeout(() => {
+      requestAnimationFrame(autoScroll);
+    }, 2000); // 2 second delay before starting
+  }
   window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
     if (window.scrollY > 100) {
-      header.style.background = 'rgba(15, 23, 42, 0.98)';
+      header.style.background = 'rgba(255, 255, 255, 0.98)';
     } else {
-      header.style.background = 'rgba(15, 23, 42, 0.95)';
+      header.style.background = 'rgba(255, 255, 255, 0.95)';
     }
   });
+
+  // Cases Modal Functionality
+  const casesNavLink = document.getElementById('cases-nav-link');
+  const casesModal = document.getElementById('cases-modal');
+  const closeButton = casesModal.querySelector('.close-button');
+  const body = document.body;
+
+  if (casesNavLink && casesModal) {
+    casesNavLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      casesModal.style.display = 'flex'; // Show the modal
+      body.classList.add('modal-active'); // Add class to blur background
+    });
+
+    closeButton.addEventListener('click', () => {
+      casesModal.style.display = 'none'; // Hide the modal
+      body.classList.remove('modal-active'); // Remove blur class
+    });
+
+    // Close modal if clicked outside content
+    casesModal.addEventListener('click', (e) => {
+      if (e.target === casesModal) {
+        casesModal.style.display = 'none';
+        body.classList.remove('modal-active');
+      }
+    });
+  }
 </script>
 
+  <div id="cases-modal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2 class="section-title" data-ru="Результаты" data-en="Results">Результаты</h2>
+      <p class="section-subtitle" data-ru="Кейсы наших клиентов" data-en="Our client cases">Кейсы наших клиентов</p>
+      
+      <div class="cards">
+        <div class="card expandable-card">
+          <span class="expand-indicator">+</span>
+          <span class="card-icon">🧠</span>
+          <h3 class="card-title">Vadym.ai</h3>
+          <p class="card-description" data-ru="Курс по ИИ Автоматизации для бизнеса - 5500 лидов за месяц!" data-en="AI Automation Course for Business - 5500 leads per month!">Курс по ИИ Автоматизации для бизнеса - 5500 лидов за месяц!</p>
+          <div class="card-expanded">
+            <p data-ru="Запустили комплексную кампанию по продвижению курса ИИ автоматизации. Результат: 5500+ лидов, конверсия в продажи 12%, ROI 340%." 
+               data-en="Launched comprehensive campaign for AI automation course. Result: 5500+ leads, 12% sales conversion, ROI 340%.">
+              Запустили комплексную кампанию по продвижению курса ИИ автоматизации. Результат: 5500+ лидов, конверсия в продажи 12%, ROI 340%.
+            </p>
+          </div>
+        </div>
+        
+        <div class="card expandable-card">
+          <span class="expand-indicator">+</span>
+          <span class="card-icon">🌟</span>
+          <h3 class="card-title">YesCenter</h3>
+          <p class="card-description" data-ru="Поступление в университеты заграницу - 850+ успешных заявок!" data-en="University admission abroad - 850+ successful applications!">Поступление в университеты заграницу - 850+ успешных заявок!</p>
+          <div class="card-expanded">
+            <p data-ru="Помогли образовательному центру масштабировать услуги поступления в зарубежные университеты. Результат: 850+ успешных заявок, увеличение выручки на 280%." 
+               data-en="Helped educational center scale university admission services abroad. Result: 850+ successful applications, 280% revenue increase.">
+              Помогли образовательному центру масштабировать услуги поступления в зарубежные университеты. Результат: 850+ успешных заявок, увеличение выручки на 280%.
+            </p>
+          </div>
+        </div>
+        
+        <div class="card expandable-card">
+          <span class="expand-indicator">+</span>
+          <span class="card-icon">💎</span>
+          <h3 class="card-title">Web3 & Crypto 2025</h3>
+          <p class="card-description" data-ru="Запуск под ключ - от 0 до 10,000 студентов" data-en="Turnkey launch - from 0 to 10,000 students">Запуск под ключ - от 0 до 10,000 студентов</p>
+          <div class="card-expanded">
+            <p data-ru="Полный запуск образовательной платформы по Web3 и криптовалютам. За 6 месяцев привлекли 10,000+ студентов, выручка $2.5M." 
+               data-en="Full launch of Web3 and cryptocurrency educational platform. In 6 months attracted 10,000+ students, revenue $2.5M.">
+              Полный запуск образовательной платформы по Web3 и криптовалютам. За 6 месяцев привлекли 10,000+ студентов, выручка $2.5M.
+            </p>
+          </div>
+        </div>
+        
+        <div class="card expandable-card">
+          <span class="expand-indicator">+</span>
+          <span class="card-icon">🏆</span>
+          <h3 class="card-title">Языковая школа Premium</h3>
+          <p class="card-description" data-ru="Заполнение групп и удержание студентов - 95% заполненность" data-en="Group filling and student retention - 95% occupancy">Заполнение групп и удержание студентов - 95% заполненность</p>
+          <div class="card-expanded">
+            <p data-ru="Построили систему привлечения и удержания студентов для языковой школы. Результат: 95% заполненность групп, снижение оттока на 60%." 
+               data-en="Built student attraction and retention system for language school. Result: 95% group occupancy, 60% churn reduction.">
+              Построили систему привлечения и удержания студентов для языковой школы. Результат: 95% заполненность групп, снижение оттока на 60%.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
