@@ -6,27 +6,37 @@
   <title>EdTech Agency - Кейс: Web3 & Crypto 2025</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"> <!-- Assuming a shared stylesheet or inline styles -->
+  <style>
+    .section-title {
+      font-size: clamp(3rem, 7vw, 4rem);
+    }
+    .btn {
+      padding: 24px 48px;
+      font-size: 1.5rem;
+    }
+  </style>
 </head>
 <body>
   <header style="background-color: white;">
-    <div class="logo">
-      <img src="logozlilly.png" alt="logozilly" style="height: 100px; width: 200px;">
+  <a href="index.html" class="logo" style="text-decoration: none;">
+    <img src="logozlilly.png" alt="logozilly">
+  </a>
+
+  <div class="menu-btn">☰</div>
+  <div class="nav-container">
+    <nav class="main-nav">
+      <a href="index.html#for"><span class="nav-number">1</span><span data-ru="Для кого" data-en="For Whom">Для кого</span></a>
+      <a href="cases.html"><span class="nav-number">2</span><span data-ru="Кейсы" data-en="Cases">Кейсы</span></a>
+      <a href="index.html#about"><span class="nav-number">3</span><span data-ru="О нас" data-en="About">О нас</span></a>
+      <a href="index.html#other-services"><span class="nav-number">4</span><span data-ru="Мы работаем еще с другими" data-en="We work with others too">Мы работаем еще с другими</span></a>
+    </nav>
+    <a href="index.html#contact" class="nav-contact-btn" data-ru="Связаться" data-en="Contact">Связаться</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="ru">RU</button>
+      <button class="lang-btn" data-lang="en">EN</button>
     </div>
-    <div class="menu-btn">☰</div>
-    <div class="nav-container">
-      <nav class="main-nav">
-        <a href="EdTech.html#for"><span class="nav-number">1</span><span data-ru="Для кого" data-en="For Whom">Для кого</span></a>
-        <a href="cases.html" class="nav-contact-btn"><span data-ru="Кейсы" data-en="Cases">Кейсы</span></a>
-        <a href="EdTech.html#about"><span class="nav-number">3</span><span data-ru="О нас" data-en="About">О нас</span></a>
-        <a href="EdTech.html#contact" class="nav-contact-btn"><span data-ru="Связаться" data-en="Contact">Связаться</span></a>
-      </nav>
-      <a href="EdTech.html#other-services" class="other-services-btn" data-ru="Мы работаем еще с другими" data-en="We work with others too">Мы работаем еще с другими</a>
-      <div class="lang-toggle">
-        <button class="lang-btn active" data-lang="ru">RU</button>
-        <button class="lang-btn" data-lang="en">EN</button>
-      </div>
-    </div>
-  </header>
+  </div>
+</header>
 
   <section class="hero" id="case-detail-hero">
     <div class="hero-content animate-on-scroll">
@@ -79,6 +89,7 @@
   </footer>
 
   <script src="https://cal.com/embed.js" async></script>
-  <script src="script.js"></script> <!-- Assuming a shared script file or inline scripts -->
+  <script src="script.js"></script>
+  <script src="cal-integration.js"></script>
 </body>
 </html>

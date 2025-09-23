@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EdTech Agency - Маркетинг-партнёр для EdTech проектов</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
   <style>
     :root {
@@ -47,14 +48,16 @@
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      padding: 15px 30px;
+      background: white; /* Solid white background */
+      /* backdrop-filter: blur(10px); Removed */
+      padding: 5px 30px; /* Even more compact padding */
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: center; /* Vertically center items */
       z-index: 1000;
       border-bottom: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 1px 5px rgba(0,0,0,0.08); /* More subtle shadow */
+      height:90px;
     }
 
     .logo {
@@ -71,6 +74,18 @@
       line-height: 1.2;
     }
 
+    .logo img {
+      max-width: 150px; /* Even further reduced desktop max width */
+      height: auto;
+      position:fixed;
+    }
+
+    @media (max-width: 768px) {
+      .logo img {
+        max-width: 120px; /* Further reduced mobile max width */
+      }
+    }
+
 
 
     .nav-container {
@@ -82,6 +97,7 @@
     .main-nav {
       display: flex;
       gap: 25px;
+      margin-top: 2px; /* Move nav menu slightly down (less) */
     }
 
     .main-nav a {
@@ -129,8 +145,9 @@
     }
 
     .nav-number:nth-child(4) {
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
-      border-radius: 2px;
+      background: var(--accent); /* Use accent color for background */
+      color: white; /* White text color */
+      border-radius: 50%; /* Make it a circle */
     }
 
     .other-services-btn {
@@ -170,9 +187,25 @@
       font-weight: 500;
     }
 
-    .lang-btn.active {
-      background: var(--primary);
+    .nav-contact-btn {
+      background: var(--gradient);
       color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-contact-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
     }
 
     .menu-btn {
@@ -192,7 +225,7 @@
       justify-content: center;
       align-items: flex-start;
       text-align: left;
-      padding: 120px 20px 80px;
+      padding: 95px 20px 80px; /* Adjusted top padding for even smaller header */
       background: var(--light);
       position: relative;
     }
@@ -240,7 +273,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 14px 28px;
+      padding: 18px 36px;
       border: none;
       border-radius: var(--border-radius);
       font-weight: 600;
@@ -274,12 +307,17 @@
     /* Sections */
     section {
       padding: 80px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
+    }
+
+    @media (min-width: 1201px) {
+      section:not(#hero) { /* Apply max-width to sections other than hero on large screens */
+        max-width: 1200px;
+        margin: 0 auto;
+      }
     }
 
     .section-title {
-      font-size: 2.5rem;
+      font-size: 3rem;
       font-weight: 700;
       text-align: center;
       margin-bottom: 20px;
@@ -299,12 +337,70 @@
       margin-right: auto;
     }
 
+    /* Service List */
+    .service-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    .service-item {
+      background: var(--dark-light);
+      border: 1px solid var(--dark-lighter);
+      border-radius: var(--border-radius);
+      padding: 20px 25px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+      position: relative;
+      text-align: left;
+    }
+
+    .service-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+      border-color: var(--primary);
+    }
+
+    .service-item::before {
+      content: '•';
+      color: var(--primary);
+      font-size: 1.5rem;
+      position: absolute;
+      left: 10px;
+      top: 15px;
+    }
+
+    .service-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 5px;
+      padding-left: 25px; /* Make space for the bullet */
+    }
+
+    .service-description {
+      color: var(--text-muted);
+      line-height: 1.5;
+      padding-left: 25px; /* Make space for the bullet */
+    }
+
     /* Cards */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
       margin-bottom: 40px;
+    }
+
+    #about .cards {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Adjust minmax for 2 columns */
+    }
+
+    @media (min-width: 768px) {
+      #about .cards {
+        grid-template-columns: repeat(2, 1fr); /* Force 2 columns on medium screens and up */
+      }
     }
 
     .card {
@@ -691,55 +787,7 @@
       transform: translateY(0);
     }
 
-    /* Trusted By Section */
-    .trusted-by {
-      padding: 60px 20px;
-      background: var(--dark-light);
-      text-align: center;
-    }
 
-    .trusted-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 40px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .trusted-logos {
-      display: flex;
-      align-items: center;
-      gap: 60px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      opacity: 0.7;
-      padding-bottom: 10px; /* Add some padding for the scrollbar */
-      /* Hide scrollbar for different browsers */
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-    }
-
-    /* Hide scrollbar for Webkit browsers */
-    .trusted-logos::-webkit-scrollbar {
-      display: none;
-    }
-
-    .trusted-logo {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      padding: 15px 25px;
-      border: 2px solid var(--dark-lighter);
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
-
-    .trusted-logo:hover {
-      color: var(--primary);
-      border-color: var(--primary);
-      opacity: 1;
-    }
 
     /* Animations */
     @keyframes fadeInUp {
@@ -786,9 +834,7 @@
       gap: 60px;
       flex-wrap: nowrap;
       overflow-x: auto;
-      opacity: 0.7;
       padding-bottom: 10px; /* Add some padding for the scrollbar */
-      min-width: max-content; /* Ensure content overflows */
       /* Hide scrollbar for different browsers */
       -ms-overflow-style: none;  /* IE and Edge */
       scrollbar-width: none;  /* Firefox */
@@ -924,22 +970,22 @@
       filter: blur(5px);
       pointer-events: none; /* Disable interaction with blurred content */
     }
+
 </style>
 <header style="background-color: white;">
-  <div class="logo">
-    <img src="logozlilly.png" alt="logozilly" style="height: 100px; width: 200px;">
-
-  </div>
+  <a href="index.html" class="logo" style="text-decoration: none;">
+    <img src="logozlilly.png" alt="logozilly">
+  </a>
 
   <div class="menu-btn">☰</div>
   <div class="nav-container">
     <nav class="main-nav">
       <a href="#for"><span class="nav-number">1</span><span data-ru="Для кого" data-en="For Whom">Для кого</span></a>
-      <a href="javascript:void(0);" id="cases-nav-link"><span class="nav-number">2</span><span data-ru="Кейсы" data-en="Cases">Кейсы</span></a>
+      <a href="cases.html"><span class="nav-number">2</span><span data-ru="Кейсы" data-en="Cases">Кейсы</span></a>
       <a href="#about"><span class="nav-number">3</span><span data-ru="О нас" data-en="About">О нас</span></a>
-      <a href="#contact"><span class="nav-number">4</span><span data-ru="Связаться" data-en="Contact">Связаться</span></a>
+      <a href="#other-services"><span class="nav-number">4</span><span data-ru="Мы работаем еще с другими" data-en="We work with others too">Мы работаем еще с другими</span></a>
     </nav>
-    <a href="#other-services" class="other-services-btn" data-ru="Мы работаем еще с другими" data-en="We work with others too">Мы работаем еще с другими</a>
+    <a href="#contact" class="nav-contact-btn" data-ru="Связаться" data-en="Contact">Связаться</a>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="ru">RU</button>
       <button class="lang-btn" data-lang="en">EN</button>
@@ -962,15 +1008,19 @@
       </span>
     </p>
     <div class="hero-cta">
-      <button 
-        data-cal-link="cal_live_0b821391b525deeabb6b077c2a8578ca"
-        data-cal-config='{"layout":"month_view","theme":"light"}'
-        class="btn btn-primary cal-booking-btn">
-        <span data-ru="Назначить встречу" data-en="Schedule Meeting">Назначить встречу</span>
-      </button>
-      <a href="#cases" class="btn btn-secondary">
+      <a href="#contact"
+      data-cal-link="kostiantyn-zozulia-k3tj7t/30min"
+      data-cal-config='{"layout":"month_view"}'
+      class="btn btn-primary">
+      <span data-ru="Назначить встречу" data-en="Schedule Meeting">Назначить встречу</span>
+    </a>
+
+
+      <a href="cases.html" class="btn btn-secondary">
         <span data-ru="Посмотреть кейсы" data-en="View Cases">Посмотреть кейсы</span>
       </a>
+
+
     </div>
     <p class="hero-subtitle">
       <span data-ru="Для языковых школ, стартапов, блогеров и университетов" 
@@ -1026,85 +1076,61 @@
   </div>
   
   <div style="text-align: center;">
-    <button 
-      data-cal-link="cal_live_0b821391b525deeabb6b077c2a8578ca"
-      data-cal-config='{"layout":"month_view","theme":"light"}'
-      class="btn btn-primary cal-booking-btn">
+    <a href="#contact"
+      data-cal-link="kostiantyn-zozulia-k3tj7t/30min"
+      data-cal-config='{"layout":"month_view"}'
+      class="btn btn-primary">
       <span data-ru="Хочу так же" data-en="I Want This Too">Хочу так же</span>
-    </button>
+    </a>
   </div>
+
 </section>
 
 <section id="services" class="animate-on-scroll">
   <h2 class="section-title" data-ru="Что мы делаем для EdTech?" data-en="What We Do for EdTech?">Что мы делаем для EdTech?</h2>
   <p class="section-subtitle" data-ru="Мы закрываем полный цикл роста EdTech-проекта" data-en="We cover the full growth cycle of EdTech projects">Мы закрываем полный цикл роста EdTech-проекта</p>
   
-  <div class="cards">
-    <div class="card expandable-card">
-      <span class="expand-indicator">+</span>
-      <span class="card-icon">🎯</span>
-      <h3 class="card-title" data-ru="Маркетинговая стратегия" data-en="Marketing Strategy">Маркетинговая стратегия</h3>
-      <p class="card-description" data-ru="От позиционирования до упаковки" data-en="From positioning to packaging">От позиционирования до упаковки</p>
-      <div class="card-expanded">
-        <p data-ru="Разрабатываем комплексную маркетинговую стратегию, включающую анализ рынка, конкурентов, целевой аудитории и позиционирование бренда." 
+  <ul class="service-list">
+    <li class="service-item">
+      <h3 class="service-title" data-ru="Маркетинговая стратегия" data-en="Marketing Strategy">Маркетинговая стратегия</h3>
+      <p class="service-description" data-ru="Разрабатываем комплексную маркетинговую стратегию, включающую анализ рынка, конкурентов, целевой аудитории и позиционирование бренда." 
            data-en="We develop comprehensive marketing strategy including market analysis, competitors, target audience and brand positioning.">
           Разрабатываем комплексную маркетинговую стратегию, включающую анализ рынка, конкурентов, целевой аудитории и позиционирование бренда.
         </p>
-      </div>
-    </div>
+    </li>
     
-    <div class="card expandable-card">
-      <span class="expand-indicator">+</span>
-      <span class="card-icon">🚀</span>
-      <h3 class="card-title" data-ru="Запуск и ведение рекламы" data-en="Advertising Launch & Management">Запуск и ведение рекламы</h3>
-      <p class="card-description" data-ru="Meta, Google Ads" data-en="Meta, Google Ads">Meta, Google Ads</p>
-      <div class="card-expanded">
-        <p data-ru="Настройка и оптимизация рекламных кампаний в Facebook, Instagram, Google Ads с фокусом на конверсии и ROI." 
+    <li class="service-item">
+      <h3 class="service-title" data-ru="Запуск и ведение рекламы" data-en="Advertising Launch & Management">Запуск и ведение рекламы</h3>
+      <p class="service-description" data-ru="Настройка и оптимизация рекламных кампаний в Facebook, Instagram, Google Ads с фокусом на конверсии и ROI." 
            data-en="Setup and optimization of advertising campaigns on Facebook, Instagram, Google Ads focused on conversions and ROI.">
           Настройка и оптимизация рекламных кампаний в Facebook, Instagram, Google Ads с фокусом на конверсии и ROI.
         </p>
-      </div>
-    </div>
+    </li>
     
-    <div class="card expandable-card">
-      <span class="expand-indicator">+</span>
-      <span class="card-icon">🔄</span>
-      <h3 class="card-title" data-ru="Воронки и CRM" data-en="Funnels & CRM">Воронки и CRM</h3>
-      <p class="card-description" data-ru="От лида до повторной продажи" data-en="From lead to repeat sale">От лида до повторной продажи</p>
-      <div class="card-expanded">
-        <p data-ru="Построение эффективных воронок продаж и настройка CRM-систем для максимизации конверсии и удержания клиентов." 
+    <li class="service-item">
+      <h3 class="service-title" data-ru="Воронки и CRM" data-en="Funnels & CRM">Воронки и CRM</h3>
+      <p class="service-description" data-ru="Построение эффективных воронок продаж и настройка CRM-систем для максимизации конверсии и удержания клиентов." 
            data-en="Building effective sales funnels and CRM systems setup to maximize conversion and customer retention.">
           Построение эффективных воронок продаж и настройка CRM-систем для максимизации конверсии и удержания клиентов.
         </p>
-      </div>
-    </div>
+    </li>
     
-    <div class="card expandable-card">
-      <span class="expand-indicator">+</span>
-      <span class="card-icon">📝</span>
-      <h3 class="card-title" data-ru="Контент-маркетинг" data-en="Content Marketing">Контент-маркетинг</h3>
-      <p class="card-description" data-ru="Блогеры, соцсети" data-en="Bloggers, social media">Блогеры, соцсети</p>
-      <div class="card-expanded">
-        <p data-ru="Создание контент-стратегии, работа с блогерами и инфлюенсерами, ведение социальных сетей." 
+    <li class="service-item">
+      <h3 class="service-title" data-ru="Контент-маркетинг" data-en="Content Marketing">Контент-маркетинг</h3>
+      <p class="service-description" data-ru="Создание контент-стратегии, работа с блогерами и инфлюенсерами, ведение социальных сетей." 
            data-en="Content strategy creation, working with bloggers and influencers, social media management.">
           Создание контент-стратегии, работа с блогерами и инфлюенсерами, ведение социальных сетей.
         </p>
-      </div>
-    </div>
+    </li>
     
-    <div class="card expandable-card">
-      <span class="expand-indicator">+</span>
-      <span class="card-icon">⚡</span>
-      <h3 class="card-title" data-ru="Автоматизация и удержание" data-en="Automation & Retention">Автоматизация и удержание</h3>
-      <p class="card-description" data-ru="Мессенджеры, чат-боты" data-en="Messengers, chatbots">Мессенджеры, чат-боты</p>
-      <div class="card-expanded">
-        <p data-ru="Настройка автоматизированных систем коммуникации, чат-ботов и email-маркетинга для удержания клиентов." 
+    <li class="service-item">
+      <h3 class="service-title" data-ru="Автоматизация и удержание" data-en="Automation & Retention">Автоматизация и удержание</h3>
+      <p class="service-description" data-ru="Настройка автоматизированных систем коммуникации, чат-ботов и email-маркетинга для удержания клиентов." 
            data-en="Setup of automated communication systems, chatbots and email marketing for customer retention.">
           Настройка автоматизированных систем коммуникации, чат-ботов и email-маркетинга для удержания клиентов.
         </p>
-      </div>
-    </div>
-  </div>
+    </li>
+  </ul>
 </section>
 
 
@@ -1141,13 +1167,15 @@
   </div>
   
   <div style="text-align: center; margin-top: 40px;">
-    <button 
-      data-cal-link="cal_live_0b821391b525deeabb6b077c2a8578ca"
-      data-cal-config='{"layout":"month_view","theme":"light"}'
-      class="btn btn-primary cal-booking-btn">
+    <a href="#contact"
+      data-cal-link="kostiantyn-zozulia-k3tj7t/30min"
+      data-cal-config='{"layout":"month_view"}'
+      class="btn btn-primary">
       <span data-ru="Связаться с нами" data-en="Contact Us">Связаться с нами</span>
-    </button>
+    </a>
   </div>
+
+
 </section>
 
 <section class="animate-on-scroll">
@@ -1288,8 +1316,9 @@
       <span data-ru="Загружается календарь..." data-en="Loading calendar...">Загружается календарь...</span>
     </div>
     <iframe 
-      src="https://cal.com/embed/cal_live_0b821391b525deeabb6b077c2a8578ca?embed-type=inline&theme=light&hide-event-type-details=false" 
+      src="https://cal.com/kostiantyn-zozulia-k3tj7t/30min?embed=true&theme=light&hide-event-type-details=false" 
       class="calendar-embed"
+
       title="Schedule a meeting"
       frameborder="0"
       allowfullscreen
@@ -1299,8 +1328,10 @@
     <div class="calendar-fallback" style="display: none;" id="calendar-fallback">
       <h3 data-ru="Не удается загрузить календарь?" data-en="Can't load calendar?">Не удается загрузить календарь?</h3>
       <p data-ru="Свяжитесь с нами напрямую:" data-en="Contact us directly:">Свяжитесь с нами напрямую:</p>
-      <a href="https://cal.com/cal_live_0b821391b525deeabb6b077c2a8578ca" target="_blank" data-ru="Открыть календарь в новом окне" data-en="Open calendar in new window">Открыть календарь в новом окне</a>
+      <a href="https://cal.com/kostiantyn-zozulia-k3tj7t/30min" target="_blank" data-ru="Открыть календарь в новом окне" data-en="Open calendar in new window">Открыть календарь в новом окне</a>
     </div>
+
+
   </div>
   
   <div class="contact-info">
@@ -1328,78 +1359,13 @@
   <p data-ru="© 2025 EdTech Agency. Все права защищены." data-en="© 2025 EdTech Agency. All rights reserved.">© 2025 EdTech Agency. Все права защищены.</p>
 </footer>
 
-<!-- Cal.com Embed Script -->
-<script src="https://cal.com/embed.js" async></script>
-
 <script>
-  // Cal.com Integration
+
   document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Cal.com when the script loads
-    if (typeof Cal !== 'undefined') {
-      Cal("init");
-    }
-    
-    // Add click handlers for booking buttons
-    document.querySelectorAll('.cal-booking-btn').forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // Check if Cal.com is loaded
-        if (typeof Cal !== 'undefined') {
-          // Cal.com popup will be triggered automatically by data attributes
-          console.log('Cal.com popup triggered');
-        } else {
-          // Fallback: scroll to contact section with iframe
-          console.log('Cal.com not loaded, using fallback');
-          document.getElementById('contact').scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-    
-    // Handle Cal.com script load errors
-    window.addEventListener('error', function(e) {
-      if (e.filename && e.filename.includes('cal.com')) {
-        console.warn('Cal.com script failed to load, using iframe fallback');
-        // Show fallback message
-        const fallback = document.getElementById('calendar-fallback');
-        if (fallback) {
-          fallback.style.display = 'block';
-        }
-      }
-    });
-
-    // Cases Modal Functionality
-    const casesNavLink = document.getElementById('cases-nav-link');
-    const casesModal = document.getElementById('cases-modal');
-    const closeButton = casesModal.querySelector('.close-button');
-    const body = document.body;
-
-    if (casesNavLink && casesModal) {
-      casesNavLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        casesModal.style.display = 'flex'; // Show the modal
-        body.classList.add('modal-active'); // Add class to blur background
-      });
-
-      closeButton.addEventListener('click', () => {
-        casesModal.style.display = 'none'; // Hide the modal
-        body.classList.remove('modal-active'); // Remove blur class
-      });
-
-      // Close modal if clicked outside content
-      casesModal.addEventListener('click', (e) => {
-        if (e.target === casesModal) {
-          casesModal.style.display = 'none';
-          body.classList.remove('modal-active');
-        }
-      });
-    }
-  });
-
   // FAQ Toggle
+
+
+
   document.querySelectorAll('.faq-question').forEach(question => {
     question.addEventListener('click', () => {
       const faqItem = question.parentElement;
@@ -1472,6 +1438,7 @@
   });
 
   // Scroll Animation
+
   const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -1492,22 +1459,30 @@
   // Trusted By automatic scroll
   const trustedLogosContainer = document.querySelector('.trusted-logos');
   if (trustedLogosContainer) {
-    let scrollAmount = 0;
     const scrollSpeed = 0.5; // Adjust scroll speed as needed
+    let scrollInterval;
 
-    function autoScroll() {
-      scrollAmount += scrollSpeed;
-      if (scrollAmount >= trustedLogosContainer.scrollWidth - trustedLogosContainer.clientWidth) {
-        scrollAmount = 0; // Loop back to the beginning
+    const startScrolling = () => {
+      if (trustedLogosContainer.scrollWidth > trustedLogosContainer.clientWidth) {
+        scrollInterval = setInterval(() => {
+          trustedLogosContainer.scrollLeft += scrollSpeed;
+          if (trustedLogosContainer.scrollLeft >= trustedLogosContainer.scrollWidth - trustedLogosContainer.clientWidth) {
+            trustedLogosContainer.scrollLeft = 0; // Loop back to the beginning
+          }
+        }, 20); // Adjust interval for smoother animation
       }
-      trustedLogosContainer.scrollLeft = scrollAmount;
-      requestAnimationFrame(autoScroll);
-    }
+    };
+
+    const stopScrolling = () => {
+      clearInterval(scrollInterval);
+    };
 
     // Start scrolling after a short delay
-    setTimeout(() => {
-      requestAnimationFrame(autoScroll);
-    }, 2000); // 2 second delay before starting
+    setTimeout(startScrolling, 2000); // 2 second delay before starting
+
+    // Optional: Pause on hover
+    trustedLogosContainer.addEventListener('mouseenter', stopScrolling);
+    trustedLogosContainer.addEventListener('mouseleave', startScrolling);
   }
   window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
@@ -1517,95 +1492,9 @@
       header.style.background = 'rgba(255, 255, 255, 0.95)';
     }
   });
+  })
 
-  // Cases Modal Functionality
-  const casesNavLink = document.getElementById('cases-nav-link');
-  const casesModal = document.getElementById('cases-modal');
-  const closeButton = casesModal.querySelector('.close-button');
-  const body = document.body;
-
-  if (casesNavLink && casesModal) {
-    casesNavLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      casesModal.style.display = 'flex'; // Show the modal
-      body.classList.add('modal-active'); // Add class to blur background
-    });
-
-    closeButton.addEventListener('click', () => {
-      casesModal.style.display = 'none'; // Hide the modal
-      body.classList.remove('modal-active'); // Remove blur class
-    });
-
-    // Close modal if clicked outside content
-    casesModal.addEventListener('click', (e) => {
-      if (e.target === casesModal) {
-        casesModal.style.display = 'none';
-        body.classList.remove('modal-active');
-      }
-    });
-  }
 </script>
 
-  <div id="cases-modal" class="modal-overlay">
-    <div class="modal-content">
-      <span class="close-button">&times;</span>
-      <h2 class="section-title" data-ru="Результаты" data-en="Results">Результаты</h2>
-      <p class="section-subtitle" data-ru="Кейсы наших клиентов" data-en="Our client cases">Кейсы наших клиентов</p>
-      
-      <div class="cards">
-        <div class="card expandable-card">
-          <span class="expand-indicator">+</span>
-          <span class="card-icon">🧠</span>
-          <h3 class="card-title">Vadym.ai</h3>
-          <p class="card-description" data-ru="Курс по ИИ Автоматизации для бизнеса - 5500 лидов за месяц!" data-en="AI Automation Course for Business - 5500 leads per month!">Курс по ИИ Автоматизации для бизнеса - 5500 лидов за месяц!</p>
-          <div class="card-expanded">
-            <p data-ru="Запустили комплексную кампанию по продвижению курса ИИ автоматизации. Результат: 5500+ лидов, конверсия в продажи 12%, ROI 340%." 
-               data-en="Launched comprehensive campaign for AI automation course. Result: 5500+ leads, 12% sales conversion, ROI 340%.">
-              Запустили комплексную кампанию по продвижению курса ИИ автоматизации. Результат: 5500+ лидов, конверсия в продажи 12%, ROI 340%.
-            </p>
-          </div>
-        </div>
-        
-        <div class="card expandable-card">
-          <span class="expand-indicator">+</span>
-          <span class="card-icon">🌟</span>
-          <h3 class="card-title">YesCenter</h3>
-          <p class="card-description" data-ru="Поступление в университеты заграницу - 850+ успешных заявок!" data-en="University admission abroad - 850+ successful applications!">Поступление в университеты заграницу - 850+ успешных заявок!</p>
-          <div class="card-expanded">
-            <p data-ru="Помогли образовательному центру масштабировать услуги поступления в зарубежные университеты. Результат: 850+ успешных заявок, увеличение выручки на 280%." 
-               data-en="Helped educational center scale university admission services abroad. Result: 850+ successful applications, 280% revenue increase.">
-              Помогли образовательному центру масштабировать услуги поступления в зарубежные университеты. Результат: 850+ успешных заявок, увеличение выручки на 280%.
-            </p>
-          </div>
-        </div>
-        
-        <div class="card expandable-card">
-          <span class="expand-indicator">+</span>
-          <span class="card-icon">💎</span>
-          <h3 class="card-title">Web3 & Crypto 2025</h3>
-          <p class="card-description" data-ru="Запуск под ключ - от 0 до 10,000 студентов" data-en="Turnkey launch - from 0 to 10,000 students">Запуск под ключ - от 0 до 10,000 студентов</p>
-          <div class="card-expanded">
-            <p data-ru="Полный запуск образовательной платформы по Web3 и криптовалютам. За 6 месяцев привлекли 10,000+ студентов, выручка $2.5M." 
-               data-en="Full launch of Web3 and cryptocurrency educational platform. In 6 months attracted 10,000+ students, revenue $2.5M.">
-              Полный запуск образовательной платформы по Web3 и криптовалютам. За 6 месяцев привлекли 10,000+ студентов, выручка $2.5M.
-            </p>
-          </div>
-        </div>
-        
-        <div class="card expandable-card">
-          <span class="expand-indicator">+</span>
-          <span class="card-icon">🏆</span>
-          <h3 class="card-title">Языковая школа Premium</h3>
-          <p class="card-description" data-ru="Заполнение групп и удержание студентов - 95% заполненность" data-en="Group filling and student retention - 95% occupancy">Заполнение групп и удержание студентов - 95% заполненность</p>
-          <div class="card-expanded">
-            <p data-ru="Построили систему привлечения и удержания студентов для языковой школы. Результат: 95% заполненность групп, снижение оттока на 60%." 
-               data-en="Built student attraction and retention system for language school. Result: 95% group occupancy, 60% churn reduction.">
-              Построили систему привлечения и удержания студентов для языковой школы. Результат: 95% заполненность групп, снижение оттока на 60%.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </body>
 </html>
