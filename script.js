@@ -1,22 +1,69 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // FAQ Toggle
-  document.querySelectorAll('.faq-question').forEach(question => {
-    question.addEventListener('click', () => {
-      const faqItem = question.parentElement;
-      const answer = question.nextElementSibling;
-      const toggle = question.querySelector('.faq-toggle');
+  // Function to apply language
+  function applyLanguage(lang) {
+    const elementsWithLang = document.querySelectorAll('[data-ru][data-en]');
+    try {
+      elementsWithLang.forEach(element => {
+        if (element.dataset[lang]) {
+          element.innerHTML = element.dataset[lang];
+        }
+      });
+    } catch (error) {
+      console.error('Error applying language to element:', error);
+    }
+    document.documentElement.lang = lang;
 
-      faqItem.classList.toggle('active');
-
-      if (faqItem.classList.contains('active')) {
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-        toggle.textContent = '-';
+    // Update active language button
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      if (b.dataset.lang === lang) {
+        b.classList.add('active');
       } else {
-        answer.style.maxHeight = '0';
-        toggle.textContent = '+';
+        b.classList.remove('active');
       }
     });
+  }
+
+  // On page load or when restored from bfcache, apply saved language or default to Russian
+  const savedLang = localStorage.getItem('selectedLang');
+  if (savedLang) {
+    applyLanguage(savedLang);
+  } else {
+    applyLanguage('ru'); // Default language
+  }
+
+  window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+      // Page was restored from bfcache, re-apply language
+      const savedLangOnPersist = localStorage.getItem('selectedLang');
+      if (savedLangOnPersist) {
+        applyLanguage(savedLangOnPersist);
+      } else {
+        applyLanguage('ru'); // Default language if no saved language
+      }
+    }
   });
+
+  // FAQ Toggle
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  if (faqQuestions.length > 0) {
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', () => {
+        const faqItem = question.parentElement;
+        const answer = question.nextElementSibling;
+        const toggle = question.querySelector('.faq-toggle');
+
+        faqItem.classList.toggle('active');
+
+        if (faqItem.classList.contains('active')) {
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          toggle.textContent = '-';
+        } else {
+          answer.style.maxHeight = '0';
+          toggle.textContent = '+';
+        }
+      });
+    });
+  }
 
   // Expandable Cards
   document.querySelectorAll('.expandable-card').forEach(card => {
@@ -36,25 +83,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Language Toggle
   const langButtons = document.querySelectorAll('.lang-btn');
-  const elementsWithLang = document.querySelectorAll('[data-ru][data-en]');
   
   langButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const lang = btn.dataset.lang;
-      
-      // Update active button
-      langButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      
-      // Update content
-      elementsWithLang.forEach(element => {
-        if (element.dataset[lang]) {
-          element.textContent = element.dataset[lang];
-        }
-      });
-      
-      // Update HTML lang attribute
-      document.documentElement.lang = lang;
+      localStorage.setItem('selectedLang', lang); // Save selected language
+      applyLanguage(lang);
     });
   });
 
