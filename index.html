@@ -402,7 +402,7 @@
 
     .logo img { 
       max-width: 150px; /* Even further reduced desktop max width */
-      height: auto;
+      height: 160px;
       position:fixed;
     }
 
@@ -643,6 +643,7 @@
     /* Sections */
     section {
       padding: 80px 20px;
+      scroll-margin-top: 100px;
     }
 
     @media (min-width: 1201px) {
@@ -1014,7 +1015,7 @@
 
     .contact-item {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       gap: 10px;
       color: var(--text-muted);
       text-decoration: none;
@@ -1023,6 +1024,13 @@
 
     .contact-item:hover {
       color: var(--primary);
+    }
+
+    .contact-icon {
+      color: var(--primary);
+      flex-shrink: 0;
+      position: relative;
+      top: 5px;
     }
 
     /* Footer */
@@ -1326,7 +1334,7 @@
       <a href="#for"><span class="nav-number">1</span><span data-ru="Для кого" data-en="For Whom">Для кого</span></a>
       <a href="cases.html"><span class="nav-number">2</span><span data-ru="Кейсы" data-en="Cases">Кейсы</span></a>
       <a href="#about"><span class="nav-number">3</span><span data-ru="О нас" data-en="About">О нас</span></a>
-      <a href="#other-services"><span class="nav-number">4</span><span data-ru="Мы работаем еще с другими" data-en="We work with others too">Мы работаем еще с другими</span></a>
+      <a href="cases.html"><span class="nav-number">4</span><span data-ru="Мы работаем еще с другими" data-en="We work with others too">Мы работаем еще с другими</span></a>
     </nav>
     <a href="#contact" class="nav-contact-btn" data-ru="Связаться" data-en="Contact">Связаться</a>
     <div class="lang-toggle">
@@ -1672,7 +1680,7 @@
 
 <section id="contact" class="animate-on-scroll">
   <h2 class="section-title" data-ru="Готовы обсудить ваш проект?" data-en="Ready to discuss your project?">Готовы обсудить ваш проект?</h2>
-  <p class="section-subtitle" data-ru="<b>Выберите удобное время для звонка прямо сейчас, время автоматически подстраивается под нашу временную зону" data-en="<b>Choose a convenient time for a call right now, time automatically adjusts to our time zone"</b><b>Выберите удобное время</b> для звонка прямо сейчас, время автоматически подстраивается под нашу временную зону</p>
+  <p class="section-subtitle" data-ru="<b>Выберите удобное время для звонка прямо сейчас, время автоматически подстраивается под нашу временную зону" data-en="<b>Choose a convenient time</b> for a call right now, time automatically adjusts to our time zone"><b>Выберите удобное время</b> для звонка прямо сейчас, время автоматически подстраивается под нашу временную зону</p>
   
   <div class="calendar-container">
     <div class="calendar-loading" id="calendar-loading">
@@ -1699,15 +1707,28 @@
   
   <div class="contact-info">
     <a href="mailto:hello@edtechagency.com" class="contact-item">
-      <span>📧</span>
+      <span class="contact-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
       <span>hello@edtechagency.com</span>
     </a>
     <a href="https://linkedin.com/company/edtech-agency" class="contact-item" target="_blank">
-      <span>🔗</span>
+      <span class="contact-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 9H2V21H6V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 6C5.10457 6 6 5.10457 6 4C6 2.89543 5.10457 2 4 2C2.89543 2 2 2.89543 2 4C2 5.10457 2.89543 6 4 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
       <span>LinkedIn</span>
     </a>
     <a href="https://t.me/edtechagency" class="contact-item" target="_blank">
-      <span>🌐</span>
+      <span class="contact-icon">
+        <img src="telegram-communication-chat-interaction-network-connection.svg" alt="Telegram" width="20" height="20" style="filter: brightness(0) saturate(100%) invert(34%) sepia(98%) saturate(1350%) hue-rotate(100deg) brightness(92%) contrast(101%);">
+      </span>
       <span>Telegram</span>
     </a>
   </div>
@@ -1720,8 +1741,8 @@
     <a href="#" data-ru="Cookies" data-en="Cookies">Cookies</a>
   </div>
   <p data-ru="© 2025 EdTech Agency. Все права защищены." data-en="© 2025 EdTech Agency. All rights reserved.">© 2025 EdTech Agency. Все права защищены.</p>
+  <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 10px;">Made by koszoz99@gmail.com</p>
 </footer>
 <script src="script.js"></script>
 </body>
 </html>
-
