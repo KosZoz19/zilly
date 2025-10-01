@@ -638,22 +638,16 @@
     /* Cards */
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 30px;
       margin-bottom: 40px;
-    }
-
-    @media (min-width: 768px) {
-      #about .cards {
-        grid-template-columns: repeat(2, 1fr); /* Force 2 columns on medium screens and up */
-      }
     }
 
     .card {
       background: var(--dark-light);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: var(--border-radius);
-      padding: 30px;
+      padding: 40px;
       text-align: center;
       transition: all 0.3s ease;
       cursor: pointer;
@@ -683,13 +677,13 @@
     }
 
     .card-icon {
-      font-size: 3rem;
+      font-size: 4rem;
       margin-bottom: 20px;
       display: block;
     }
 
     .card-title {
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       font-weight: 600;
       margin-bottom: 15px;
       color: var(--text);
@@ -698,6 +692,7 @@
     .card-description {
       color: var(--text-muted);
       line-height: 1.6;
+      font-size: 1rem;
     }
 
     /* Footer */
@@ -790,6 +785,81 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* Contact Section */
+    .contact-section {
+      background: var(--dark-light);
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .calendar-container {
+      background: var(--light);
+      border-radius: var(--border-radius);
+      padding: 0;
+      margin: 40px auto;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      box-shadow: var(--shadow);
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .calendar-embed {
+      width: 100%;
+      min-height: 700px;
+      border: none;
+      border-radius: var(--border-radius);
+      background: white;
+    }
+
+    .calendar-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      background: var(--light);
+      color: var(--dark);
+      font-size: 1.1rem;
+    }
+
+    .calendar-fallback {
+      text-align: center;
+      padding: 40px;
+      background: var(--light);
+      color: var(--dark);
+      border-radius: var(--border-radius);
+    }
+
+    .calendar-fallback h3 {
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    .calendar-fallback p {
+      margin-bottom: 15px;
+    }
+
+    .calendar-fallback a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .calendar-fallback a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .calendar-container {
+        margin: 20px 0;
+        border-radius: 8px;
+      }
+
+      .calendar-embed {
+        min-height: 600px;
+        border-radius: 8px;
+      }
+    }
   </style>
 <header style="background-color: white;">
   <a href="index.html" class="logo" style="text-decoration: none;">
@@ -802,7 +872,7 @@
       <a href="index.html#for"><span class="nav-number">1</span><span data-ru="Для кого?" data-en="Who is it for?">Для кого?</span></a>
       <a href="cases.html"><span class="nav-number">2</span><span data-ru="EdTech" data-en="EdTech">EdTech</span></a>
       <a href="index.html#about"><span class="nav-number">3</span><span data-ru="О Нас" data-en="About Us">О Нас</span></a>
-      <a href="other-cases.html"><span class="nav-number">4</span><span data-ru="Другие ниши" data-en="Other Industries">Другие ниши</span></a>
+      <a href="other-cases.html" class="nav-link-green-bg"><span class="nav-number">4</span><span data-ru="Другие ниши" data-en="Other Industries">Другие ниши</span></a>
     </nav>
     <a href="#contact"
       data-cal-link="pavils-zilly-team/book-a-call"
@@ -819,14 +889,19 @@
 
 <section class="hero" id="hero">
   <div class="hero-content animate-on-scroll">
+    <p class="hero-subtitle">
+      <span data-ru="РАСШИРЯЕМ ГРАНИЦЫ EdTech" data-en="EXPANDING BEYOND EdTech">
+        РАСШИРЯЕМ ГРАНИЦЫ EdTech
+      </span>
+    </p>
     <h1>
       <span data-ru="Мы также работаем с eCom, B2B, Healthcare" data-en="We also work with eCom, B2B, Healthcare">
         Мы также работаем с eCom, B2B, Healthcare
       </span>
     </h1>
     <p class="hero-description">
-      <span data-ru="Zilly Team — маркетинг-партнёр для проектов вне EdTech: от привлечения клиентов до построения систем под ключ с использованием AI" data-en="Zilly Team — your digital marketing partner beyond EdTech. From lead generation to full-scale AI-driven marketing systems.">
-        Zilly Team — маркетинг-партнёр для проектов вне EdTech: от привлечения клиентов до построения систем под ключ с использованием AI
+      <span data-ru="Zilly Team — маркетинг-партнёр для проектов вне EdTech: от привлечения клиентов до построения систем под ключ с использованием AI. Мы масштабируем бизнесы в различных индустриях с доказанной эффективностью." data-en="Zilly Team — your digital marketing partner beyond EdTech. From lead generation to full-scale AI-driven marketing systems. We scale businesses across industries with proven results.">
+        Zilly Team — маркетинг-партнёр для проектов вне EdTech: от привлечения клиентов до построения систем под ключ с использованием AI. Мы масштабируем бизнесы в различных индустриях с доказанной эффективностью.
       </span>
     </p>
     <div class="hero-cta">
@@ -835,7 +910,7 @@
       data-cal-config='{"layout":"month_view"}'
       class="btn btn-primary">
       <span data-ru="Назначить встречу" data-en="Schedule Meeting">Назначить встречу</span>
-    </a>
+      </a>
     </div>
   </div>
 </section>
@@ -848,16 +923,16 @@
     <div class="card">
       <span class="card-icon">🏥</span>
       <h3 class="card-title" data-ru="KORU Pharma" data-en="KORU Pharma">KORU Pharma</h3>
-      <p class="card-description" data-ru="Масштабирование фармацевтической компании: привлечение клиентов через performance marketing и оптимизация воронки продаж." data-en="Scaling a pharmaceutical company: attracting customers through performance marketing and optimizing the sales funnel.">
-        Масштабирование фармацевтической компании: привлечение клиентов через performance marketing и оптимизация воронки продаж.
+      <p class="card-description" data-ru="Масштабирование фармацевтической компании: привлечение клиентов через performance marketing и оптимизация воронки продаж. Результат: 300% рост лидов, увеличение конверсии на 45%." data-en="Scaling a pharmaceutical company: attracting customers through performance marketing and optimizing the sales funnel. Result: 300% lead growth, 45% conversion increase.">
+        Масштабирование фармацевтической компании: привлечение клиентов через performance marketing и оптимизация воронки продаж. Результат: 300% рост лидов, увеличение конверсии на 45%.
       </p>
     </div>
 
     <div class="card">
       <span class="card-icon">💼</span>
       <h3 class="card-title" data-ru="Intax Connect" data-en="Intax Connect">Intax Connect</h3>
-      <p class="card-description" data-ru="B2B-решения для налоговых консультантов: автоматизация коммуникаций и рост клиентской базы с помощью AI-инструментов." data-en="B2B solutions for tax consultants: automating communications and growing the client base with AI tools.">
-        B2B-решения для налоговых консультантов: автоматизация коммуникаций и рост клиентской базы с помощью AI-инструментов.
+      <p class="card-description" data-ru="B2B-решения для налоговых консультантов: автоматизация коммуникаций и рост клиентской базы с помощью AI-инструментов. Результат: 200% увеличение клиентской базы, автоматизация 80% процессов." data-en="B2B solutions for tax consultants: automating communications and growing the client base with AI tools. Result: 200% client base growth, 80% process automation.">
+        B2B-решения для налоговых консультантов: автоматизация коммуникаций и рост клиентской базы с помощью AI-инструментов. Результат: 200% увеличение клиентской базы, автоматизация 80% процессов.
       </p>
     </div>
   </div>
@@ -869,6 +944,32 @@
       class="btn btn-primary">
       <span data-ru="ХОЧУ ТАКЖЕ → СОЗВОНИТЬСЯ!" data-en="LET'S TALK!">ХОЧУ ТАКЖЕ → СОЗВОНИТЬСЯ!</span>
     </a>
+  </div>
+</section>
+
+<section id="contact" class="contact-section animate-on-scroll">
+  <h2 class="section-title" data-ru="ГОТОВЫ ОБСУДИТЬ СОТРУДНИЧЕСТВО?" data-en="READY TO DISCUSS COLLABORATION?">ГОТОВЫ ОБСУДИТЬ СОТРУДНИЧЕСТВО?</h2>
+  <p class="section-subtitle" data-ru="Выберите удобное время для звонка прямо сейчас, время автоматически подстраивается под нашу временную зону" data-en="Choose a convenient time for a call right now, time automatically adjusts to our time zone">Выберите удобное время для звонка прямо сейчас, время автоматически подстраивается под нашу временную зону</p>
+
+  <div class="calendar-container">
+    <div class="calendar-loading" id="calendar-loading">
+      <span data-ru="Загружается календарь..." data-en="Loading calendar...">Загружается календарь...</span>
+    </div>
+    <iframe
+      src="https://cal.com/pavils-zilly-team/book-a-call?embed=true&theme=light&hide-event-type-details=false"
+      class="calendar-embed"
+
+      title="Schedule a meeting"
+      frameborder="0"
+      allowfullscreen
+      style="display: none;"
+      onload="document.getElementById('calendar-loading').style.display='none'; this.style.display='block';">
+    </iframe>
+    <div class="calendar-fallback" style="display: none;" id="calendar-fallback">
+      <h3 data-ru="Не удается загрузить календарь?" data-en="Can't load calendar?">Не удается загрузить календарь?</h3>
+      <p data-ru="Свяжитесь с нами напрямую:" data-en="Contact us directly:">Свяжитесь с нами напрямую:</p>
+      <a href="https://cal.com/pavils-zilly-team/book-a-call" target="_blank" data-ru="Открыть календарь в новом окне" data-en="Open calendar in new window">Открыть календарь в новом окне</a>
+    </div>
   </div>
 </section>
 
