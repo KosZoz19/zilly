@@ -22,6 +22,7 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     body {
@@ -317,6 +318,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      overflow: visible;
     }
 
     .section-subtitle {
@@ -741,6 +743,8 @@
 
       .menu-btn {
         display: block;
+        position: absolute;
+        right: 10px;
         padding: 8px;
         background: rgba(255,255,255,0.1);
         border-radius: 4px;

@@ -6,6 +6,8 @@
   <title>Zilly Team - Маркетинг-партнёр для EdTech проектов и Вашего бизнеса</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+  </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
   // Function to apply language
@@ -424,22 +426,21 @@
 
     /* Cookie Consent Banner */
     .cookie-consent-banner {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      position: relative;
       background: var(--dark-light);
       border-top: 2px solid var(--primary);
       padding: 20px;
       box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
       z-index: 10000;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
+      display: none;
+      transition: opacity 0.3s ease;
       font-size: 14px;
+      margin-top: 40px;
     }
 
     .cookie-consent-banner.show {
-      transform: translateY(0);
+      display: block;
+      opacity: 1;
     }
 
     .cookie-consent-content {
@@ -540,11 +541,11 @@
       }
 
       .cookie-consent-text p {
-        word-wrap: break-word;
+        word-break: break-all;
       }
 
       .cookie-consent-text a {
-        word-wrap: break-word;
+        word-break: break-all;
       }
 
       .cookie-consent-buttons {
@@ -852,6 +853,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      line-height: 1.2;
     }
 
     .section-subtitle {
@@ -1289,8 +1291,6 @@
   
       .menu-btn {
         display: block;
-        position: fixed;
-        right:200px;
       }
 
       .hero h1 {
@@ -1536,12 +1536,11 @@
 
 </style>
 <header style="background-color: white;">
-  <div class="header-left">
-    <a href="index.html" class="logo" style="text-decoration: none;">
-      <img src="logozlilly.png" alt="logozilly">
-    </a>
-    <div class="menu-btn">☰</div>
-  </div>
+  <a href="index.html" class="logo" style="text-decoration: none;">
+    <img src="logozlilly.png" alt="logozilly">
+  </a>
+
+  <div class="menu-btn">☰</div>
   <div class="nav-container">
     <nav class="main-nav">
       <a href="#for"><span class="nav-number">1</span><span data-ru="Для кого?" data-en="Who is it for?">Для кого?</span></a>
@@ -1556,21 +1555,6 @@
     </div>
   </div>
 </header>
-
-<!-- Cookie Consent Banner -->
-<div id="cookie-consent-banner" class="cookie-consent-banner">
-  <div class="cookie-consent-content">
-    <div class="cookie-consent-text">
-      <p data-ru="Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>." data-en="We use cookies to improve website functionality and analyze traffic. By continuing to use the site, you agree to our <a href='cookies.html'>Cookie Policy</a> and <a href='privacy-policy.html'>Privacy Policy</a>.">
-        Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>.
-      </p>
-    </div>
-    <div class="cookie-consent-buttons">
-      <button id="accept-cookies" class="cookie-btn cookie-btn-accept" data-ru="Принять" data-en="Accept">Принять</button>
-      <button id="decline-cookies" class="cookie-btn cookie-btn-decline" data-ru="Отклонить" data-en="Decline">Отклонить</button>
-    </div>
-  </div>
-</div>
 
 <section class="hero" id="hero">
   <div class="hero-content animate-on-scroll">
@@ -1986,6 +1970,20 @@
   </div>
 </section>
 
+<!-- Cookie Consent Banner -->
+<div id="cookie-consent-banner" class="cookie-consent-banner">
+  <div class="cookie-consent-content">
+    <div class="cookie-consent-text">
+      <p data-ru="Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>." data-en="We use cookies to improve website functionality and analyze traffic. By continuing to use the site, you agree to our <a href='cookies.html'>Cookie Policy</a> and <a href='privacy-policy.html'>Privacy Policy</a>.">
+        Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>.
+      </p>
+    </div>
+    <div class="cookie-consent-buttons">
+      <button id="accept-cookies" class="cookie-btn cookie-btn-accept" data-ru="Принять" data-en="Accept">Принять</button>
+      <button id="decline-cookies" class="cookie-btn cookie-btn-decline" data-ru="Отклонить" data-en="Decline">Отклонить</button>
+    </div>
+  </div>
+</div>
 <footer>
   <div class="footer-links">
     <a href="privacy-policy.html" data-ru="Политика конфиденциальности" data-en="Privacy Policy">Политика конфиденциальности</a>
