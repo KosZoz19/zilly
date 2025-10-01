@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ru" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zilly Team - Другие кейсы: eCom, B2B, Healthcare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  // Function to apply language
+  function applyLanguage(lang) {
+    const elementsWithLang = document.querySelectorAll('[data-ru][data-en]');
+    elementsWithLang.forEach(element => {
+      if (element.dataset[lang]) {
+        element.innerHTML = element.dataset[lang];
+      }
+    });
+    document.documentElement.lang = lang;
+
+    // Update active language button
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      if (b.dataset.lang === lang) {
+        b.classList.add('active');
+      } else {
+        b.classList.remove('active');
+      }
+    });
+  }
+
+  // On page load or when restored from bfcache, apply saved language or default to Russian
+  const savedLang = localStorage.getItem('selectedLang');
+  if (savedLang) {
+    applyLanguage(savedLang);
+  } else {
+    applyLanguage('ru'); // Default language
+  }
+
+  window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+      // Page was restored from bfcache, re-apply language
+      const savedLangOnPersist = localStorage.getItem('selectedLang');
+      if (savedLangOnPersist) {
+        applyLanguage(savedLangOnPersist);
+      } else {
+        applyLanguage('ru'); // Default language if no saved language
+      }
+    }
+  });
+
+  // Language Toggle
+  const langButtons = document.querySelectorAll('.lang-btn');
+
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      localStorage.setItem('selectedLang', lang); // Save selected language
+      applyLanguage(lang);
+    });
+  });
+
+  // Smooth Scrolling for Navigation Links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Scroll Animation
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    observer.observe(el);
+  });
+
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (window.scrollY > 100) {
+      header.style.background = 'rgba(255, 255, 255, 0.98)';
+    } else {
+      header.style.background = 'rgba(255, 255, 255, 0.95)';
+    }
+  });
+  });
+
+  // Cookie Consent Banner Functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const banner = document.getElementById('cookie-consent-banner');
+    const acceptBtn = document.getElementById('accept-cookies');
+    const declineBtn = document.getElementById('decline-cookies');
+
+    // Function to set cookie
+    function setCookie(name, value, days) {
+      const expires = new Date();
+      expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+      document.cookie = name + '=' + value + ';expires=' + expires.toUTCString() + ';path=/';
+    }
+
+    // Function to get cookie
+    function getCookie(name) {
+      const nameEQ = name + '=';
+      const ca = document.cookie.split(';');
+      for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    // Function to hide banner
+    function hideBanner() {
+      banner.classList.remove('show');
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 300);
+    }
+
+    // Check if user has already made a choice
+    const consent = getCookie('cookieConsent');
+    if (consent === null) {
+      // Show banner after a short delay
+      setTimeout(() => {
+        banner.classList.add('show');
+      }, 1000);
+    }
+
+    // Accept cookies
+    acceptBtn.addEventListener('click', function() {
+      setCookie('cookieConsent', 'accepted', 365);
+      hideBanner();
+      // Here you can initialize analytics or other cookies
+      console.log('Cookies accepted');
+    });
+
+    // Decline cookies
+    declineBtn.addEventListener('click', function() {
+      setCookie('cookieConsent', 'declined', 365);
+      hideBanner();
+      // Disable non-essential cookies
+      console.log('Cookies declined');
+    });
+
+    // Apply current language to banner
+    function applyBannerLanguage(lang) {
+      const bannerElements = banner.querySelectorAll('[data-ru][data-en]');
+      bannerElements.forEach(element => {
+        if (element.dataset[lang]) {
+          element.innerHTML = element.dataset[lang];
+        }
+      });
+    }
+
+    // Apply language to banner when language changes
+    const savedLang = localStorage.getItem('selectedLang') || 'ru';
+    applyBannerLanguage(savedLang);
+
+    // Listen for language changes
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        applyBannerLanguage(lang);
+      });
+    });
+  });
+  </script>
+</head>
+<body>
+  <script>
+    (function() {
+      const savedLang = localStorage.getItem('selectedLang');
+      if (savedLang) {
+        document.documentElement.lang = savedLang;
+      }
+    })();
+  </script>
+  <style>
+    :root {
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --secondary: #34d399;
+      --dark: #ffffff;
+      --dark-light: #f8f9fa;
+      --dark-lighter: #e9ecef;
+      --light: #ffffff;
+      --text: #333333; /* Very dark grey, almost black */
+      --text-muted: #555555; /* Darker, more muted grey */
+      --accent: #10b981;
+      --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      --shadow: 0 10px 25px rgba(0,0,0,0.1);
+      --border-radius: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Cookie Consent Banner */
+    .cookie-consent-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--dark-light);
+      border-top: 2px solid var(--primary);
+      padding: 20px;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+      z-index: 10000;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      font-size: 14px;
+    }
+
+    .cookie-consent-banner.show {
+      transform: translateY(0);
+    }
+
+    .cookie-consent-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-consent-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .cookie-consent-text p {
+      margin: 0 0 10px 0;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .cookie-consent-text a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .cookie-consent-text a:hover {
+      text-decoration: underline;
+    }
+
+    .cookie-consent-buttons {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .cookie-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .cookie-btn-accept {
+      background: var(--gradient);
+      color: white;
+    }
+
+    .cookie-btn-accept:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .cookie-btn-decline {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--text-muted);
+    }
+
+    .cookie-btn-decline:hover {
+      background: var(--text-muted);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .cookie-consent-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cookie-consent-buttons {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .cookie-consent-banner {
+        padding: 15px;
+      }
+    }
+
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #36454F; /* Graphite Black */
+      /* backdrop-filter: blur(10px); Removed */
+      padding: 5px 30px; /* Even more compact padding */
+      display: flex;
+      justify-content: space-between;
+      align-items: center; /* Vertically center items */
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 1px 5px rgba(0,0,0,0.08); /* More subtle shadow */
+      height:90px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .logo img {
+      max-width: 150px; /* Even further reduced desktop max width */
+      height: 160px;
+      position:fixed;
+    }
+
+    @media (max-width: 768px) {
+      .logo img {
+        max-width: 120px; /* Further reduced mobile max width */
+      }
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 25px;
+      margin-top: 2px; /* Move nav menu slightly down (less) */
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link-green-bg {
+      background-color: var(--primary);
+      color: white !important;
+    }
+
+    .main-nav a:hover {
+      color: var(--primary);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .nav-number {
+      color: white;
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      margin-right: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-number:nth-child(1) {
+      background: var(--primary);
+      border-radius: 50%;
+    }
+
+    .nav-number:nth-child(2) {
+      background: var(--secondary);
+      border-radius: 4px;
+    }
+
+    .nav-number:nth-child(3) {
+      background: var(--primary-dark);
+      border-radius: 6px;
+      transform: rotate(45deg);
+    }
+
+    .nav-number:nth-child(4) {
+      background: var(--accent); /* Use accent color for background */
+      color: white; /* White text color */
+      border-radius: 50%; /* Make it a circle */
+    }
+
+    .other-services-btn {
+      background: var(--gradient);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .other-services-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .lang-toggle {
+      display: flex;
+      background: var(--dark-lighter);
+      border-radius: 20px;
+      padding: 4px;
+    }
+
+    .lang-btn {
+      padding: 6px 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .nav-contact-btn {
+      background: var(--gradient);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-contact-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: left;
+      padding: 95px 20px 80px; /* Adjusted top padding for even smaller header */
+      background: var(--light);
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 24px;
+      line-height: 1.2;
+      color: var(--text);
+    }
+
+    .hero-description {
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 40px;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 20px;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .hero-subtitle {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: white;
+      background-color: var(--primary);
+      padding: 8px 16px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 18px 36px;
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 20px;
+      scroll-margin-top: 100px;
+    }
+
+    @media (min-width: 1201px) {
+      section:not(#hero) { /* Apply max-width to sections other than hero on large screens */
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 20px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 60px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    @media (min-width: 768px) {
+      #about .cards {
+        grid-template-columns: repeat(2, 1fr); /* Force 2 columns on medium screens and up */
+      }
+    }
+
+    .card {
+      background: var(--dark-light);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .card:hover::before {
+      left: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+
+    .card-description {
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-lighter);
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 80px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-container {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--dark);
+        flex-direction: column;
+        padding: 20px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .nav-container.active {
+        display: flex;
+      }
+
+      .main-nav {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+<header style="background-color: white;">
+  <a href="index.html" class="logo" style="text-decoration: none;">
+    <img src="logozlilly.png" alt="logozilly">
+  </a>
+
+  <div class="menu-btn">☰</div>
+  <div class="nav-container">
+    <nav class="main-nav">
+      <a href="index.html#for"><span class="nav-number">1</span><span data-ru="Для кого?" data-en="Who is it for?">Для кого?</span></a>
+      <a href="cases.html"><span class="nav-number">2</span><span data-ru="EdTech" data-en="EdTech">EdTech</span></a>
+      <a href="index.html#about"><span class="nav-number">3</span><span data-ru="О Нас" data-en="About Us">О Нас</span></a>
+      <a href="other-cases.html"><span class="nav-number">4</span><span data-ru="Другие ниши" data-en="Other Industries">Другие ниши</span></a>
+    </nav>
+    <a href="#contact"
+      data-cal-link="pavils-zilly-team/book-a-call"
+      data-cal-config='{"layout":"month_view"}'
+      class="nav-contact-btn">
+      <span data-ru="Связаться" data-en="Contact">Связаться</span>
+    </a>
+    <div class="lang-toggle">
+      <button class="lang-btn" data-lang="ru">RU</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <div class="hero-content animate-on-scroll">
+    <h1>
+      <span data-ru="Мы также работаем с eCom, B2B, Healthcare" data-en="We also work with eCom, B2B, Healthcare">
+        Мы также работаем с eCom, B2B, Healthcare
+      </span>
+    </h1>
+    <p class="hero-description">
+      <span data-ru="Zilly Team — маркетинг-партнёр для проектов вне EdTech: от привлечения клиентов до построения систем под ключ с использованием AI" data-en="Zilly Team — your digital marketing partner beyond EdTech. From lead generation to full-scale AI-driven marketing systems.">
+        Zilly Team — маркетинг-партнёр для проектов вне EdTech: от привлечения клиентов до построения систем под ключ с использованием AI
+      </span>
+    </p>
+    <div class="hero-cta">
+      <a href="#contact"
+      data-cal-link="pavils-zilly-team/book-a-call"
+      data-cal-config='{"layout":"month_view"}'
+      class="btn btn-primary">
+      <span data-ru="Назначить встречу" data-en="Schedule Meeting">Назначить встречу</span>
+    </a>
+    </div>
+  </div>
+</section>
+
+<section id="cases" class="animate-on-scroll">
+  <h2 class="section-title" data-ru="КЕЙСЫ ВНЕ EdTech" data-en="CASES BEYOND EdTech">КЕЙСЫ ВНЕ EdTech</h2>
+  <p class="section-subtitle" data-ru="Примеры успешных проектов в других индустриях" data-en="Examples of successful projects in other industries">Примеры успешных проектов в других индустриях</p>
+
+  <div class="cards">
+    <div class="card">
+      <span class="card-icon">🏥</span>
+      <h3 class="card-title" data-ru="KORU Pharma" data-en="KORU Pharma">KORU Pharma</h3>
+      <p class="card-description" data-ru="Масштабирование фармацевтической компании: привлечение клиентов через performance marketing и оптимизация воронки продаж." data-en="Scaling a pharmaceutical company: attracting customers through performance marketing and optimizing the sales funnel.">
+        Масштабирование фармацевтической компании: привлечение клиентов через performance marketing и оптимизация воронки продаж.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="card-icon">💼</span>
+      <h3 class="card-title" data-ru="Intax Connect" data-en="Intax Connect">Intax Connect</h3>
+      <p class="card-description" data-ru="B2B-решения для налоговых консультантов: автоматизация коммуникаций и рост клиентской базы с помощью AI-инструментов." data-en="B2B solutions for tax consultants: automating communications and growing the client base with AI tools.">
+        B2B-решения для налоговых консультантов: автоматизация коммуникаций и рост клиентской базы с помощью AI-инструментов.
+      </p>
+    </div>
+  </div>
+
+  <div style="text-align: center;">
+    <a href="#contact"
+      data-cal-link="pavils-zilly-team/book-a-call"
+      data-cal-config='{"layout":"month_view"}'
+      class="btn btn-primary">
+      <span data-ru="ХОЧУ ТАКЖЕ → СОЗВОНИТЬСЯ!" data-en="LET'S TALK!">ХОЧУ ТАКЖЕ → СОЗВОНИТЬСЯ!</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="privacy-policy.html" data-ru="Политика конфиденциальности" data-en="Privacy Policy">Политика конфиденциальности</a>
+    <a href="terms-of-service.html" data-ru="Условия использования" data-en="Terms of Service">Условия использования</a>
+    <a href="cookies.html" data-ru="Cookies" data-en="Cookies">Cookies</a>
+  </div>
+  <p data-ru="© 2025 Zilly Team. Все права защищены." data-en="© 2025 Zilly Team. All rights reserved.">© 2025 Zilly Team. Все права защищены.</p>
+  <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 10px;">Made by koszoz99@gmail.com</p>
+</footer>
+
+<!-- Cookie Consent Banner -->
+<div id="cookie-consent-banner" class="cookie-consent-banner">
+  <div class="cookie-consent-content">
+    <div class="cookie-consent-text">
+      <p data-ru="Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>." data-en="We use cookies to improve website functionality and analyze traffic. By continuing to use the site, you agree to our <a href='cookies.html'>Cookie Policy</a> and <a href='privacy-policy.html'>Privacy Policy</a>.">
+        Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>.
+      </p>
+    </div>
+    <div class="cookie-consent-buttons">
+      <button id="accept-cookies" class="cookie-btn cookie-btn-accept" data-ru="Принять" data-en="Accept">Принять</button>
+      <button id="decline-cookies" class="cookie-btn cookie-btn-decline" data-ru="Отклонить" data-en="Decline">Отклонить</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EdTech Agency - Маркетинг-партнёр для EdTech проектов</title>
+  <title>Zilly Team - Маркетинг-партнёр для EdTech проектов и Вашего бизнеса</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script>
@@ -285,34 +285,7 @@
     observer.observe(el);
   });
 
-  // Trusted By automatic scroll
-  const trustedLogosContainer = document.querySelector('.trusted-logos');
-  if (trustedLogosContainer) {
-    const scrollSpeed = 0.5; // Adjust scroll speed as needed
-    let scrollInterval;
-
-    const startScrolling = () => {
-      if (trustedLogosContainer.scrollWidth > trustedLogosContainer.clientWidth) {
-        scrollInterval = setInterval(() => {
-          trustedLogosContainer.scrollLeft += scrollSpeed;
-          if (trustedLogosContainer.scrollLeft >= trustedLogosContainer.scrollWidth - trustedLogosContainer.clientWidth) {
-            trustedLogosContainer.scrollLeft = 0; // Loop back to the beginning
-          }
-        }, 20); // Adjust interval for smoother animation
-      }
-    };
-
-    const stopScrolling = () => {
-      clearInterval(scrollInterval);
-    };
-
-    // Start scrolling after a short delay
-    setTimeout(startScrolling, 2000); // 2 second delay before starting
-
-    // Optional: Pause on hover
-    trustedLogosContainer.addEventListener('mouseenter', stopScrolling);
-    trustedLogosContainer.addEventListener('mouseleave', startScrolling);
-  }
+  // Trusted By automatic scroll code removed from duplicate script
   window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
     if (window.scrollY > 100) {
@@ -321,6 +294,87 @@
       header.style.background = 'rgba(255, 255, 255, 0.95)';
     }
   });
+  });
+
+  // Cookie Consent Banner Functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const banner = document.getElementById('cookie-consent-banner');
+    const acceptBtn = document.getElementById('accept-cookies');
+    const declineBtn = document.getElementById('decline-cookies');
+
+    // Function to set cookie
+    function setCookie(name, value, days) {
+      const expires = new Date();
+      expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+      document.cookie = name + '=' + value + ';expires=' + expires.toUTCString() + ';path=/';
+    }
+
+    // Function to get cookie
+    function getCookie(name) {
+      const nameEQ = name + '=';
+      const ca = document.cookie.split(';');
+      for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    // Function to hide banner
+    function hideBanner() {
+      banner.classList.remove('show');
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 300);
+    }
+
+    // Check if user has already made a choice
+    const consent = getCookie('cookieConsent');
+    if (consent === null) {
+      // Show banner after a short delay
+      setTimeout(() => {
+        banner.classList.add('show');
+      }, 1000);
+    }
+
+    // Accept cookies
+    acceptBtn.addEventListener('click', function() {
+      setCookie('cookieConsent', 'accepted', 365);
+      hideBanner();
+      // Here you can initialize analytics or other cookies
+      console.log('Cookies accepted');
+    });
+
+    // Decline cookies
+    declineBtn.addEventListener('click', function() {
+      setCookie('cookieConsent', 'declined', 365);
+      hideBanner();
+      // Disable non-essential cookies
+      console.log('Cookies declined');
+    });
+
+    // Apply current language to banner
+    function applyBannerLanguage(lang) {
+      const bannerElements = banner.querySelectorAll('[data-ru][data-en]');
+      bannerElements.forEach(element => {
+        if (element.dataset[lang]) {
+          element.innerHTML = element.dataset[lang];
+        }
+      });
+    }
+
+    // Apply language to banner when language changes
+    const savedLang = localStorage.getItem('selectedLang') || 'ru';
+    applyBannerLanguage(savedLang);
+
+    // Listen for language changes
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        applyBannerLanguage(lang);
+      });
+    });
   });
   </script>
 </head>
@@ -366,6 +420,110 @@
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
+    }
+
+    /* Cookie Consent Banner */
+    .cookie-consent-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--dark-light);
+      border-top: 2px solid var(--primary);
+      padding: 20px;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+      z-index: 10000;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      font-size: 14px;
+    }
+
+    .cookie-consent-banner.show {
+      transform: translateY(0);
+    }
+
+    .cookie-consent-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-consent-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .cookie-consent-text p {
+      margin: 0 0 10px 0;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .cookie-consent-text a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .cookie-consent-text a:hover {
+      text-decoration: underline;
+    }
+
+    .cookie-consent-buttons {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .cookie-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .cookie-btn-accept {
+      background: var(--gradient);
+      color: white;
+    }
+
+    .cookie-btn-accept:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .cookie-btn-decline {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--text-muted);
+    }
+
+    .cookie-btn-decline:hover {
+      background: var(--text-muted);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .cookie-consent-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cookie-consent-buttons {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .cookie-consent-banner {
+        padding: 15px;
+      }
     }
 
     /* Header & Navigation */
@@ -1219,10 +1377,16 @@
     }
 
     .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 30px;
       margin-top: 40px;
+    }
+
+    .team-member {
+      flex: 1 1 250px;
+      max-width: 300px;
     }
 
     .team-member {
@@ -1331,10 +1495,10 @@
   <div class="menu-btn">☰</div>
   <div class="nav-container">
     <nav class="main-nav">
-      <a href="#for"><span class="nav-number">1</span><span data-ru="Для кого" data-en="For Whom">Для кого</span></a>
-      <a href="cases.html"><span class="nav-number">2</span><span data-ru="Кейсы" data-en="Cases">Кейсы</span></a>
-      <a href="#about"><span class="nav-number">3</span><span data-ru="О нас" data-en="About">О нас</span></a>
-      <a href="cases.html"><span class="nav-number">4</span><span data-ru="Мы работаем еще с другими" data-en="We work with others too">Мы работаем еще с другими</span></a>
+      <a href="#for"><span class="nav-number">1</span><span data-ru="Для кого?" data-en="Who is it for?">Для кого?</span></a>
+      <a href="cases.html"><span class="nav-number">2</span><span data-ru="EdTech" data-en="EdTech">EdTech</span></a>
+      <a href="#about"><span class="nav-number">3</span><span data-ru="О Нас" data-en="About Us">О Нас</span></a>
+      <a href="other-cases.html"><span class="nav-number">4</span><span data-ru="Другие ниши" data-en="Other Industries">Другие ниши</span></a>
     </nav>
     <a href="#contact" class="nav-contact-btn" data-ru="Связаться" data-en="Contact">Связаться</a>
     <div class="lang-toggle">
@@ -1347,21 +1511,18 @@
 <section class="hero" id="hero">
   <div class="hero-content animate-on-scroll">
     <p class="hero-subtitle">
-      <span data-ru="Для языковых школ, стартапов, блогеров и университетов" 
-            data-en="For language schools, startups, bloggers and universities">
-        Для языковых школ, стартапов, блогеров и университетов
+      <span data-ru="ЯЗЫКОВЫЕ ШКОЛЫ, СТАРТАПЫ, ЭКСПЕРТЫ И МИРОВЫЕ УНИВЕРСИТЕТЫ" data-en="LANGUAGE SCHOOLS, STARTUPS, EXPERTS & GLOBAL UNIVERSITIES">
+        ЯЗЫКОВЫЕ ШКОЛЫ, СТАРТАПЫ, ЭКСПЕРТЫ И МИРОВЫЕ УНИВЕРСИТЕТЫ
       </span>
     </p>
     <h1>
-      <span data-ru="Zilly — маркетинг-партнёр для EdTech-проектов: от привлечения лидов до построения систем удержания." 
-            data-en="Zilly — marketing partner for EdTech projects: from lead generation to retention systems.">
-        Zilly — маркетинг-партнёр для EdTech-проектов: от привлечения лидов до построения систем удержания.
+      <span data-ru="Zilly Team — маркетинг-партнёр для EdTech-проектов и Вашего бизнеса: от привлечения лидов до построения системы под ключ с использованием AI" data-en="Zilly Team — your digital marketing partner in EdTech and beyond. From lead generation to full-scale AI-driven marketing systems.">
+        Zilly Team — маркетинг-партнёр для EdTech-проектов и Вашего бизнеса: от привлечения лидов до построения системы под ключ с использованием AI
       </span>
     </h1>
     <p class="hero-description">
-      <span data-ru="<i>Трафик — лишь часть нашей работы.Мы закрываем весь цикл роста</i> " 
-            data-en="<i>Traffic is just part of our work.We cover the entire growth cycle</i> ">
-        <i>Трафик — лишь часть нашей работы.</i> Мы закрываем весь цикл роста
+      <span data-ru="<i>Трафик — лишь часть нашей работы. Мы закрываем весь цикл маркетинга: продюсирование, стратегия, построение команды и реализация задачи используя новейшие технологии на базе искусственного интеллекта!</i>" data-en="<i>Traffic is just the start. We manage the full marketing cycle — from strategy and production to team building and AI-powered execution.</i>">
+        <i>Трафик — лишь часть нашей работы. Мы закрываем весь цикл маркетинга: продюсирование, стратегия, построение команды и реализация задачи используя новейшие технологии на базе искусственного интеллекта!</i>
       </span>
     </p>
     <div class="hero-cta">
@@ -1374,7 +1535,7 @@
 
 
       <a href="cases.html" class="btn btn-secondary">
-        <span data-ru="Посмотреть кейсы" data-en="View Cases">Посмотреть кейсы</span>
+        <span data-ru="EdTech Портфолио" data-en="EdTech Portfolio">EdTech Портфолио</span>
       </a>
 
 
@@ -1385,44 +1546,44 @@
 
 
 <section id="for" class="animate-on-scroll">
-  <h2 class="section-title" data-ru="Для кого мы работаем" data-en="Who We Work For">Для кого мы работаем</h2>
-  <p class="section-subtitle" data-ru="Сегментация EdTech проектов" data-en="EdTech Project Segmentation">Сегментация EdTech проектов</p>
+  <h2 class="section-title" data-ru="КЛЮЧЕВАЯ ЭКСПЕРТИЗА ZILLY TEAM" data-en="ZILLY TEAM'S CORE EXPERTISE">КЛЮЧЕВАЯ ЭКСПЕРТИЗА ZILLY TEAM</h2>
+  <p class="section-subtitle" data-ru="<i>Эксперт — это человек, совершивший все возможные ошибки в очень узкой области. Нильс Бор.</i>" data-en="<i>An expert is a person who has made all the mistakes that can be made in a very narrow field. — Niels Bohr</i>"><i>Эксперт — это человек, совершивший все возможные ошибки в очень узкой области. Нильс Бор.</i></p>
   
   <div class="cards">
     <div class="card">
       <span class="card-icon">🌐</span>
-      <h3 class="card-title" data-ru="Языковые школы" data-en="Language Schools">Языковые школы</h3>
-      <p class="card-description" data-ru="Приводим лидов, удерживаем и заполняем группы" data-en="Generate leads, retain and fill groups">Приводим лидов, удерживаем и заполняем группы</p>
+      <h3 class="card-title" data-ru="ЯЗЫКОВЫЕ ШКОЛЫ" data-en="LANGUAGE SCHOOLS">ЯЗЫКОВЫЕ ШКОЛЫ</h3>
+      <p class="card-description" data-ru="Приведем целевые заявки и заполним ваши языковые группы!" data-en="We'll bring you qualified leads and fill your classes!">Приведем целевые заявки и заполним ваши языковые группы!</p>
     </div>
-    
+
     <div class="card">
       <span class="card-icon">💡</span>
-      <h3 class="card-title" data-ru="Стартапы" data-en="Startups">Стартапы</h3>
-      <p class="card-description" data-ru="Первые пользователи и growth marketing" data-en="First users and growth marketing">Первые пользователи и growth marketing</p>
+      <h3 class="card-title" data-ru="СТАРТАПЫ" data-en="STARTUPS">СТАРТАПЫ</h3>
+      <p class="card-description" data-ru="User acquisition и growth marketing" data-en="User acquisition & growth marketing.">User acquisition и growth marketing</p>
     </div>
-    
+
     <div class="card">
       <span class="card-icon">🎯</span>
-      <h3 class="card-title" data-ru="Эксперты/Блоггеры" data-en="Experts/Bloggers">Эксперты/Блоггеры</h3>
-      <p class="card-description" data-ru="Запуск под ключ" data-en="Turnkey launch">Запуск под ключ</p>
+      <h3 class="card-title" data-ru="ЭКСПЕРТЫ/БЛОГГЕРЫ" data-en="EXPERTS / CREATORS">ЭКСПЕРТЫ/БЛОГГЕРЫ</h3>
+      <p class="card-description" data-ru="Продюсирование и запуск под ключ! Смотри наше портфолио!" data-en="Full-scale production and turnkey project launches. Check our portfolio!">Продюсирование и запуск под ключ! Смотри наше портфолио!</p>
     </div>
-    
+
     <div class="card">
       <span class="card-icon">🎓</span>
-      <h3 class="card-title" data-ru="Университеты" data-en="Universities">Университеты</h3>
-      <p class="card-description" data-ru="Digital-переход и глобальные студенты" data-en="Digital transition and global students">Digital-переход и глобальные студенты</p>
+      <h3 class="card-title" data-ru="УНИВЕРСИТЕТЫ" data-en="UNIVERSITIES">УНИВЕРСИТЕТЫ</h3>
+      <p class="card-description" data-ru="Поиск студентов через performance marketing, маркетинг стратегия" data-en="Student recruitment via performance marketing & strategic campaigns.">Поиск студентов через performance marketing, маркетинг стратегия</p>
     </div>
-    
+
     <div class="card">
       <span class="card-icon">🏢</span>
-      <h3 class="card-title" data-ru="Корпорации" data-en="Corporations">Корпорации</h3>
-      <p class="card-description" data-ru="Корпоративное обучение и развитие персонала" data-en="Corporate training and staff development">Корпоративное обучение и развитие персонала</p>
+      <h3 class="card-title" data-ru="Б2Б" data-en="B2B">Б2Б</h3>
+      <p class="card-description" data-ru="Корпоративное обучение" data-en="Corporate training solutions.">Корпоративное обучение</p>
     </div>
-    
+
     <div class="card">
       <span class="card-icon">🚀</span>
-      <h3 class="card-title" data-ru="EdTech платформы" data-en="EdTech Platforms">EdTech платформы</h3>
-      <p class="card-description" data-ru="Масштабирование образовательных платформ" data-en="Scaling educational platforms">Масштабирование образовательных платформ</p>
+      <h3 class="card-title" data-ru="EdTech ПЛАТФОРМЫ" data-en="EdTech PLATFORMS">EdTech ПЛАТФОРМЫ</h3>
+      <p class="card-description" data-ru="Масштабирование образовательных платформ и стратегия привлечения пользователя" data-en="Scaling education platforms with user acquisition strategies.">Масштабирование образовательных платформ и стратегия привлечения пользователя</p>
     </div>
   </div>
   
@@ -1431,55 +1592,50 @@
       data-cal-link="pavils-zilly-team/book-a-call"
       data-cal-config='{"layout":"month_view"}'
       class="btn btn-primary">
-      <span data-ru="Хочу так же" data-en="I Want This Too">Хочу так же</span>
+      <span data-ru="ХОЧУ ТАКЖЕ → СОЗВОНИТЬСЯ!" data-en="LET'S TALK!">ХОЧУ ТАКЖЕ → СОЗВОНИТЬСЯ!</span>
     </a>
   </div>
 
 </section>
 
 <section id="services" class="animate-on-scroll">
-  <h2 class="section-title" data-ru="Что мы делаем для EdTech?" data-en="What We Do for EdTech?">Что мы делаем для EdTech?</h2>
-  <p class="section-subtitle" data-ru="Мы закрываем полный цикл роста EdTech-проекта" data-en="We cover the full growth cycle of EdTech projects">Мы закрываем полный цикл роста EdTech-проекта</p>
+  <h2 class="section-title" data-ru="КАКУЮ ЦЕННОСТЬ МЫ СОЗДАЁМ В EdTech?" data-en="WHAT VALUE DO WE CREATE IN EdTech?">КАКУЮ ЦЕННОСТЬ МЫ СОЗДАЁМ В EdTech?</h2>
+  <p class="section-subtitle" data-ru="<i>Комплекс маркетинговых решений для роста EdTech-проекта от А до Я</i>" data-en="<i>Complete marketing solutions for EdTech growth — from A to Z</i>"><i>Комплекс маркетинговых решений для роста EdTech-проекта от А до Я</i></p>
   
   <ul class="service-list">
     <li class="service-item">
       <h3 class="service-title" data-ru="Маркетинговая стратегия" data-en="Marketing Strategy">Маркетинговая стратегия</h3>
-      <p class="service-description" data-ru="Разрабатываем комплексную маркетинговую стратегию, включающую анализ рынка, конкурентов, целевой аудитории и позиционирование бренда." 
-           data-en="We develop comprehensive marketing strategy including market analysis, competitors, target audience and brand positioning.">
-          Разрабатываем комплексную маркетинговую стратегию, включающую анализ рынка, конкурентов, целевой аудитории и позиционирование бренда.
-        </p>
+      <p class="service-description" data-ru="Создаём стратегию роста EdTech-проекта с использованием искусственного интеллекта и глубокой работы с нейронными моделями: глубокий анализ рынка и конкурентов, точное определение целевой аудитории и сильное позиционирование бренда. " data-en="Deep market and competitor analysis, precise audience targeting, and brand positioning to build a solid growth roadmap.">
+         Создаём стратегию роста EdTech-проекта с использованием искусственного интеллекта и глубокой работы с нейронными моделями: глубокий анализ рынка и конкурентов, точное определение целевой аудитории и сильное позиционирование бренда.
+         </p>
     </li>
-    
+
     <li class="service-item">
-      <h3 class="service-title" data-ru="Запуск и ведение рекламы" data-en="Advertising Launch & Management">Запуск и ведение рекламы</h3>
-      <p class="service-description" data-ru="Настройка и оптимизация рекламных кампаний в Facebook, Instagram, Google Ads с фокусом на конверсии и ROI." 
-           data-en="Setup and optimization of advertising campaigns on Facebook, Instagram, Google Ads focused on conversions and ROI.">
-          Настройка и оптимизация рекламных кампаний в Facebook, Instagram, Google Ads с фокусом на конверсии и ROI.
-        </p>
+      <h3 class="service-title" data-ru="Запуск и ведение рекламы" data-en="Advertising Campaigns">Запуск и ведение рекламы</h3>
+      <p class="service-description" data-ru="Запускаем кампании в Facebook, Instagram, Google Ads, TikTok с акцентом на привлечение клиентов, рост конверсии и максимальный возврат инвестиций (ROMI). ИИ позволяет увеличить эффективность рекламных кампаний на 35%!" data-en="We run campaigns on Facebook, Instagram, Google Ads, TikTok — driving leads, boosting conversions, and maximizing ROI.">
+         Запускаем кампании в Facebook, Instagram, Google Ads, TikTok с акцентом на привлечение клиентов, рост конверсии и максимальный возврат инвестиций (ROMI). ИИ позволяет увеличить эффективность рекламных кампаний на 35%!
+         </p>
     </li>
-    
+
     <li class="service-item">
-      <h3 class="service-title" data-ru="Воронки и CRM" data-en="Funnels & CRM">Воронки и CRM</h3>
-      <p class="service-description" data-ru="Построение эффективных воронок продаж и настройка CRM-систем для максимизации конверсии и удержания клиентов." 
-           data-en="Building effective sales funnels and CRM systems setup to maximize conversion and customer retention.">
-          Построение эффективных воронок продаж и настройка CRM-систем для максимизации конверсии и удержания клиентов.
-        </p>
+      <h3 class="service-title" data-ru="Воронки и построение системы" data-en="Funnels & System Building">Воронки и построение системы</h3>
+      <p class="service-description" data-ru="Проектируем воронки продаж и внедряем системы, которые увеличивают конверсию и удержание студентов или клиентов на каждом этапе пути. Только практические знания!" data-en="We design sales funnels and implement systems to improve conversion and student retention at every stage.">
+         Проектируем воронки продаж и внедряем системы, которые увеличивают конверсию и удержание студентов или клиентов на каждом этапе пути. Только практические знания!
+         </p>
     </li>
-    
+
     <li class="service-item">
       <h3 class="service-title" data-ru="Контент-маркетинг" data-en="Content Marketing">Контент-маркетинг</h3>
-      <p class="service-description" data-ru="Создание контент-стратегии, работа с блогерами и инфлюенсерами, ведение социальных сетей." 
-           data-en="Content strategy creation, working with bloggers and influencers, social media management.">
-          Создание контент-стратегии, работа с блогерами и инфлюенсерами, ведение социальных сетей.
-        </p>
+      <p class="service-description" data-ru="Разрабатываем стратегию контента: работа с блогерами и лидерами мнений, управление соцсетями и формирование доверия к бренду." data-en="From influencer collaborations to social media management, we craft content strategies that build trust and authority.">
+         Разрабатываем стратегию контента: работа с блогерами и лидерами мнений, управление соцсетями и формирование доверия к бренду.
+         </p>
     </li>
-    
+
     <li class="service-item">
       <h3 class="service-title" data-ru="Автоматизация и удержание" data-en="Automation & Retention">Автоматизация и удержание</h3>
-      <p class="service-description" data-ru="Настройка автоматизированных систем коммуникации, чат-ботов и email-маркетинга для удержания клиентов." 
-           data-en="Setup of automated communication systems, chatbots and email marketing for customer retention.">
-          Настройка автоматизированных систем коммуникации, чат-ботов и email-маркетинга для удержания клиентов.
-        </p>
+      <p class="service-description" data-ru="Настраиваем автоматизированные коммуникации: чат-боты Telegram/WhatsApp/ManyChat, email-маркетинг и персональные сценарии, которые помогают привлекать и удерживать клиентов эффективнее через автоматизацию процессов." data-en="Automated workflows: Telegram/WhatsApp/ManyChat bots, email marketing, and personalized retention flows that increase LTV.">
+         Настраиваем автоматизированные коммуникации: чат-боты Telegram/WhatsApp/ManyChat, email-маркетинг и персональные сценарии, которые помогают привлекать и удерживать клиентов эффективнее через автоматизацию процессов.
+         </p>
     </li>
   </ul>
 </section>
@@ -1488,8 +1644,8 @@
 
 
 <section id="about" class="animate-on-scroll">
-  <h2 class="section-title" data-ru="Почему мы?" data-en="Why Us?">Почему мы?</h2>
-  <p class="section-subtitle" data-ru="Отстройка от конкурентов" data-en="Differentiation from competitors">Отстройка от конкурентов</p>
+  <h2 class="section-title" data-ru="ПОЧЕМУ МЫ?" data-en="WHY US?">ПОЧЕМУ МЫ?</h2>
+  <p class="section-subtitle" data-ru="<i>Люди покупают не то, что вы делаете, а то, зачем вы это делаете. Саймон Синек</i>" data-en="<i>People don't buy what you do, they buy why you do it. — Simon Sinek</i>"><i>Люди покупают не то, что вы делаете, а то, зачем вы это делаете. Саймон Синек</i></p>
   
   <div class="cards">
     <div class="card expandable-card">
@@ -1578,109 +1734,119 @@
 
 <section class="animate-on-scroll">
   <h2 class="section-title" data-ru="FAQ" data-en="FAQ">FAQ</h2>
-  <p class="section-subtitle" data-ru="Частые вопросы" data-en="Frequently asked questions">Частые вопросы</p>
-  
+  <p class="section-subtitle" data-ru="ChatGPT: *Частые вопросы, на которые у нас есть ответ!* " data-en="ChatGPT: *Frequently asked questions, we have answers!*">ChatGPT: *Частые вопросы, на которые у нас есть ответ!*</p>
+
   <div class="faq-item">
     <div class="faq-question">
-      <span data-ru="Цена наших услуг?" data-en="What are your service prices?">Цена наших услуг?</span>
+      <span data-ru="1. Список всех наших услуг!" data-en="1. What services do you provide?">1. Список всех наших услуг!</span>
       <span class="faq-toggle">+</span>
     </div>
     <div class="faq-answer">
-      <p data-ru="Стоимость наших услуг высчитывается после первого совместного звонка 'Briefing'. Наша работа начинается от базовых пакетов, точная стоимость зависит от масштаба проекта и поставленных задач." 
-         data-en="Our service cost is calculated after the first joint 'Briefing' call. Our work starts from basic packages, exact cost depends on project scale and set tasks.">
-        Стоимость наших услуг высчитывается после первого совместного звонка "Briefing". Наша работа начинается от базовых пакетов, точная стоимость зависит от масштаба проекта и поставленных задач.
+      <p data-ru="- таргетированая реклама META, TikTok (Facebook/Instagram)<br>- Google Ads (Search) & YouTube<br>- Маркетинг стратегия<br>- Продюсирование проекта/эксперта под ключ<br>- Контент стратегия<br>- Построение системы и команды под ваш запрос<br>- Инфлюенс маркетинг (Influencers)<br>- Создание чат-ботов<br>- Создание лендингов<br>- Бизнес консалтинг<br>- Корпоративное обучение (Б2Б)" data-en="- Targeted advertising META, TikTok (Facebook/Instagram)<br>- Google Ads (Search) & YouTube<br>- Marketing strategy<br>- Turnkey project/expert production<br>- Content strategy<br>- Building systems and teams for your request<br>- Influencer marketing<br>- Creating chatbots<br>- Creating landing pages<br>- Business consulting<br>- Corporate training (B2B)">
+        - таргетированая реклама META, TikTok (Facebook/Instagram)<br>- Google Ads (Search) & YouTube<br>- Маркетинг стратегия<br>- Продюсирование проекта/эксперта под ключ<br>- Контент стратегия<br>- Построение системы и команды под ваш запрос<br>- Инфлюенс маркетинг (Influencers)<br>- Создание чат-ботов<br>- Создание лендингов<br>- Бизнес консалтинг<br>- Корпоративное обучение (Б2Б)
       </p>
     </div>
   </div>
-  
+
   <div class="faq-item">
     <div class="faq-question">
-      <span data-ru="Сколько лидов мы получим?" data-en="How many leads will we get?">Сколько лидов мы получим?</span>
+      <span data-ru="2. Что, если мой бизнес не с ниши EdTech?" data-en="2. Do you only work with EdTech?">2. Что, если мой бизнес не с ниши EdTech?</span>
       <span class="faq-toggle">+</span>
     </div>
     <div class="faq-answer">
-      <p data-ru="Мы строим системный и комплексный маркетинг. Количество лидов зависит от нашей воронки, географии рынка, стоимости за конверсию и прочих факторов. Мы всегда работаем на результат и гарантируем достижение KPI." 
-         data-en="We build systematic and comprehensive marketing. Number of leads depends on our funnel, market geography, cost per conversion and other factors. We always work for results and guarantee KPI achievement.">
-        Мы строим системный и комплексный маркетинг. Количество лидов зависит от нашей воронки, географии рынка, стоимости за конверсию и прочих факторов. Мы всегда работаем на результат и гарантируем достижение KPI.
+      <p data-ru="Мы работаем не только в сфере образования. <strong>Zilly Team обладает опытом масштабирования проектов в разных странах, культурах и индустриях.</strong> Ознакомьтесь с примерами <a href='other-cases.html'>здесь</a>." data-en="We work not only in education. <strong>Zilly Team has experience scaling projects in different countries, cultures and industries.</strong> Check out examples <a href='other-cases.html'>here</a>.">
+        Мы работаем не только в сфере образования. <strong>Zilly Team обладает опытом масштабирования проектов в разных странах, культурах и индустриях.</strong> Ознакомьтесь с примерами <a href='other-cases.html'>здесь</a>.
       </p>
     </div>
   </div>
-  
+
   <div class="faq-item">
     <div class="faq-question">
-      <span data-ru="Какие рынки вы охватываете?" data-en="What markets do you cover?">Какие рынки вы охватываете?</span>
+      <span data-ru="3. Сколько лидов мы получим?" data-en="3. How many leads will we get?">3. Сколько лидов мы получим?</span>
       <span class="faq-toggle">+</span>
     </div>
     <div class="faq-answer">
-      <p data-ru="Наша команда знает немецкий, английский, украинский и польский языки. Мы работаем по всему миру и умеем масштабировать проекты в рамках разных культур и рынков!" 
-         data-en="Our team knows German, English, Ukrainian and Polish languages. We work worldwide and know how to scale projects across different cultures and markets!">
-        Наша команда знает немецкий, английский, украинский и польский языки. Мы работаем по всему миру и умеем масштабировать проекты в рамках разных культур и рынков!
+      <p data-ru="Точное количество лидов на старте предсказать невозможно. Проект всегда начинается с изучения вашего бизнеса, выстраивания процессов и тестирования гипотез. На первом этапе мы можем дать прогноз, опираясь на рыночные метрики." data-en="The exact number of leads at the start is impossible to predict. The project always starts with studying your business, building processes and testing hypotheses. At the first stage, we can give a forecast based on market metrics.">
+        Точное количество лидов на старте предсказать невозможно. Проект всегда начинается с изучения вашего бизнеса, выстраивания процессов и тестирования гипотез. На первом этапе мы можем дать прогноз, опираясь на рыночные метрики.
       </p>
     </div>
   </div>
-  
+
   <div class="faq-item">
     <div class="faq-question">
-      <span data-ru="Что, если я не в EdTech?" data-en="What if I'm not in EdTech?">Что, если я не в EdTech?</span>
+      <span data-ru="4. Какая стоимость ваших услуг?" data-en="4. What about pricing?">4. Какая стоимость ваших услуг?</span>
       <span class="faq-toggle">+</span>
     </div>
     <div class="faq-answer">
-      <p data-ru="У нас есть и проекты вне нашей специализации. " data-en="We also have projects outside our specialization. ">У нас есть и проекты вне нашей специализации. </p>
-      <a href="#other-services" data-ru="Посмотреть другие кейсы" data-en="View other cases">Посмотреть другие кейсы</a>
+      <p data-ru="Мы работаем по 100% предоплате. Стоимость зависит от задач и времени команды. Есть минимальная ставка для старта. После первого звонка ждите оффер.<br><br>*И да, маркетинг-роботы у нас пока не рассылают офферы сами. Но мы работаем над этим… правда, пока руками 😅*" data-en="We work with 100% prepayment. Cost depends on tasks and team time. There is a minimum rate to start. After the first call, expect an offer.<br><br>*And yes, marketing robots don't send offers themselves yet. But we're working on it... honestly, by hand for now 😅*">
+        Мы работаем по 100% предоплате. Стоимость зависит от задач и времени команды. Есть минимальная ставка для старта. После первого звонка ждите оффер.<br><br>*И да, маркетинг-роботы у нас пока не рассылают офферы сами. Но мы работаем над этим… правда, пока руками 😅*
+      </p>
     </div>
   </div>
 </section>
 
 <section class="trusted-by animate-on-scroll">
-  <h3 class="trusted-title" data-ru="Нам доверяют" data-en="Trusted by">Нам доверяют</h3>
+  <h3 class="trusted-title" data-ru="НАМ ДОВЕРЯЮТ" data-en="TRUSTED BY">НАМ ДОВЕРЯЮТ</h3>
   <div class="trusted-logos">
-    <div class="trusted-logo">Vadym.ai</div>
-    <div class="trusted-logo">YesCenter</div>
-    <div class="trusted-logo">Web3 Academy</div>
-    <div class="trusted-logo">EduTech Pro</div>
-    <div class="trusted-logo">Language Plus</div>
-    <div class="trusted-logo">Vadym.ai</div>
-    <div class="trusted-logo">YesCenter</div>
-    <div class="trusted-logo">Web3 Academy</div>
-    <div class="trusted-logo">EduTech Pro</div>
-    <div class="trusted-logo">Language Plus</div>
+    <div class="trusted-logo">KORU Pharma</div>
+    <div class="trusted-logo">Vadym.AI</div>
+    <div class="trusted-logo">Raccoon School</div>
+    <div class="trusted-logo">Intax Connect</div>
+    <div class="trusted-logo">KORU Pharma</div>
+    <div class="trusted-logo">Vadym.AI</div>
+    <div class="trusted-logo">Raccoon School</div>
+    <div class="trusted-logo">Intax Connect</div>
+    <div class="trusted-logo">KORU Pharma</div>
+    <div class="trusted-logo">Vadym.AI</div>
+    <div class="trusted-logo">Raccoon School</div>
+    <div class="trusted-logo">Intax Connect</div>
+    <div class="trusted-logo">KORU Pharma</div>
+    <div class="trusted-logo">Vadym.AI</div>
+    <div class="trusted-logo">Raccoon School</div>
+    <div class="trusted-logo">Intax Connect</div>
   </div>
 </section>
 
 <section id="team" class="team animate-on-scroll">
-  <h2 class="section-title" data-ru="Команда" data-en="Team">Команда</h2>
-  <p class="section-subtitle" data-ru="Профессионалы, которые работают над вашим успехом" data-en="Professionals working on your success">Профессионалы, которые работают над вашим успехом</p>
+  <h2 class="section-title" data-ru="КОМАНДА" data-en="TEAM">КОМАНДА</h2>
+  <p class="section-subtitle" data-ru="<i>Никто из нас не так умен, как все мы вместе. Кен Бланшар</i>" data-en="<i>None of us is as smart as all of us. Ken Blanchard</i>"><i>Никто из нас не так умен, как все мы вместе. Кен Бланшар</i></p>
   
   <div class="team-grid">
     <div class="team-member">
       <div class="team-photo">👨‍💼</div>
-      <h3 class="team-name" data-ru="Алексей Иванов" data-en="Alex Ivanov">Алексей Иванов</h3>
-      <p class="team-role" data-ru="Стратегический директор" data-en="Strategic Director">Стратегический директор</p>
+      <h3 class="team-name" data-ru="Pavils G." data-en="Pavils G.">Pavils G.</h3>
+      <p class="team-role" data-ru="FOUNDER, CEO" data-en="FOUNDER, CEO">FOUNDER, CEO</p>
     </div>
-    
+
     <div class="team-member">
       <div class="team-photo">👩‍💻</div>
-      <h3 class="team-name" data-ru="Мария Петрова" data-en="Maria Petrova">Мария Петрова</h3>
-      <p class="team-role" data-ru="Руководитель маркетинга" data-en="Marketing Director">Руководитель маркетинга</p>
+      <h3 class="team-name" data-ru="Nazar N." data-en="Nazar N.">Nazar N.</h3>
+      <p class="team-role" data-ru="Senior Media Buyer" data-en="Senior Media Buyer">Senior Media Buyer</p>
     </div>
-    
+
     <div class="team-member">
       <div class="team-photo">👨‍🎨</div>
-      <h3 class="team-name" data-ru="Дмитрий Козлов" data-en="Dmitry Kozlov">Дмитрий Козлов</h3>
-      <p class="team-role" data-ru="Креативный директор" data-en="Creative Director">Креативный директор</p>
+      <h3 class="team-name" data-ru="Viktoriia V." data-en="Viktoriia V.">Viktoriia V.</h3>
+      <p class="team-role" data-ru="Junior Media Buyer" data-en="Junior Media Buyer">Junior Media Buyer</p>
     </div>
-    
+
     <div class="team-member">
       <div class="team-photo">👩‍📊</div>
-      <h3 class="team-name" data-ru="Анна Смирнова" data-en="Anna Smirnova">Анна Смирнова</h3>
-      <p class="team-role" data-ru="Аналитик данных" data-en="Data Analyst">Аналитик данных</p>
+      <h3 class="team-name" data-ru="Polyna Y." data-en="Polyna Y.">Polyna Y.</h3>
+      <p class="team-role" data-ru="Social Media Manager" data-en="Social Media Manager">Social Media Manager</p>
+    </div>
+
+    <div class="team-member">
+      <div class="team-photo">👨‍💻</div>
+      <h3 class="team-name" data-ru="Tyler J." data-en="Tyler J.">Tyler J.</h3>
+      <p class="team-role" data-ru="Integration & Programmatic Specialist" data-en="Integration & Programmatic Specialist">Integration & Programmatic Specialist</p>
     </div>
   </div>
 </section>
 
 <section id="contact" class="animate-on-scroll">
-  <h2 class="section-title" data-ru="Готовы обсудить ваш проект?" data-en="Ready to discuss your project?">Готовы обсудить ваш проект?</h2>
-  <p class="section-subtitle" data-ru="<b>Выберите удобное время для звонка прямо сейчас, время автоматически подстраивается под нашу временную зону" data-en="<b>Choose a convenient time</b> for a call right now, time automatically adjusts to our time zone"><b>Выберите удобное время</b> для звонка прямо сейчас, время автоматически подстраивается под нашу временную зону</p>
+  <h2 class="section-title" data-ru="ГОТОВЫ ОБСУДИТЬ СОТРУДНИЧЕСТВО?" data-en="READY TO DISCUSS COLLABORATION?">ГОТОВЫ ОБСУДИТЬ СОТРУДНИЧЕСТВО?</h2>
+  <p class="section-subtitle" data-ru="<b>Выберите удобное время для звонка прямо сейчас, время автоматически подстраивается под нашу временную зону</b>" data-en="<b>Choose a convenient time for a call right now, time automatically adjusts to our time zone</b>"><b>Выберите удобное время для звонка прямо сейчас, время автоматически подстраивается под нашу временную зону</b></p>
   
   <div class="calendar-container">
     <div class="calendar-loading" id="calendar-loading">
@@ -1706,16 +1872,16 @@
   </div>
   
   <div class="contact-info">
-    <a href="mailto:hello@edtechagency.com" class="contact-item">
+    <a href="mailto:business@zilly.es" class="contact-item">
       <span class="contact-icon">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </span>
-      <span>hello@edtechagency.com</span>
+      <span>business@zilly.es</span>
     </a>
-    <a href="https://linkedin.com/company/edtech-agency" class="contact-item" target="_blank">
+    <a href="https://www.linkedin.com/in/pavils-paid-ads/" class="contact-item" target="_blank">
       <span class="contact-icon">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1725,9 +1891,31 @@
       </span>
       <span>LinkedIn</span>
     </a>
-    <a href="https://t.me/edtechagency" class="contact-item" target="_blank">
+    <a href="https://www.instagram.com/pavils_grey?igsh=aDM5YnF0cnM5YXE5&utm_source=qr" class="contact-item" target="_blank">
       <span class="contact-icon">
-        <img src="telegram-communication-chat-interaction-network-connection.svg" alt="Telegram" width="20" height="20" style="filter: brightness(0) saturate(100%) invert(34%) sepia(98%) saturate(1350%) hue-rotate(100deg) brightness(92%) contrast(101%);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>Instagram</span>
+    </a>
+    <a href="https://youtu.be/xvFZjo5PgG0?si=JzW8LNU1wKJ9xSiF" class="contact-item" target="_blank">
+      <span class="contact-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <polygon points="9.75,15.02 15.5,11.75 9.75,8.48" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>YouTube</span>
+    </a>
+    <a href="https://t.me/pavils_grey" class="contact-item" target="_blank">
+      <span class="contact-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21.5 2.5L2.5 10.5L9.5 13.5L12.5 20.5L21.5 2.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9.5 13.5L12.5 10.5L16.5 14.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </span>
       <span>Telegram</span>
     </a>
@@ -1736,13 +1924,29 @@
 
 <footer>
   <div class="footer-links">
-    <a href="#" data-ru="Политика конфиденциальности" data-en="Privacy Policy">Политика конфиденциальности</a>
-    <a href="#" data-ru="Условия использования" data-en="Terms of Service">Условия использования</a>
-    <a href="#" data-ru="Cookies" data-en="Cookies">Cookies</a>
+    <a href="privacy-policy.html" data-ru="Политика конфиденциальности" data-en="Privacy Policy">Политика конфиденциальности</a>
+    <a href="terms-of-service.html" data-ru="Условия использования" data-en="Terms of Service">Условия использования</a>
+    <a href="cookies.html" data-ru="Cookies" data-en="Cookies">Cookies</a>
   </div>
-  <p data-ru="© 2025 EdTech Agency. Все права защищены." data-en="© 2025 EdTech Agency. All rights reserved.">© 2025 EdTech Agency. Все права защищены.</p>
+  <p data-ru="© 2025 Zilly Team. Все права защищены." data-en="© 2025 Zilly Team. All rights reserved.">© 2025 Zilly Team. Все права защищены.</p>
   <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 10px;">Made by koszoz99@gmail.com</p>
 </footer>
+
+<!-- Cookie Consent Banner -->
+<div id="cookie-consent-banner" class="cookie-consent-banner">
+  <div class="cookie-consent-content">
+    <div class="cookie-consent-text">
+      <p data-ru="Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>." data-en="We use cookies to improve website functionality and analyze traffic. By continuing to use the site, you agree to our <a href='cookies.html'>Cookie Policy</a> and <a href='privacy-policy.html'>Privacy Policy</a>.">
+        Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>.
+      </p>
+    </div>
+    <div class="cookie-consent-buttons">
+      <button id="accept-cookies" class="cookie-btn cookie-btn-accept" data-ru="Принять" data-en="Accept">Принять</button>
+      <button id="decline-cookies" class="cookie-btn cookie-btn-decline" data-ru="Отклонить" data-en="Decline">Отклонить</button>
+    </div>
+  </div>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
