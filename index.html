@@ -514,6 +514,22 @@
       .cookie-consent-content {
         flex-direction: column;
         text-align: center;
+        max-width: none;
+        width: 100%;
+      }
+
+      .cookie-consent-text {
+        min-width: 0;
+        flex: none;
+        width: 100%;
+      }
+
+      .cookie-consent-text p {
+        word-break: break-all;
+      }
+
+      .cookie-consent-text a {
+        word-break: break-all;
       }
 
       .cookie-consent-buttons {
@@ -525,6 +541,7 @@
         padding: 15px;
         max-height: 90vh;
         overflow-y: auto;
+        overflow-x: hidden;
       }
     }
 
