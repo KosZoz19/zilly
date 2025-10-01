@@ -1253,7 +1253,11 @@
     /* Mobile Responsive */
     @media (max-width: 768px) {
       header {
-        padding: 5px 10px;
+        padding: 5px 5px;
+      }
+
+      .logo img {
+        position: relative;
       }
 
       .nav-container {
@@ -1277,8 +1281,16 @@
         width: 100%;
       }
 
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+  
       .menu-btn {
         display: block;
+        position: fixed;
+        right:200px;
       }
 
       .hero h1 {
@@ -1524,11 +1536,12 @@
 
 </style>
 <header style="background-color: white;">
-  <a href="index.html" class="logo" style="text-decoration: none;">
-    <img src="logozlilly.png" alt="logozilly">
-  </a>
-
-  <div class="menu-btn">☰</div>
+  <div class="header-left">
+    <a href="index.html" class="logo" style="text-decoration: none;">
+      <img src="logozlilly.png" alt="logozilly">
+    </a>
+    <div class="menu-btn">☰</div>
+  </div>
   <div class="nav-container">
     <nav class="main-nav">
       <a href="#for"><span class="nav-number">1</span><span data-ru="Для кого?" data-en="Who is it for?">Для кого?</span></a>
