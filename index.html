@@ -511,6 +511,21 @@
     }
 
     @media (max-width: 768px) {
+      .cookie-consent-banner {
+        position: relative;
+        display: none;
+        padding: 5px;
+        font-size: 10px;
+        line-height: 1.2;
+        max-height: 60vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      .cookie-consent-banner.show {
+        display: block;
+      }
+
       .cookie-consent-content {
         flex-direction: column;
         text-align: center;
@@ -526,7 +541,6 @@
 
       .cookie-consent-text p {
         word-wrap: break-word;
-        font-size: 12px;
       }
 
       .cookie-consent-text a {
@@ -536,15 +550,6 @@
       .cookie-consent-buttons {
         width: 100%;
         justify-content: center;
-      }
-
-      .cookie-consent-banner {
-        padding: 5px;
-        font-size: 10px;
-        line-height: 1.2;
-        max-height: 60vh;
-        overflow-y: auto;
-        overflow-x: hidden;
       }
 
       .cookie-btn {
@@ -1247,6 +1252,10 @@
 
     /* Mobile Responsive */
     @media (max-width: 768px) {
+      header {
+        padding: 5px 15px;
+      }
+
       .nav-container {
         display: none;
         position: absolute;
@@ -1534,6 +1543,21 @@
     </div>
   </div>
 </header>
+
+<!-- Cookie Consent Banner -->
+<div id="cookie-consent-banner" class="cookie-consent-banner">
+  <div class="cookie-consent-content">
+    <div class="cookie-consent-text">
+      <p data-ru="Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>." data-en="We use cookies to improve website functionality and analyze traffic. By continuing to use the site, you agree to our <a href='cookies.html'>Cookie Policy</a> and <a href='privacy-policy.html'>Privacy Policy</a>.">
+        Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>.
+      </p>
+    </div>
+    <div class="cookie-consent-buttons">
+      <button id="accept-cookies" class="cookie-btn cookie-btn-accept" data-ru="Принять" data-en="Accept">Принять</button>
+      <button id="decline-cookies" class="cookie-btn cookie-btn-decline" data-ru="Отклонить" data-en="Decline">Отклонить</button>
+    </div>
+  </div>
+</div>
 
 <section class="hero" id="hero">
   <div class="hero-content animate-on-scroll">
@@ -1958,21 +1982,6 @@
   <p data-ru="© 2025 Zilly Team. Все права защищены." data-en="© 2025 Zilly Team. All rights reserved.">© 2025 Zilly Team. Все права защищены.</p>
   <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 10px;">Made by koszoz99@gmail.com</p>
 </footer>
-
-<!-- Cookie Consent Banner -->
-<div id="cookie-consent-banner" class="cookie-consent-banner">
-  <div class="cookie-consent-content">
-    <div class="cookie-consent-text">
-      <p data-ru="Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>." data-en="We use cookies to improve website functionality and analyze traffic. By continuing to use the site, you agree to our <a href='cookies.html'>Cookie Policy</a> and <a href='privacy-policy.html'>Privacy Policy</a>.">
-        Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>.
-      </p>
-    </div>
-    <div class="cookie-consent-buttons">
-      <button id="accept-cookies" class="cookie-btn cookie-btn-accept" data-ru="Принять" data-en="Accept">Принять</button>
-      <button id="decline-cookies" class="cookie-btn cookie-btn-decline" data-ru="Отклонить" data-en="Decline">Отклонить</button>
-    </div>
-  </div>
-</div>
 
 <script src="script.js"></script>
 </body>
