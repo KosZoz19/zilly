@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zilly Team - Кейс: Intax Connect Cyprus — Международный ивент для предпринимателей</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .section-title {
+      font-size: clamp(3rem, 7vw, 4rem);
+    }
+    .btn {
+      padding: 24px 48px;
+      font-size: 1.5rem;
+    }
+
+    /* Cookie Consent Banner */
+    .cookie-consent-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #f8f9fa;
+      border-top: 2px solid #10b981;
+      padding: 20px;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+      z-index: 10000;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      font-size: 14px;
+      display: none;
+    }
+
+    .cookie-consent-banner.show {
+      transform: translateY(0);
+    }
+
+    .cookie-consent-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-consent-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .cookie-consent-text p {
+      margin: 0 0 10px 0;
+      color: #333333;
+      line-height: 1.5;
+    }
+
+    .cookie-consent-text a {
+      color: #10b981;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .cookie-consent-text a:hover {
+      text-decoration: underline;
+    }
+
+    .cookie-consent-buttons {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .cookie-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .cookie-btn-accept {
+      background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      color: white;
+    }
+
+    .cookie-btn-accept:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .cookie-btn-decline {
+      background: transparent;
+      color: #555555;
+      border: 1px solid #555555;
+    }
+
+    .cookie-btn-decline:hover {
+      background: #555555;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .cookie-consent-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cookie-consent-buttons {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .cookie-consent-banner {
+        padding: 15px;
+      }
+    }
+
+    .case-content {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      margin: 60px 0;
+    }
+
+    .case-text {
+      flex: 1;
+    }
+
+    .case-text h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .case-text p, .case-text ul {
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .case-text ul {
+      padding-left: 20px;
+    }
+
+    .case-text li {
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .case-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  // Function to apply language
+  function applyLanguage(lang) {
+    const elementsWithLang = document.querySelectorAll('[data-ru][data-en]');
+    elementsWithLang.forEach(element => {
+      if (element.dataset[lang]) {
+        element.innerHTML = element.dataset[lang];
+      }
+    });
+    document.documentElement.lang = lang;
+
+    // Update active language button
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      if (b.dataset.lang === lang) {
+        b.classList.add('active');
+      } else {
+        b.classList.remove('active');
+      }
+    });
+  }
+
+  // On page load or when restored from bfcache, apply saved language or default to Russian
+  const savedLang = localStorage.getItem('selectedLang');
+  if (savedLang) {
+    applyLanguage(savedLang);
+  } else {
+    applyLanguage('ru'); // Default language
+  }
+
+  window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+      // Page was restored from bfcache, re-apply language
+      const savedLangOnPersist = localStorage.getItem('selectedLang');
+      if (savedLangOnPersist) {
+        applyLanguage(savedLangOnPersist);
+      } else {
+        applyLanguage('ru'); // Default language if no saved language
+      }
+    }
+  });
+
+  // Mobile Menu
+  const menuBtn = document.querySelector('.menu-btn');
+  const navContainer = document.querySelector('.nav-container');
+  
+  menuBtn.addEventListener('click', () => {
+    navContainer.classList.toggle('active');
+  });
+
+  // Language Toggle
+  const langButtons = document.querySelectorAll('.lang-btn');
+  
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      localStorage.setItem('selectedLang', lang); // Save selected language
+      applyLanguage(lang);
+    });
+  });
+
+  // Smooth Scrolling for Navigation Links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Scroll Animation
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    observer.observe(el);
+  });
+
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (window.scrollY > 100) {
+      header.style.background = 'rgba(255, 255, 255, 0.98)';
+    } else {
+      header.style.background = 'rgba(255, 255, 255, 0.95)';
+    }
+  });
+  });
+
+  // Cookie Consent Banner Functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const banner = document.getElementById('cookie-consent-banner');
+    const acceptBtn = document.getElementById('accept-cookies');
+    const declineBtn = document.getElementById('decline-cookies');
+
+    // Function to set cookie
+    function setCookie(name, value, days) {
+      const expires = new Date();
+      expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+      document.cookie = name + '=' + value + ';expires=' + expires.toUTCString() + ';path=/';
+    }
+
+    // Function to get cookie
+    function getCookie(name) {
+      const nameEQ = name + '=';
+      const ca = document.cookie.split(';');
+      for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    // Function to hide banner
+    function hideBanner() {
+      banner.classList.remove('show');
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 300);
+    }
+
+    // Check if user has already made a choice
+    const consent = getCookie('cookieConsent');
+    if (consent === null) {
+      // Show banner after a short delay
+      setTimeout(() => {
+        banner.classList.add('show');
+      }, 1000);
+    }
+
+    // Accept cookies
+    acceptBtn.addEventListener('click', function() {
+      setCookie('cookieConsent', 'accepted', 365);
+      hideBanner();
+      console.log('Cookies accepted');
+    });
+
+    // Decline cookies
+    declineBtn.addEventListener('click', function() {
+      setCookie('cookieConsent', 'declined', 365);
+      hideBanner();
+      console.log('Cookies declined');
+    });
+
+    // Apply current language to banner
+    function applyBannerLanguage(lang) {
+      const bannerElements = banner.querySelectorAll('[data-ru][data-en]');
+      bannerElements.forEach(element => {
+        if (element.dataset[lang]) {
+          element.innerHTML = element.dataset[lang];
+        }
+      });
+    }
+
+    // Apply language to banner when language changes
+    const savedLang = localStorage.getItem('selectedLang') || 'ru';
+    applyBannerLanguage(savedLang);
+
+    // Listen for language changes
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        applyBannerLanguage(lang);
+      });
+    });
+  });
+  </script>
+</head>
+<body>
+  <header style="background-color: white;">
+  <a href="index.html" class="logo" style="text-decoration: none;">
+    <img src="logozlilly.png" alt="logozilly">
+  </a>
+
+  <div class="menu-btn">☰</div>
+  <div class="nav-container">
+    <nav class="main-nav">
+      <a href="index.html#for"><span class="nav-number">1</span><span data-ru="Для кого?" data-en="Who is it for?">Для кого?</span></a>
+      <a href="cases.html"><span class="nav-number">2</span><span data-ru="EdTech" data-en="EdTech">EdTech</span></a>
+      <a href="index.html#about"><span class="nav-number">3</span><span data-ru="О Нас" data-en="About Us">О Нас</span></a>
+      <a href="other-cases.html"><span class="nav-number">4</span><span data-ru="Другие ниши" data-en="Other Industries">Другие ниши</span></a>
+    </nav>
+    <a href="index.html#contact" class="nav-contact-btn" data-ru="Связаться" data-en="Contact">Связаться</a>
+    <div class="lang-toggle">
+      <button class="lang-btn" data-lang="ru">RU</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+  <section class="hero" id="case-detail-hero" style="background-color: white; color: var(--text);">
+    <div class="hero-content animate-on-scroll">
+      <h1>
+        <span data-ru="Кейс: Intax Connect Cyprus — Международный ивент для предпринимателей" data-en="Case: Intax Connect Cyprus — International Event for Entrepreneurs">
+          Кейс: Intax Connect Cyprus — Международный ивент для предпринимателей
+        </span>
+      </h1>
+      <p class="hero-description">
+        <span data-ru="Запуск рекламной кампании с нуля и привлечение лидов на мероприятие всего за 2 недели!" data-en="Launching an advertising campaign from scratch and attracting leads to the event in just 2 weeks!">
+          Запуск рекламной кампании с нуля и привлечение лидов на мероприятие всего за 2 недели!
+        </span>
+      </p>
+    </div>
+  </section>
+
+  <section class="case-content animate-on-scroll">
+    <div class="case-text">
+      <h2 data-ru="Задача клиента" data-en="Client's Task">🎯 Задача клиента</h2>
+      <p data-ru="Запустить рекламную кампанию с нуля и привлечь целевых лидов на мероприятие **Intax Connect Cyprus** всего за 2 недели до ивента. Бюджет был ограничен — $300. Цель: сформировать поток регистраций в кратчайшие сроки и протестировать эффективность креативов для последующих масштабирований." data-en="Launch an advertising campaign from scratch and attract targeted leads to the **Intax Connect Cyprus** event just 2 weeks before the event. The budget was limited — $300. Goal: create a flow of registrations in the shortest possible time and test the effectiveness of creatives for subsequent scalings.">
+        Запустить рекламную кампанию с нуля и привлечь целевых лидов на мероприятие **Intax Connect Cyprus** всего за 2 недели до ивента. Бюджет был ограничен — $300. Цель: сформировать поток регистраций в кратчайшие сроки и протестировать эффективность креативов для последующих масштабирований.
+      </p>
+      
+      <h2 data-ru="Наш подход" data-en="Our Approach">🧠 Наш подход</h2>
+      <ul>
+        <li data-ru="Основой оффера стали **ключевые темы и хедлайнеры ивента**: международная налоговая оптимизация, структура бизнеса, релокация капитала. Мы сделали акцент на **практической пользе и международной экспертности**, чтобы зацепить предпринимателей." data-en="The basis of the offer was the **key topics and headliners of the event**: international tax optimization, business structure, capital relocation. We emphasized **practical benefits and international expertise** to hook entrepreneurs.">
+          Основой оффера стали **ключевые темы и хедлайнеры ивента**: международная налоговая оптимизация, структура бизнеса, релокация капитала. Мы сделали акцент на **практической пользе и международной экспертности**, чтобы зацепить предпринимателей.
+        </li>
+        <li data-ru="Настроили таргетинг на аудиторию в **Кипре и соседних странах**, где высок интерес к бизнес-ивентам подобного формата." data-en="Set up targeting for the audience in **Cyprus and neighboring countries**, where there is high interest in business events of this format.">
+          Настроили таргетинг на аудиторию в **Кипре и соседних странах**, где высок интерес к бизнес-ивентам подобного формата.
+        </li>
+        <li data-ru="Создали креативы с упором на **боли и ожидания аудитории**: «Практическая информация из первых уст», «Лучшие компании и эксперты со всего мира», «Решения для бизнеса в условиях глобальных изменений»." data-en="Created creatives focusing on **pains and expectations of the audience**: "Practical information from the first hands", "Best companies and experts from around the world", "Business solutions in the context of global changes".">
+          Создали креативы с упором на **боли и ожидания аудитории**: «Практическая информация из первых уст», «Лучшие компании и эксперты со всего мира», «Решения для бизнеса в условиях глобальных изменений».
+        </li>
+        <li data-ru="Подготовка заняла 3 дня: упаковка оффера, написание текстов, создание визуалов. Запуск прошёл в максимально сжатые сроки." data-en="Preparation took 3 days: offer packaging, text writing, visual creation. The launch took place in the shortest possible time.">
+          Подготовка заняла 3 дня: упаковка оффера, написание текстов, создание визуалов. Запуск прошёл в максимально сжатые сроки.
+        </li>
+      </ul>
+
+      <h2 data-ru="Ключевые метрики и результаты" data-en="Key Metrics and Results">📊 Ключевые метрики и результаты</h2>
+      <ul>
+        <li data-ru="Минимальный бюджет — **$300**" data-en="Minimum budget — **$300**">
+          Минимальный бюджет — **$300**
+        </li>
+        <li data-ru="Запуск за **1,5 недели до ивента**" data-en="Launch **1.5 weeks before the event**">
+          Запуск за **1,5 недели до ивента**
+        </li>
+        <li data-ru="Получено **7 активных регистраций** на мероприятие" data-en="Received **7 active registrations** for the event">
+          Получено **7 активных регистраций** на мероприятие
+        </li>
+        <li data-ru="**Стоимость клика — одна из самых низких** в нише за счёт качества креативов и точного таргетинга" data-en="**Cost per click — one of the lowest** in the niche due to the quality of creatives and precise targeting">
+          **Стоимость клика — одна из самых низких** в нише за счёт качества креативов и точного таргетинга
+        </li>
+        <li data-ru="Кампания вышла в **ноль по бюджету** (окупаемость) при первой же тестовой воронке" data-en="The campaign came out to **zero on the budget** (payback) on the first test funnel">
+          Кампания вышла в **ноль по бюджету** (окупаемость) при первой же тестовой воронке
+        </li>
+      </ul>
+
+      <h2 data-ru="Вывод" data-en="Conclusion">✅ Вывод</h2>
+      <p data-ru="Даже при ограниченном бюджете и коротких сроках можно добиться результата, если грамотно выстроить воронку и сфокусироваться на болях аудитории. Креативы с практической ценностью и фокусом на международный уровень ивента показали себя лучше всего. Клиент остался доволен результатом и уже обратился к нам для подготовки рекламы к следующему мероприятию." data-en="Even with a limited budget and short deadlines, you can achieve results if you build the funnel competently and focus on the audience's pains. Creatives with practical value and focus on the international level of the event performed best. The client was satisfied with the result and has already contacted us to prepare advertising for the next event.">
+        Даже при ограниченном бюджете и коротких сроках можно добиться результата, если грамотно выстроить воронку и сфокусироваться на болях аудитории. Креативы с практической ценностью и фокусом на международный уровень ивента показали себя лучше всего. Клиент остался доволен результатом и уже обратился к нам для подготовки рекламы к следующему мероприятию.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="privacy-policy.html" data-ru="Политика конфиденциальности" data-en="Privacy Policy">Политика конфиденциальности</a>
+      <a href="terms-of-service.html" data-ru="Условия использования" data-en="Terms of Service">Условия использования</a>
+      <a href="cookies.html" data-ru="Cookies" data-en="Cookies">Cookies</a>
+    </div>
+    <p data-ru="© 2025 Zilly Team. Все права защищены." data-en="© 2025 Zilly Team. All rights reserved.">© 2025 Zilly Team. Все права защищены.</p>
+    <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 10px;">Made by koszoz99@gmail.com</p>
+  </footer>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-consent-banner" class="cookie-consent-banner">
+    <div class="cookie-consent-content">
+      <div class="cookie-consent-text">
+        <p data-ru="Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>." data-en="We use cookies to improve website functionality and analyze traffic. By continuing to use the site, you agree to our <a href='cookies.html'>Cookie Policy</a> and <a href='privacy-policy.html'>Privacy Policy</a>.">
+          Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>.
+        </p>
+      </div>
+      <div class="cookie-consent-buttons">
+        <button id="accept-cookies" class="cookie-btn cookie-btn-accept" data-ru="Принять" data-en="Accept">Принять</button>
+        <button id="decline-cookies" class="cookie-btn cookie-btn-decline" data-ru="Отклонить" data-en="Decline">Отклонить</button>
+      </div>
+    </div>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>

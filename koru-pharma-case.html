@@ -1,0 +1,500 @@
+6<!DOCTYPE html>
+<html id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zilly Team - Кейс: KORU Pharma B2B</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .section-title {
+      font-size: clamp(3rem, 7vw, 4rem);
+    }
+    .btn {
+      padding: 24px 48px;
+      font-size: 1.5rem;
+    }
+
+    /* Cookie Consent Banner */
+    .cookie-consent-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #f8f9fa;
+      border-top: 2px solid #10b981;
+      padding: 20px;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+      z-index: 10000;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      font-size: 14px;
+      display: none;
+    }
+
+    .cookie-consent-banner.show {
+      transform: translateY(0);
+    }
+
+    .cookie-consent-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-consent-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .cookie-consent-text p {
+      margin: 0 0 10px 0;
+      color: #333333;
+      line-height: 1.5;
+    }
+
+    .cookie-consent-text a {
+      color: #10b981;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .cookie-consent-text a:hover {
+      text-decoration: underline;
+    }
+
+    .cookie-consent-buttons {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .cookie-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .cookie-btn-accept {
+      background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      color: white;
+    }
+
+    .cookie-btn-accept:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .cookie-btn-decline {
+      background: transparent;
+      color: #555555;
+      border: 1px solid #555555;
+    }
+
+    .cookie-btn-decline:hover {
+      background: #555555;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .cookie-consent-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cookie-consent-buttons {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .cookie-consent-banner {
+        padding: 15px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .case-content {
+        flex-direction: column;
+      }
+    }
+
+    .case-content {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      margin: 60px 0;
+    }
+
+    .case-text {
+      flex: 1;
+    }
+
+    .case-text h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .case-text p, .case-text ul {
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .case-text ul {
+      padding-left: 20px;
+    }
+
+    .case-text li {
+      margin-bottom: 10px;
+    }
+
+    .case-screenshot {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .case-screenshot img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    margin: 0 auto;
+    border: 2px solid #10b981;
+    position: relative;
+    left: 300px;
+  }
+
+    .image-caption {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .case-screenshot figcaption {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .case-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  // Function to apply language
+  function applyLanguage(lang) {
+    const elementsWithLang = document.querySelectorAll('[data-ru][data-en]');
+    elementsWithLang.forEach(element => {
+      if (element.dataset[lang]) {
+        element.innerHTML = element.dataset[lang];
+      }
+    });
+    document.documentElement.lang = lang;
+
+    // Update active language button
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      if (b.dataset.lang === lang) {
+        b.classList.add('active');
+      } else {
+        b.classList.remove('active');
+      }
+    });
+  }
+
+  // On page load or when restored from bfcache, apply saved language or default to Russian
+  const savedLang = localStorage.getItem('selectedLang');
+  if (savedLang) {
+    applyLanguage(savedLang);
+  } else {
+    applyLanguage('ru'); // Default language
+  }
+
+  window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+      // Page was restored from bfcache, re-apply language
+      const savedLangOnPersist = localStorage.getItem('selectedLang');
+      if (savedLangOnPersist) {
+        applyLanguage(savedLangOnPersist);
+      } else {
+        applyLanguage('ru'); // Default language if no saved language
+      }
+    }
+  });
+
+  // Mobile Menu
+  const menuBtn = document.querySelector('.menu-btn');
+  const navContainer = document.querySelector('.nav-container');
+  
+  menuBtn.addEventListener('click', () => {
+    navContainer.classList.toggle('active');
+  });
+
+  // Language Toggle
+  const langButtons = document.querySelectorAll('.lang-btn');
+  
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      localStorage.setItem('selectedLang', lang); // Save selected language
+      applyLanguage(lang);
+    });
+  });
+
+  // Smooth Scrolling for Navigation Links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Scroll Animation
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    observer.observe(el);
+  });
+
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (window.scrollY > 100) {
+      header.style.background = 'rgba(255, 255, 255, 0.98)';
+    } else {
+      header.style.background = 'rgba(255, 255, 255, 0.95)';
+    }
+  });
+  });
+
+  // Cookie Consent Banner Functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const banner = document.getElementById('cookie-consent-banner');
+    const acceptBtn = document.getElementById('accept-cookies');
+    const declineBtn = document.getElementById('decline-cookies');
+
+    // Function to set consent
+    function setConsent(value) {
+      localStorage.setItem('cookieConsent', value);
+    }
+
+    // Function to get consent
+    function getConsent() {
+      return localStorage.getItem('cookieConsent');
+    }
+
+    // Function to show banner
+    function showBanner() {
+      banner.style.display = 'block';
+      banner.classList.add('show');
+    }
+
+    // Function to hide banner
+    function hideBanner() {
+      banner.classList.remove('show');
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 300);
+    }
+
+    // Check if user has already made a choice
+    const consent = getConsent();
+    if (consent === null) {
+      // Show banner after a short delay
+      setTimeout(() => {
+        showBanner();
+      }, 1000);
+    }
+
+    // Accept cookies
+    acceptBtn.addEventListener('click', function() {
+      setConsent('accepted');
+      hideBanner();
+      console.log('Cookies accepted');
+    });
+
+    // Decline cookies
+    declineBtn.addEventListener('click', function() {
+      setConsent('declined');
+      hideBanner();
+      console.log('Cookies declined');
+    });
+
+    // Apply current language to banner
+    function applyBannerLanguage(lang) {
+      const bannerElements = banner.querySelectorAll('[data-ru][data-en]');
+      bannerElements.forEach(element => {
+        if (element.dataset[lang]) {
+          element.innerHTML = element.dataset[lang];
+        }
+      });
+    }
+
+    // Apply language to banner when language changes
+    const savedLang = localStorage.getItem('selectedLang') || 'ru';
+    applyBannerLanguage(savedLang);
+
+    // Listen for language changes
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        applyBannerLanguage(lang);
+      });
+    });
+  });
+  </script>
+</head>
+<body>
+  <header style="background-color: white;">
+  <a href="index.html" class="logo" style="text-decoration: none;">
+    <img src="logozlilly.png" alt="logozilly">
+  </a>
+
+  <div class="menu-btn">☰</div>
+  <div class="nav-container">
+    <nav class="main-nav">
+      <a href="index.html#for"><span class="nav-number">1</span><span data-ru="Для кого?" data-en="Who is it for?">Для кого?</span></a>
+      <a href="cases.html"><span class="nav-number">2</span><span data-ru="EdTech" data-en="EdTech">EdTech</span></a>
+      <a href="index.html#about"><span class="nav-number">3</span><span data-ru="О Нас" data-en="About Us">О Нас</span></a>
+      <a href="other-cases.html"><span class="nav-number">4</span><span data-ru="Другие ниши" data-en="Other Industries">Другие ниши</span></a>
+    </nav>
+    <a href="index.html#contact" class="nav-contact-btn" data-ru="Связаться" data-en="Contact">Связаться</a>
+    <div class="lang-toggle">
+      <button class="lang-btn" data-lang="ru">RU</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+  <section class="hero" id="case-detail-hero" style="background-color: white; color: var(--text);">
+    <div class="hero-content animate-on-scroll">
+      <h1>
+        <span data-ru="Кейс: KORU Pharma B2B" data-en="Case: KORU Pharma B2B">
+          Кейс: KORU Pharma B2B
+        </span>
+      </h1>
+      <p class="hero-description">
+        <span data-ru="B2B-компания по производству товаров эстетической медицины: более 600 лидов из 100 стран в месяц, средняя цена лида $16.40!" 
+              data-en="B2B company producing aesthetic medicine products: more than 600 leads from 100 countries per month, average lead cost $16.40!">
+          B2B-компания по производству товаров эстетической медицины: более 600 лидов из 100 стран в месяц, средняя цена лида $16.40!
+        </span>
+      </p>
+    </div>
+  </section>
+
+  <section class="case-content animate-on-scroll">
+    <div class="case-text">
+      <h2 data-ru="Задача клиента" data-en="Client's Task">🎯 Задача клиента</h2>
+      <p data-ru="KORU Pharma — B2B-компания из Южной Кореи, производитель инъекционных препаратов с оборотом более $40 млн. (филлеры, мезо-препараты, липолитики и др.). Цель — усилить лидогенерацию в определенных рынках и удерживать количество лидов (NDA)." data-en="KORU Pharma — B2B company from South Korea, manufacturer of injection preparations with a turnover of more than $40 million (fillers, meso-preparations, lipolytics, etc.). Goal — to strengthen lead generation in certain markets and maintain the number of leads (NDA).">
+        KORU Pharma — B2B-компания из Южной Кореи, производитель инъекционных препаратов с оборотом более $40 млн. (филлеры, мезо-препараты, липолитики и др.). Цель — усилить лидогенерацию в определенных рынках и удерживать количество лидов (NDA).
+      </p>
+      
+      <h2 data-ru="Наш подход" data-en="Our Approach">🧠 Наш подход</h2>
+      <ul>
+        <li data-ru="Разработка стратегии B2B-рекламы с учётом региональных особенностей." data-en="Development of B2B advertising strategy taking into account regional characteristics.">
+          Разработка стратегии B2B-рекламы с учётом региональных особенностей.
+        </li>
+        <li data-ru="Создание посадочных страниц и контента, соответствующих требованиям Google и интересам врачей, клиник и дистрибьюторов." data-en="Creating landing pages and content that meet Google requirements and the interests of doctors, clinics and distributors.">
+          Создание посадочных страниц и контента, соответствующих требованиям Google и интересам врачей, клиник и дистрибьюторов.
+        </li>
+        <li data-ru="Сегментация и подбор безопасных ключевых слов под чувствительную нишу (fillers, aesthetic supplies, HA wholesale и др.)." data-en="Segmentation and selection of safe keywords for the sensitive niche (fillers, aesthetic supplies, HA wholesale, etc.).">
+          Сегментация и подбор безопасных ключевых слов под чувствительную нишу (fillers, aesthetic supplies, HA wholesale и др.).
+        </li>
+        <li data-ru="Настройка трекинга заявок через CRM и форм на сайте для полного контроля ROI и анализа источников." data-en="Setting up lead tracking through CRM and forms on the site for full ROI control and source analysis.">
+          Настройка трекинга заявок через CRM и форм на сайте для полного контроля ROI и анализа источников.
+        </li>
+      </ul>
+
+      <h2 data-ru="Ключевые метрики и результаты" data-en="Key Metrics and Results">📊 Ключевые метрики и результаты</h2>
+      <ul>
+        <li data-ru="Средняя цена за лид (Google Ads): $16.40." data-en="Average cost per lead (Google Ads): $16.40.">
+          Средняя цена за лид (Google Ads): $16.40.
+        </li>
+        <li data-ru="Конверсия с трафика в заявку: 6.4%." data-en="Conversion from traffic to application: 6.4%.">
+          Конверсия с трафика в заявку: 6.4%.
+        </li>
+        <li data-ru="Более 600 лидов из 100 стран / месяц." data-en="More than 600 leads from 100 countries / month.">
+          Более 600 лидов из 100 стран / месяц.
+        </li>
+        <li data-ru="Рост объема оборотных средств." data-en="Growth in working capital volume.">
+          Рост объема оборотных средств.
+        </li>
+        <li data-ru="Минимальные отклонения объявлений — благодаря грамотной адаптации текста и ключевых слов, выполнение стратегии компании." data-en="Minimal ad deviations — thanks to competent adaptation of text and keywords, implementation of the company's strategy.">
+          Минимальные отклонения объявлений — благодаря грамотной адаптации текста и ключевых слов, выполнение стратегии компании.
+        </li>
+        <li data-ru="UPDATE: Активный и эффективный кризис менеджмент. В рамках нашего сотрудничества за последние пол года google ads сбивал оптимизацию рекламных объявлений, из-за чего наша команда эффективно решала проблему в любое время дня и суток." data-en="UPDATE: Active and effective crisis management. During our cooperation over the past six months, Google Ads disrupted ad optimization, which is why our team effectively solved the problem at any time of the day or night.">
+          UPDATE: Активный и эффективный кризис менеджмент. В рамках нашего сотрудничества за последние пол года google ads сбивал оптимизацию рекламных объявлений, из-за чего наша команда эффективно решала проблему в любое время дня и суток.
+        </li>
+      </ul>
+
+      <h2 data-ru="Вывод" data-en="Conclusion">✅ Вывод</h2>
+      <p data-ru="Продвижение медицинских B2B-продуктов — это зона высокой ответственности. Этот кейс доказывает, что даже в тяжелой для запуска нише можно добиться стабильной генерации лидов, если работать с умом, а не наобум." data-en="Promoting medical B2B products is a zone of high responsibility. This case proves that even in a niche that is difficult to launch, you can achieve stable lead generation if you work smart, not haphazardly.">
+        Продвижение медицинских B2B-продуктов — это зона высокой ответственности. Этот кейс доказывает, что даже в тяжелой для запуска нише можно добиться стабильной генерации лидов, если работать с умом, а не наобум.
+      </p>
+    </div>
+    <div class="case-screenshot">
+      <img src="image (3).webp" alt="Скриншот кейса KORU Pharma">
+    </div>
+    <p class="image-description" style="font-size: 0.8rem; margin-top: 0cm;">
+        <span data-ru="Пример продаж за месяц Июль, 2025. Валюта: Корейский вон. 429 конверсии по стоимости 35.9к за конверсию (25$) США, Европа, Южная Америка, Австралия."
+              data-en="Example of sales for the month of July, 2025. Currency: Korean won. 429 conversions at 35.9k per conversion (25$) USA, Europe, South America, Australia.">
+          Пример продаж за месяц Июль, 2025. Валюта: Корейский вон. 429 конверсии по стоимости 35.9к за конверсию (25$) США, Европа, Южная Америка, Австралия.
+        </span>
+    </p>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="privacy-policy.html" data-ru="Политика конфиденциальности" data-en="Privacy Policy">Политика конфиденциальности</a>
+      <a href="terms-of-service.html" data-ru="Условия использования" data-en="Terms of Service">Условия использования</a>
+      <a href="cookies.html" data-ru="Cookies" data-en="Cookies">Cookies</a>
+    </div>
+    <p data-ru="© 2025 Zilly Team. Все права защищены." data-en="© 2025 Zilly Team. All rights reserved.">© 2025 Zilly Team. Все права защищены.</p>
+    <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 10px;">Made by koszoz99@gmail.com</p>
+  </footer>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-consent-banner" class="cookie-consent-banner">
+    <div class="cookie-consent-content">
+      <div class="cookie-consent-text">
+        <p data-ru="Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>." data-en="We use cookies to improve website functionality and analyze traffic. By continuing to use the site, you agree to our <a href='cookies.html'>Cookie Policy</a> and <a href='privacy-policy.html'>Privacy Policy</a>.">
+          Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>.
+        </p>
+      </div>
+      <div class="cookie-consent-buttons">
+        <button id="accept-cookies" class="cookie-btn cookie-btn-accept" data-ru="Принять" data-en="Accept">Принять</button>
+        <button id="decline-cookies" class="cookie-btn cookie-btn-decline" data-ru="Отклонить" data-en="Decline">Отклонить</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

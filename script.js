@@ -160,4 +160,91 @@ document.addEventListener('DOMContentLoaded', function() {
       header.style.background = 'rgba(255, 255, 255, 0.95)';
     }
   });
+
+  // Highlight current page in nav menu
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll('.main-nav a');
+  navLinks.forEach(link => {
+    if (link.getAttribute('href') === currentPath.split('/').pop()) {
+      link.classList.add('nav-link-green-bg');
+    } else {
+      link.classList.remove('nav-link-green-bg');
+    }
+  });
   })
+
+  // Cookie Consent Banner Functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const banner = document.getElementById('cookie-consent-banner');
+    const acceptBtn = document.getElementById('accept-cookies');
+    const declineBtn = document.getElementById('decline-cookies');
+
+    // Function to set consent
+    function setConsent(value) {
+      localStorage.setItem('cookieConsent', value);
+    }
+
+    // Function to get consent
+    function getConsent() {
+      return localStorage.getItem('cookieConsent');
+    }
+
+    // Function to show banner
+    function showBanner() {
+      banner.style.display = 'block';
+      banner.classList.add('show');
+    }
+
+    // Function to hide banner
+    function hideBanner() {
+      banner.classList.remove('show');
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 300);
+    }
+
+    // Check if user has already made a choice
+    const consent = getConsent();
+    if (consent === null) {
+      // Show banner after a short delay
+      setTimeout(() => {
+        showBanner();
+      }, 1000);
+    }
+
+    // Accept cookies
+    acceptBtn.addEventListener('click', function() {
+      setConsent('accepted');
+      hideBanner();
+      console.log('Cookies accepted');
+    });
+
+    // Decline cookies
+    declineBtn.addEventListener('click', function() {
+      setConsent('declined');
+      hideBanner();
+      console.log('Cookies declined');
+    });
+
+    // Apply current language to banner
+    function applyBannerLanguage(lang) {
+      const bannerElements = banner.querySelectorAll('[data-ru][data-en]');
+      bannerElements.forEach(element => {
+        if (element.dataset[lang]) {
+          element.innerHTML = element.dataset[lang];
+        }
+      });
+    }
+
+    // Apply language to banner when language changes
+    const savedLang = localStorage.getItem('selectedLang') || 'ru';
+    applyBannerLanguage(savedLang);
+
+    // Listen for language changes
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        applyBannerLanguage(lang);
+      });
+    });
+  });

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zilly Team - Кейс: Украинская школа и детский сад во Вроцлаве</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .section-title {
+      font-size: clamp(3rem, 7vw, 4rem);
+    }
+    .btn {
+      padding: 24px 48px;
+      font-size: 1.5rem;
+    }
+
+    /* Cookie Consent Banner */
+    .cookie-consent-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #f8f9fa;
+      border-top: 2px solid #10b981;
+      padding: 20px;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+      z-index: 10000;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      font-size: 14px;
+      display: none;
+    }
+
+    .cookie-consent-banner.show {
+      transform: translateY(0);
+    }
+
+    .cookie-consent-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-consent-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .cookie-consent-text p {
+      margin: 0 0 10px 0;
+      color: #333333;
+      line-height: 1.5;
+    }
+
+    .cookie-consent-text a {
+      color: #10b981;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .cookie-consent-text a:hover {
+      text-decoration: underline;
+    }
+
+    .cookie-consent-buttons {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .cookie-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .cookie-btn-accept {
+      background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      color: white;
+    }
+
+    .cookie-btn-accept:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .cookie-btn-decline {
+      background: transparent;
+      color: #555555;
+      border: 1px solid #555555;
+    }
+
+    .cookie-btn-decline:hover {
+      background: #555555;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .cookie-consent-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cookie-consent-buttons {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .cookie-consent-banner {
+        padding: 15px;
+      }
+    }
+
+    .case-content {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      margin: 60px 0;
+    }
+
+    .case-text {
+      flex: 1;
+    }
+
+    .case-text h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .case-text p, .case-text ul {
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .case-text ul {
+      padding-left: 20px;
+    }
+
+    .case-text li {
+      margin-bottom: 10px;
+    }
+
+    .case-screenshot {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .case-screenshot img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      border: 2px solid #10b981;
+      margin: 0 auto;
+      position:relative;
+      left:250px;
+    }
+
+    @media (min-width: 768px) {
+      .case-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  // Function to apply language
+  function applyLanguage(lang) {
+    const elementsWithLang = document.querySelectorAll('[data-ru][data-en]');
+    elementsWithLang.forEach(element => {
+      if (element.dataset[lang]) {
+        element.innerHTML = element.dataset[lang];
+      }
+    });
+    document.documentElement.lang = lang;
+
+    // Update active language button
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      if (b.dataset.lang === lang) {
+        b.classList.add('active');
+      } else {
+        b.classList.remove('active');
+      }
+    });
+  }
+
+  // On page load or when restored from bfcache, apply saved language or default to Russian
+  const savedLang = localStorage.getItem('selectedLang');
+  if (savedLang) {
+    applyLanguage(savedLang);
+  } else {
+    applyLanguage('ru'); // Default language
+  }
+
+  window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+      // Page was restored from bfcache, re-apply language
+      const savedLangOnPersist = localStorage.getItem('selectedLang');
+      if (savedLangOnPersist) {
+        applyLanguage(savedLangOnPersist);
+      } else {
+        applyLanguage('ru'); // Default language if no saved language
+      }
+    }
+  });
+
+  // Mobile Menu
+  const menuBtn = document.querySelector('.menu-btn');
+  const navContainer = document.querySelector('.nav-container');
+  
+  menuBtn.addEventListener('click', () => {
+    navContainer.classList.toggle('active');
+  });
+
+  // Language Toggle
+  const langButtons = document.querySelectorAll('.lang-btn');
+  
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      localStorage.setItem('selectedLang', lang); // Save selected language
+      applyLanguage(lang);
+    });
+  });
+
+  // Smooth Scrolling for Navigation Links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Scroll Animation
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    observer.observe(el);
+  });
+
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (window.scrollY > 100) {
+      header.style.background = 'rgba(255, 255, 255, 0.98)';
+    } else {
+      header.style.background = 'rgba(255, 255, 255, 0.95)';
+    }
+  });
+  });
+
+  // Cookie Consent Banner Functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const banner = document.getElementById('cookie-consent-banner');
+    const acceptBtn = document.getElementById('accept-cookies');
+    const declineBtn = document.getElementById('decline-cookies');
+
+    // Function to set cookie
+    function setCookie(name, value, days) {
+      const expires = new Date();
+      expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+      document.cookie = name + '=' + value + ';expires=' + expires.toUTCString() + ';path=/';
+    }
+
+    // Function to get cookie
+    function getCookie(name) {
+      const nameEQ = name + '=';
+      const ca = document.cookie.split(';');
+      for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    // Function to hide banner
+    function hideBanner() {
+      banner.classList.remove('show');
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 300);
+    }
+
+    // Check if user has already made a choice
+    const consent = getCookie('cookieConsent');
+    if (consent === null) {
+      // Show banner after a short delay
+      setTimeout(() => {
+        banner.classList.add('show');
+      }, 1000);
+    }
+
+    // Accept cookies
+    acceptBtn.addEventListener('click', function() {
+      setCookie('cookieConsent', 'accepted', 365);
+      hideBanner();
+      console.log('Cookies accepted');
+    });
+
+    // Decline cookies
+    declineBtn.addEventListener('click', function() {
+      setCookie('cookieConsent', 'declined', 365);
+      hideBanner();
+      console.log('Cookies declined');
+    });
+
+    // Apply current language to banner
+    function applyBannerLanguage(lang) {
+      const bannerElements = banner.querySelectorAll('[data-ru][data-en]');
+      bannerElements.forEach(element => {
+        if (element.dataset[lang]) {
+          element.innerHTML = element.dataset[lang];
+        }
+      });
+    }
+
+    // Apply language to banner when language changes
+    const savedLang = localStorage.getItem('selectedLang') || 'ru';
+    applyBannerLanguage(savedLang);
+
+    // Listen for language changes
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        applyBannerLanguage(lang);
+      });
+    });
+  });
+  </script>
+</head>
+<body>
+  <header style="background-color: white;">
+  <a href="index.html" class="logo" style="text-decoration: none;">
+    <img src="logozlilly.png" alt="logozilly">
+  </a>
+
+  <div class="menu-btn">☰</div>
+  <div class="nav-container">
+    <nav class="main-nav">
+      <a href="index.html#for"><span class="nav-number">1</span><span data-ru="Для кого?" data-en="Who is it for?">Для кого?</span></a>
+      <a href="cases.html"><span class="nav-number">2</span><span data-ru="EdTech" data-en="EdTech">EdTech</span></a>
+      <a href="index.html#about"><span class="nav-number">3</span><span data-ru="О Нас" data-en="About Us">О Нас</span></a>
+      <a href="other-cases.html"><span class="nav-number">4</span><span data-ru="Другие ниши" data-en="Other Industries">Другие ниши</span></a>
+    </nav>
+    <a href="index.html#contact" class="nav-contact-btn" data-ru="Связаться" data-en="Contact">Связаться</a>
+    <div class="lang-toggle">
+      <button class="lang-btn" data-lang="ru">RU</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+  <section class="hero" id="case-detail-hero" style="background-color: white; color: var(--text);">
+    <div class="hero-content animate-on-scroll">
+      <h1>
+        <span data-ru="Кейс: Украинская школа и детский сад во Вроцлаве" data-en="Case: Ukrainian School and Kindergarten in Wrocław">
+          Кейс: Украинская школа и детский сад во Вроцлаве
+        </span>
+      </h1>
+      <p class="hero-description">
+        <span data-ru="Набор детей в детский сад и школу перед новым учебным годом с ограниченным бюджетом!" data-en="Recruiting children for kindergarten and school before the new school year with a limited budget!">
+          Набор детей в детский сад и школу перед новым учебным годом с ограниченным бюджетом!
+        </span>
+      </p>
+    </div>
+  </section>
+
+  <section class="case-content animate-on-scroll">
+    <div class="case-text">
+      <h2 data-ru="Исходные данные" data-en="Initial Data">Исходные данные</h2>
+      <ul>
+        <li data-ru="Формат: частная украинская школа (1–9 классы) и детский сад (от 3 лет) во Вроцлаве." data-en="Format: private Ukrainian school (grades 1-9) and kindergarten (from 3 years old) in Wrocław.">
+          Формат: частная украинская школа (1–9 классы) и детский сад (от 3 лет) во Вроцлаве.
+        </li>
+        <li data-ru="Задача: набор детей в детский сад, начальную и среднюю школу перед новым учебным годом." data-en="Task: recruiting children for kindergarten, primary and secondary school before the new school year.">
+          Задача: набор детей в детский сад, начальную и среднюю школу перед новым учебным годом.
+        </li>
+        <li data-ru="Бюджет: ограниченный — около 1000 zł/мес." data-en="Budget: limited — about 1000 zł/month.">
+          Бюджет: ограниченный — около 1000 zł/мес.
+        </li>
+        <li data-ru="Каналы: только Facebook Ads." data-en="Channels: only Facebook Ads.">
+          Каналы: только Facebook Ads.
+        </li>
+      </ul>
+      
+      <h2 data-ru="Вызов" data-en="Challenge">Вызов</h2>
+      <ul>
+        <li data-ru="Конкуренция с местными польскими и международными школами." data-en="Competition with local Polish and international schools.">
+          Конкуренция с местными польскими и международными школами.
+        </li>
+        <li data-ru="Очень ограниченный рекламный бюджет." data-en="Very limited advertising budget.">
+          Очень ограниченный рекламный бюджет.
+        </li>
+        <li data-ru="Необходимость быстро закрыть набор, так как оставалось мало времени до начала учебного года." data-en="Need to quickly close recruitment, as there was little time left before the start of the school year.">
+          Необходимость быстро закрыть набор, так как оставалось мало времени до начала учебного года.
+        </li>
+      </ul>
+
+      <h2 data-ru="Решение" data-en="Solution">Решение</h2>
+      <ul>
+        <li data-ru="Создание четких рекламных офферов для родителей детей разных возрастов (сад и школа)." data-en="Creating clear advertising offers for parents of children of different ages (kindergarten and school).">
+          Создание четких рекламных офферов для родителей детей разных возрастов (сад и школа).
+        </li>
+        <li data-ru="Таргетинг на украинские семьи во Вроцлаве и ближайших городах." data-en="Targeting Ukrainian families in Wrocław and nearby cities.">
+          Таргетинг на украинские семьи во Вроцлаве и ближайших городах.
+        </li>
+        <li data-ru="Креативы с акцентом на комфорт, украиноязычную среду и безопасное пространство для детей." data-en="Creatives focusing on comfort, Ukrainian-speaking environment and safe space for children.">
+          Креативы с акцентом на комфорт, украиноязычную среду и безопасное пространство для детей.
+        </li>
+        <li data-ru="Оптимизация кампании под лиды с максимальной экономией бюджета." data-en="Optimizing the campaign for leads with maximum budget savings.">
+          Оптимизация кампании под лиды с максимальной экономией бюджета.
+        </li>
+      </ul>
+
+      <h2 data-ru="Результаты" data-en="Results">Результаты</h2>
+      <ul>
+        <li data-ru="Получено 100+ заявок всего за месяц." data-en="Received 100+ applications in just one month.">
+          Получено 100+ заявок всего за месяц.
+        </li>
+        <li data-ru="Закрыто 25 мест в школе." data-en="Closed 25 spots in the school.">
+          Закрыто 25 мест в школе.
+        </li>
+        <li data-ru="Закрыто 15 мест в детском саду, из них 20 мест заполнили всего за 2 недели." data-en="Closed 15 spots in the kindergarten, of which 20 spots were filled in just 2 weeks.">
+          Закрыто 15 мест в детском саду, из них 20 мест заполнили всего за 2 недели.
+        </li>
+        <li data-ru="Средняя цена заявки — в несколько раз ниже среднерыночной в образовательном сегменте." data-en="Average application cost — several times lower than the market average in the education segment.">
+          Средняя цена заявки — в несколько раз ниже среднерыночной в образовательном сегменте.
+        </li>
+      </ul>
+
+      <h2 data-ru="Вывод" data-en="Conclusion">Вывод</h2>
+      <p data-ru="Даже с минимальным бюджетом и работой только через Facebook Ads удалось достичь отличных результатов: полностью укомплектовать группы детского сада и значительную часть классов в школе. Грамотная стратегия и точный таргетинг на целевую аудиторию стали ключом к успеху." data-en="Even with a minimal budget and working only through Facebook Ads, it was possible to achieve excellent results: fully staff the kindergarten groups and a significant part of the school classes. A competent strategy and precise targeting of the target audience became the key to success.">
+        Даже с минимальным бюджетом и работой только через Facebook Ads удалось достичь отличных результатов: полностью укомплектовать группы детского сада и значительную часть классов в школе. Грамотная стратегия и точный таргетинг на целевую аудиторию стали ключом к успеху.
+      </p>
+    </div>
+    <div class="case-screenshot">
+      <img src="image (5).webp" alt="Скриншот кейса Украинская школа и детский сад во Вроцлаве">
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="privacy-policy.html" data-ru="Политика конфиденциальности" data-en="Privacy Policy">Политика конфиденциальности</a>
+      <a href="terms-of-service.html" data-ru="Условия использования" data-en="Terms of Service">Условия использования</a>
+      <a href="cookies.html" data-ru="Cookies" data-en="Cookies">Cookies</a>
+    </div>
+    <p data-ru="© 2025 Zilly Team. Все права защищены." data-en="© 2025 Zilly Team. All rights reserved.">© 2025 Zilly Team. Все права защищены.</p>
+    <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 10px;">Made by koszoz99@gmail.com</p>
+  </footer>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-consent-banner" class="cookie-consent-banner">
+    <div class="cookie-consent-content">
+      <div class="cookie-consent-text">
+        <p data-ru="Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>." data-en="We use cookies to improve website functionality and analyze traffic. By continuing to use the site, you agree to our <a href='cookies.html'>Cookie Policy</a> and <a href='privacy-policy.html'>Privacy Policy</a>.">
+          Мы используем cookie для улучшения работы сайта и анализа трафика. Продолжая использовать сайт, вы соглашаетесь с нашей <a href='cookies.html'>Политикой использования cookie</a> и <a href='privacy-policy.html'>Политикой конфиденциальности</a>.
+        </p>
+      </div>
+      <div class="cookie-consent-buttons">
+        <button id="accept-cookies" class="cookie-btn cookie-btn-accept" data-ru="Принять" data-en="Accept">Принять</button>
+        <button id="decline-cookies" class="cookie-btn cookie-btn-decline" data-ru="Отклонить" data-en="Decline">Отклонить</button>
+      </div>
+    </div>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>

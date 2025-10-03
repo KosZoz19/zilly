@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><span data-ru="EdTech Agency - Кейсы" data-en="EdTech Agency - Cases">EdTech Agency - Кейсы</span></title>
+  <title>Zilly Team - Кейсы EdTech</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"> <!-- Assuming a shared stylesheet or inline styles -->
+  <link rel="stylesheet" href="style.css">
   <style>
     .section-title {
       font-size: clamp(3rem, 7vw, 4rem);
@@ -29,6 +29,7 @@
       transform: translateY(100%);
       transition: transform 0.3s ease;
       font-size: 14px;
+      display: none;
     }
 
     .cookie-consent-banner.show {
@@ -118,21 +119,70 @@
         padding: 15px;
       }
     }
+
+    .case-content {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      margin: 60px 0;
+    }
+
+    .case-text {
+      flex: 1;
+    }
+
+    .case-text h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .case-text p, .case-text ul {
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .case-text ul {
+      padding-left: 20px;
+    }
+
+    .case-text li {
+      margin-bottom: 10px;
+    }
+
+    .case-screenshot {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .case-screenshot img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      border: 2px solid #10b981;
+    }
+
+    @media (max-width: 768px) {
+      .case-content {
+        flex-direction: column;
+      }
+    }
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
   // Function to apply language
   function applyLanguage(lang) {
     const elementsWithLang = document.querySelectorAll('[data-ru][data-en]');
-    try {
-      elementsWithLang.forEach(element => {
-        if (element.dataset[lang]) {
-          element.innerHTML = element.dataset[lang];
-        }
-      });
-    } catch (error) {
-      console.error('Error applying language to element:', error);
-    }
+    elementsWithLang.forEach(element => {
+      if (element.dataset[lang]) {
+        element.innerHTML = element.dataset[lang];
+      }
+    });
     document.documentElement.lang = lang;
 
     // Update active language button
@@ -149,6 +199,8 @@
   const savedLang = localStorage.getItem('selectedLang');
   if (savedLang) {
     applyLanguage(savedLang);
+  } else {
+    applyLanguage('ru'); // Default language
   }
 
   window.addEventListener('pageshow', function(event) {
@@ -157,60 +209,23 @@
       const savedLangOnPersist = localStorage.getItem('selectedLang');
       if (savedLangOnPersist) {
         applyLanguage(savedLangOnPersist);
-      }
-    } else {
-        // For fresh page loads, apply the language from localStorage
-        const initialSavedLang = localStorage.getItem('selectedLang');
-        if (initialSavedLang) {
-            applyLanguage(initialSavedLang);
-        } else {
-            applyLanguage('ru'); // Default language if no saved language
-        }
-    }
-  });
-
-  // FAQ Toggle
-  document.querySelectorAll('.faq-question').forEach(question => {
-    question.addEventListener('click', () => {
-      const faqItem = question.parentElement;
-      const answer = question.nextElementSibling;
-      const toggle = question.querySelector('.faq-toggle');
-
-      faqItem.classList.toggle('active');
-
-      if (faqItem.classList.contains('active')) {
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-        toggle.textContent = '-';
       } else {
-        answer.style.maxHeight = '0';
-        toggle.textContent = '+';
+        applyLanguage('ru'); // Default language if no saved language
       }
-    });
-  });
-
-  // Expandable Cards
-  document.querySelectorAll('.expandable-card').forEach(card => {
-    const expander = card.querySelector('.expand-indicator');
-    if (expander) {
-      expander.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        card.classList.toggle('expanded');
-      });
     }
   });
 
   // Mobile Menu
   const menuBtn = document.querySelector('.menu-btn');
   const navContainer = document.querySelector('.nav-container');
-  
+
   menuBtn.addEventListener('click', () => {
     navContainer.classList.toggle('active');
   });
 
   // Language Toggle
   const langButtons = document.querySelectorAll('.lang-btn');
-  
+
   langButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const lang = btn.dataset.lang;
@@ -251,34 +266,6 @@
     observer.observe(el);
   });
 
-  // Trusted By automatic scroll
-  const trustedLogosContainer = document.querySelector('.trusted-logos');
-  if (trustedLogosContainer) {
-    const scrollSpeed = 0.5; // Adjust scroll speed as needed
-    let scrollInterval;
-
-    const startScrolling = () => {
-      if (trustedLogosContainer.scrollWidth > trustedLogosContainer.clientWidth) {
-        scrollInterval = setInterval(() => {
-          trustedLogosContainer.scrollLeft += scrollSpeed;
-          if (trustedLogosContainer.scrollLeft >= trustedLogosContainer.scrollWidth - trustedLogosContainer.clientWidth) {
-            trustedLogosContainer.scrollLeft = 0; // Loop back to the beginning
-          }
-        }, 20); // Adjust interval for smoother animation
-      }
-    };
-
-    const stopScrolling = () => {
-      clearInterval(scrollInterval);
-    };
-
-    // Start scrolling after a short delay
-    setTimeout(startScrolling, 2000); // 2 second delay before starting
-
-    // Optional: Pause on hover
-    trustedLogosContainer.addEventListener('mouseenter', stopScrolling);
-    trustedLogosContainer.addEventListener('mouseleave', startScrolling);
-  }
   window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
     if (window.scrollY > 100) {
@@ -370,7 +357,7 @@
   </script>
 </head>
 <body>
-  <header>
+  <header style="background-color: white;">
   <a href="index.html" class="logo" style="text-decoration: none;">
     <img src="logozlilly.png" alt="logozilly">
   </a>
@@ -391,78 +378,95 @@
   </div>
 </header>
 
-  <section class="hero" id="cases-hero">
+  <section class="hero" id="case-detail-hero" style="background-color: white; color: var(--text);">
     <div class="hero-content animate-on-scroll">
       <h1>
-        <span data-ru="Наши успешные кейсы" data-en="Our Successful Cases">
-          Наши успешные кейсы
-        </span>
+        <span data-ru="Кейсы EdTech" data-en="EdTech Cases">Кейсы EdTech</span>
       </h1>
       <p class="hero-description">
-        <span data-ru="Посмотрите, как мы помогли нашим клиентам достичь выдающихся результатов в EdTech." 
-              data-en="See how we helped our clients achieve outstanding results in EdTech.">
-          Посмотрите, как мы помогли нашим клиентам достичь выдающихся результатов в EdTech.
-        </span>
+        <span data-ru="Комплексный маркетинг под ключ для ниши запуска Инфопродуктов | P2P, Vadym.AI" data-en="Turnkey comprehensive marketing for the infoproducts launch niche | P2P, Vadym.AI">Комплексный маркетинг под ключ для ниши запуска Инфопродуктов | P2P, Vadym.AI</span>
       </p>
     </div>
   </section>
 
-  <section class="cases-listing animate-on-scroll">
-    <h2 class="section-title" data-ru="Результаты" data-en="Results">Результаты</h2>
-    <p class="section-subtitle" data-ru="Кейсы наших клиентов" data-en="Our client cases">Кейсы наших клиентов</p>
-    
-    <div class="cards">
-      <a href="vadym-ai-case.html" class="card expandable-card">
-        <span class="expand-indicator">+</span>
-        <span class="card-icon">🧠</span>
-        <h3 class="card-title">Vadym.ai</h3>
-        <p class="card-description" data-ru="Курс по ИИ Автоматизации для бизнеса - 5500 лидов за месяц!" data-en="AI Automation Course for Business - 5500 leads per month!">Курс по ИИ Автоматизации для бизнеса - 5500 лидов за месяц!</p>
-        <div class="card-expanded">
-          <p data-ru="Запустили комплексную кампанию по продвижению курса ИИ автоматизации. Результат: 5500+ лидов, конверсия в продажи 12%, ROI 340%." 
-             data-en="Launched comprehensive campaign for AI automation course. Result: 5500+ leads, 12% sales conversion, ROI 340%.">
-            Запустили комплексную кампанию по продвижению курса ИИ автоматизации. Результат: 5500+ лидов, конверсия в продажи 12%, ROI 340%.
-          </p>
-        </div>
-      </a>
-      
-      <a href="yescenter-case.html" class="card expandable-card">
-        <span class="expand-indicator">+</span>
-        <span class="card-icon">🌟</span>
-        <h3 class="card-title">YesCenter</h3>
-        <p class="card-description" data-ru="Поступление в университеты заграницу - 850+ успешных заявок!" data-en="University admission abroad - 850+ successful applications!">Поступление в университеты заграницу - 850+ успешных заявок!</p>
-        <div class="card-expanded">
-          <p data-ru="Помогли образовательному центру масштабировать услуги поступления в зарубежные университеты. Результат: 850+ успешных заявок, увеличение выручки на 280%." 
-             data-en="Helped educational center scale university admission services abroad. Result: 850+ successful applications, 280% revenue increase.">
-            Помогли образовательному центру масштабировать услуги поступления в зарубежные университеты. Результат: 850+ успешных заявок, увеличение выручки на 280%.
-          </p>
-        </div>
-      </a>
-      
-      <a href="web3-crypto-case.html" class="card expandable-card">
-        <span class="expand-indicator">+</span>
-        <span class="card-icon">💎</span>
-        <h3 class="card-title">Web3 & Crypto 2025</h3>
-        <p class="card-description" data-ru="Запуск под ключ - от 0 до 10,000 студентов" data-en="Turnkey launch - from 0 to 10,000 students">Запуск под ключ - от 0 до 10,000 студентов</p>
-        <div class="card-expanded">
-          <p data-ru="Полный запуск образовательной платформы по Web3 и криптовалютам. За 6 месяцев привлекли 10,000+ студентов, выручка $2.5M." 
-             data-en="Full launch of Web3 and cryptocurrency educational platform. In 6 months attracted 10,000+ students, revenue $2.5M.">
-            Полный запуск образовательной платформы по Web3 и криптовалютам. За 6 месяцев привлекли 10,000+ студентов, выручка $2.5M.
-          </p>
-        </div>
-      </a>
-      
-      <a href="language-school-case.html" class="card expandable-card">
-        <span class="expand-indicator">+</span>
-        <span class="card-icon">🏆</span>
-        <h3 class="card-title"><span data-ru="Языковая школа Premium" data-en="Premium Language School">Языковая школа Premium</span></h3>
-        <p class="card-description" data-ru="Заполнение групп и удержание студентов - 95% заполненность" data-en="Group filling and student retention - 95% occupancy">Заполнение групп и удержание студентов - 95% заполненность</p>
-        <div class="card-expanded">
-          <p data-ru="Построили систему привлечения и удержания студентов для языковой школы. Результат: 95% заполненность групп, снижение оттока на 60%." 
-             data-en="Built student attraction and retention system for language school. Result: 95% group occupancy, 60% churn reduction.">
-            Построили систему привлечения и удержания студентов для языковой школы. Результат: 95% group occupancy, 60% churn reduction.
-          </p>
-        </div>
-      </a>
+  <section class="case-content animate-on-scroll">
+    <div class="case-text">
+      <p data-ru="В P2P-проекте мы выступали как продюсеры под ключ: вместе с командой мы подготовили полноценную продающую воронку, включая все элементы Facebook-рекламы — от креативов и контента для Telegram и Instagram до найма мини-команды под задачи проекта. За 5 месяцев слаженной работы при бюджете $500–600 в месяц мы привлекли 1800 активных подписчиков в Telegram и вывели ежемесячный чек на уровень $4 500. Так как клиент начинал с нуля, без базы и без раскрученного экспертного Instagram, результат оказался действительно впечатляющим. Его стабильный доход продолжает расти ежемесячно." data-en="In the P2P project, we acted as turnkey producers: together with the team, we prepared a full-fledged selling funnel, including all elements of Facebook advertising — from creatives and content for Telegram and Instagram to hiring a mini-team for project tasks. Over 5 months of coordinated work with a budget of $500–600 per month, we attracted 1800 active subscribers in Telegram and brought the monthly check to $4,500. Since the client started from scratch, without a base and without a promoted expert Instagram, the result turned out to be really impressive. His stable income continues to grow monthly.">
+        В P2P-проекте мы выступали как продюсеры под ключ: вместе с командой мы подготовили полноценную продающую воронку, включая все элементы Facebook-рекламы — от креативов и контента для Telegram и Instagram до найма мини-команды под задачи проекта. За 5 месяцев слаженной работы при бюджете $500–600 в месяц мы привлекли 1800 активных подписчиков в Telegram и вывели ежемесячный чек на уровень $4 500. Так как клиент начинал с нуля, без базы и без раскрученного экспертного Instagram, результат оказался действительно впечатляющим. Его стабильный доход продолжает расти ежемесячно.
+      </p>
+
+      <img src="image.webp" alt="Скриншот кейса P2P Vadym.AI" style="width: 100%; max-width: 600px; margin: 20px 0; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 2px solid #10b981;">
+
+      <p data-ru="Первичные лиды на Польшу в телеграм выходили с $0.80 - $2.5. Подписка в ТГ в среднем 1.5$ в нише P2P арбитража. На старте проекта мы собрали лучшее качество трафика, перебрали 35 рекламных креативов и нашли рабочий, дающий как качество так и количество на масштабе. До сих пор делаем все рекламные макеты в таком же формате." data-en="Primary leads to Poland in Telegram came out at $0.80 - $2.5. Subscription in TG averages $1.5 in the P2P arbitrage niche. At the start of the project, we collected the best traffic quality, went through 35 advertising creatives and found a working one that gives both quality and quantity on scale. We still make all advertising layouts in the same format.">
+        <em>Первичные лиды на Польшу в телеграм выходили с $0.80 - $2.5. Подписка в ТГ в среднем 1.5$ в нише P2P арбитража. На старте проекта мы собрали лучшее качество трафика, перебрали 35 рекламных креативов и нашли рабочий, дающий как качество так и количество на масштабе. До сих пор делаем все рекламные макеты в таком же формате.</em>
+      </p>
+
+      <h2 data-ru="Проект **«Эксперт в нише AI», часть информации под NDA**" data-en="Project **"Expert in the AI niche", part of the information under NDA**">Проект **«Эксперт в нише AI», часть информации под NDA**</h2>
+
+      <p data-ru="Профиль и наш рекламный креатив подготовленный совместно с его командой командой" data-en="Profile and our advertising creative prepared jointly with his team team">
+        <a href="https://www.instagram.com/reel/DE5OAm8Nt0Z/?igsh=bjdlczJxODlxN2c1" target="_blank">Профиль и наш рекламный креатив подготовленный совместно с его командой командой</a> (клик)
+      </p>
+
+      <p data-ru="Ко мне обратился украинский предприниматель, владелец технологической компании и лауреат списка **Forbes 30 Under 30 Украина**. Вместе с партнёром он запускал инфопродукт в нише AI-автоматизации и с самого начала обратился ко мне как к эксперту по трафику." data-en="A Ukrainian entrepreneur, owner of a technology company and laureate of the **Forbes 30 Under 30 Ukraine** list, approached me. Together with a partner, he was launching an infoproduct in the AI automation niche and from the very beginning turned to me as a traffic expert.">
+        Ко мне обратился украинский предприниматель, владелец технологической компании и лауреат списка **Forbes 30 Under 30 Украина**. Вместе с партнёром он запускал инфопродукт в нише AI-автоматизации и с самого начала обратился ко мне как к эксперту по трафику.
+      </p>
+
+      <p data-ru="Партнерство с таким высококлассным экспертом дала нам колоссальный опыт в понимание воронок и построение профитного инфопродукта. Со стороны таргетированной рекламы мы смогли не только привлечь покупающих лидов, но и масштабировать поток заявок вплоть до 800-1000$ рекламных затрат в день." data-en="Partnership with such a high-class expert gave us colossal experience in understanding funnels and building a profitable infoproduct. From the side of targeted advertising, we were able not only to attract buying leads, but also to scale the flow of applications up to 800-1000$ advertising costs per day.">
+        Партнерство с таким высококлассным экспертом дала нам колоссальный опыт в понимание воронок и построение профитного инфопродукта. Со стороны таргетированной рекламы мы смогли не только привлечь покупающих лидов, но и масштабировать поток заявок вплоть до 800-1000$ рекламных затрат в день.
+      </p>
+
+      <p data-ru="Как это было? (ссылки и скрины ниже)" data-en="How was it? (links and screenshots below)">
+        Как это было? (ссылки и скрины ниже)
+      </p>
+
+      <img src="image (1).webp" alt="Скриншот кейса Эксперт в нише AI 1" style="width: 100%; max-width: 600px; margin: 20px 0; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 2px solid #10b981;">
+
+      <p data-ru="Здесь мы тестили вначале запуски через мини-продукт. Бюджет в 1232$ здесь как ежедневный." data-en="Here we initially tested launches through a mini-product. The budget of $1232 here is daily.">
+        <em>Здесь мы тестили вначале запуски через мини-продукт. Бюджет в 1232$ здесь как ежедневный.</em>
+      </p>
+
+      <img src="image (2).webp" alt="Скриншот кейса Эксперт в нише AI 2" style="width: 100%; max-width: 600px; margin: 20px 0; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 2px solid #10b981;">
+
+      <p data-ru="Здесь видны вся математика за полтора месяца. Затраты на рекламу только вышли 19000$" data-en="Here you can see all the math for one and a half months. Advertising costs came out to only $19,000">
+        Здесь видны вся математика за полтора месяца. Затраты на рекламу только вышли 19000$
+      </p>
+
+      <p data-ru="Воронка работала как часы. Благодаря Telegram-боту и push-уведомлениям мы выстроили стабильный поток продаж, который фильтровался и прогревался через вебинар." data-en="The funnel worked like clockwork. Thanks to the Telegram bot and push notifications, we built a stable sales flow that was filtered and warmed up through the webinar.">
+        Воронка работала как часы. Благодаря Telegram-боту и push-уведомлениям мы выстроили стабильный поток продаж, который фильтровался и прогревался через вебинар.
+      </p>
+
+      <p data-ru="Наша роль заключалась в том, чтобы:" data-en="Our role was to:">
+        Наша роль заключалась в том, чтобы:
+      </p>
+      <ul>
+        <li data-ru="разработать сильные смысловые акценты для рекламных креативов," data-en="develop strong semantic accents for advertising creatives,">разработать сильные смысловые акценты для рекламных креативов,</li>
+        <li data-ru="системно протестировать видеоформаты, найти оптимальный и улучшить его качество," data-en="systematically test video formats, find the optimal one and improve its quality,">системно протестировать видеоформаты, найти оптимальный и улучшить его качество,</li>
+        <li data-ru="внедрить регулярную отчётность в команде," data-en="implement regular reporting in the team,">внедрить регулярную отчётность в команде,</li>
+      </ul>
+
+      <p data-ru="Задача стояла в том, чтобы не разбрасываться на сотни тестов, а сконцентрироваться на качестве креативов и системном повышении уровня видео на каждом этапе." data-en="The task was to not scatter on hundreds of tests, but to focus on the quality of creatives and systematic improvement of video level at each stage.">
+        Задача стояла в том, чтобы не разбрасываться на сотни тестов, а сконцентрироваться на качестве креативов и системном повышении уровня видео на каждом этапе.
+      </p>
+
+      <p data-ru="Проект получил мощный результат за счёт высокой экспертности, его глубоких знаний в сфере AI-автоматизаций и умения доносить практическую ценность информации до аудитории." data-en="The project received a powerful result due to high expertise, his deep knowledge in the field of AI automations and the ability to convey the practical value of information to the audience.">
+        Проект получил мощный результат за счёт высокой экспертности, его глубоких знаний в сфере AI-автоматизаций и умения доносить практическую ценность информации до аудитории.
+      </p>
+
+      <p data-ru="**Наша ЦА:** предприниматели, владельцы бизнеса, фрилансеры, а также люди, желающие освоить профессию в автоматизации бизнес-процессов и применении искусственного интеллекта. Контент крайне высокого качества, а воронка строилась исключительно через Telegram-бота и вебинар — без Instagram, сторис или прямых продаж от эксперта." data-en="**Our target audience:** entrepreneurs, business owners, freelancers, as well as people who want to master the profession in business process automation and artificial intelligence application. The content is extremely high quality, and the funnel was built exclusively through the Telegram bot and webinar — without Instagram, stories or direct sales from the expert.">
+        <strong>Наша ЦА:</strong> предприниматели, владельцы бизнеса, фрилансеры, а также люди, желающие освоить профессию в автоматизации бизнес-процессов и применении искусственного интеллекта. Контент крайне высокого качества, а воронка строилась исключительно через Telegram-бота и вебинар — без Instagram, сторис или прямых продаж от эксперта.
+      </p>
+
+      <p data-ru="**ГЕО воронки:** Польша, Украина, Прибалтика, Франция, Германия." data-en="**Funnel GEO:** Poland, Ukraine, Baltics, France, Germany.">
+        <strong>ГЕО воронки:</strong> Польша, Украина, Прибалтика, Франция, Германия.
+      </p>
+
+      <p data-ru="Лучшие и самые дешевые конверсии мы получили в результате в Украине по стоимости за лида до $1 и Польше в $1.7-2.0, с худшим результатом в Франции и Германии. Стоимость лида достигала $4.5 - $6." data-en="The best and cheapest conversions we got as a result in Ukraine at a cost per lead up to $1 and in Poland at $1.7-2.0, with the worst result in France and Germany. The cost per lead reached $4.5 - $6.">
+        Лучшие и самые дешевые конверсии мы получили в результате в Украине по стоимости за лида до $1 и Польше в $1.7-2.0, с худшим результатом в Франции и Германии. Стоимость лида достигала $4.5 - $6.
+      </p>
+
+      <p data-ru="Заинтересовало сотрудничество с нами? Выбирайте удобное вам время в календаре и бронируйте первый бесплатный аудит от нашей команды!" data-en="Interested in cooperation with us? Choose a convenient time in the calendar and book the first free audit from our team!">
+        Заинтересовало сотрудничество с нами? Выбирайте удобное вам время в календаре и бронируйте первый бесплатный аудит от нашей команды!
+      </p>
     </div>
   </section>
 
@@ -472,7 +476,7 @@
       <a href="terms-of-service.html" data-ru="Условия использования" data-en="Terms of Service">Условия использования</a>
       <a href="cookies.html" data-ru="Cookies" data-en="Cookies">Cookies</a>
     </div>
-    <p data-ru="© 2025 EdTech Agency. Все права защищены." data-en="© 2025 EdTech Agency. All rights reserved.">© 2025 EdTech Agency. Все права защищены.</p>
+    <p data-ru="© 2025 Zilly Team. Все права защищены." data-en="© 2025 Zilly Team. All rights reserved.">© 2025 Zilly Team. Все права защищены.</p>
     <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 10px;">Made by koszoz99@gmail.com</p>
   </footer>
 
@@ -491,5 +495,6 @@
     </div>
   </div>
 
+<script src="script.js"></script>
 </body>
 </html>
