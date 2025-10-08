@@ -3,10 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zilly Team - Кейс: Iryna Фитнес Тренер | Warsaw</title>
+  <title>Zilly Team - Iryna Фитнес Тренер | Warsaw</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
+    .hero-text-group{
+      margin-bottom:400px;
+    }
+    .case-content{
+      margin-top:-200px !important;
+    }
+    .logo img{
+      max-width: 130px; /* Even further reduced desktop max width */
+    }
+    .case-text{
+      margin-top: -300px !important;
+      margin-bottom:-400px;
+    }
     .section-title {
       font-size: clamp(3rem, 7vw, 4rem);
     }
@@ -124,17 +137,23 @@
       display: flex;
       gap: 40px;
       align-items: flex-start;
-      margin: 60px 0;
+      margin: -350px 0;
+      margin-bottom: 300px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-bottom: 300px;
     }
 
     .case-text {
       flex: 1;
+      margin: -400px 0;
     }
 
     .case-text h2 {
       font-size: 2rem;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 0px;
       color: var(--text);
     }
 
@@ -152,9 +171,22 @@
     }
 
     @media (max-width: 768px) {
+      header {
+        padding: 5px 5px;
+        height: 90px;
+      }
+
       .case-content {
         flex-direction: column;
       }
+        .hero-text-group{
+        margin-top:50px !important;
+      }
+       .case-text {
+      flex: 1;
+      margin-top:-250px !important;
+      margin-bottom:-600px;
+    }
     }
   </style>
   <script>
@@ -199,13 +231,6 @@
     }
   });
 
-  // Mobile Menu
-  const menuBtn = document.querySelector('.menu-btn');
-  const navContainer = document.querySelector('.nav-container');
-  
-  menuBtn.addEventListener('click', () => {
-    navContainer.classList.toggle('active');
-  });
 
   // Language Toggle
   const langButtons = document.querySelectorAll('.lang-btn');
@@ -248,6 +273,11 @@
 
   document.querySelectorAll('.animate-on-scroll').forEach(el => {
     observer.observe(el);
+  });
+
+  // Immediately animate close elements like case-content
+  document.querySelectorAll('.case-content.animate-on-scroll').forEach(el => {
+    el.classList.add('animated');
   });
 
   window.addEventListener('scroll', () => {
@@ -364,16 +394,18 @@
 
   <section class="hero" id="case-detail-hero" style="background-color: white; color: var(--text);">
     <div class="hero-content animate-on-scroll">
-      <h1>
-        <span data-ru="Кейс: Iryna Фитнес Тренер | Warsaw" data-en="Case: Iryna Fitness Trainer | Warsaw">
-          Кейс: Iryna Фитнес Тренер | Warsaw
-        </span>
-      </h1>
-      <p class="hero-description">
-        <span data-ru="Сотрудничество длиною в год! Запуск рекламных кампаний с целью масштабирования и набора" data-en="Year-long cooperation! Launching advertising campaigns for scaling and recruitment">
-          Сотрудничество длиною в год! Запуск рекламных кампаний с целью масштабирования и набора
-        </span>
-      </p>
+      <div class="hero-text-group">
+        <h1>
+          <span data-ru="Iryna Фитнес Тренер | Warsaw" data-en="Iryna Fitness Trainer | Warsaw">
+            Iryna Фитнес Тренер | Warsaw
+          </span>
+        </h1>
+        <p class="hero-description">
+          <span data-ru="Сотрудничество длиною в год! Запуск рекламных кампаний с целью масштабирования и набора" data-en="Year-long cooperation! Launching advertising campaigns for scaling and recruitment">
+            Сотрудничество длиною в год! Запуск рекламных кампаний с целью масштабирования и набора
+          </span>
+        </p>
+      </div>
     </div>
   </section>
 

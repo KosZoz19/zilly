@@ -3,10 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zilly Team - Кейс: Украинская школа и детский сад во Вроцлаве</title>
+  <title>Zilly Team - Украинская школа и детский сад во Вроцлаве</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
+     .logo img{
+      max-width: 130px; /* Even further reduced desktop max width */
+    }
+    .hero h1{
+margin-bottom:350px;
+    }
+    .case-text{
+      margin-top:50px !important;
+     padding-bottom:40px;
+    }
+
     .section-title {
       font-size: clamp(3rem, 7vw, 4rem);
     }
@@ -105,6 +116,11 @@
     }
 
     @media (max-width: 768px) {
+      header {
+        padding: 5px 5px;
+        height: 90px;
+      }
+
       .cookie-consent-content {
         flex-direction: column;
         text-align: center;
@@ -118,6 +134,20 @@
       .cookie-consent-banner {
         padding: 15px;
       }
+
+       .case-text {
+      flex: 1;
+      margin-top:-500px !important;
+    }
+     .case-screenshot {
+      position:relative;
+      right:250px;
+    }
+
+    .case-screenshot img {
+      max-width: 250px !important;
+    }
+
     }
 
     .case-content {
@@ -129,12 +159,13 @@
 
     .case-text {
       flex: 1;
+      margin: -400px 0;
     }
 
     .case-text h2 {
       font-size: 2rem;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 0px;
       color: var(--text);
     }
 
@@ -157,11 +188,12 @@
       flex-direction: column;
       gap: 20px;
       align-items: center;
+      margin-top: 400px;
     }
 
     .case-screenshot img {
       width: 100%;
-      max-width: 600px;
+      max-width: 560px;
       border-radius: 12px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.15);
       border: 2px solid #10b981;
@@ -174,6 +206,12 @@
       .case-content {
         flex-direction: column;
       }
+        .case-text {
+        flex: 1;
+        margin: -500px 0 !important;
+        padding-bottom: 100px;
+      }
+      
     }
   </style>
   <script>
@@ -218,13 +256,6 @@
     }
   });
 
-  // Mobile Menu
-  const menuBtn = document.querySelector('.menu-btn');
-  const navContainer = document.querySelector('.nav-container');
-  
-  menuBtn.addEventListener('click', () => {
-    navContainer.classList.toggle('active');
-  });
 
   // Language Toggle
   const langButtons = document.querySelectorAll('.lang-btn');
@@ -253,8 +284,8 @@
 
   // Scroll Animation
   const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0,
+    rootMargin: '0px 0px -1000px 0px'
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -384,19 +415,14 @@
   <section class="hero" id="case-detail-hero" style="background-color: white; color: var(--text);">
     <div class="hero-content animate-on-scroll">
       <h1>
-        <span data-ru="Кейс: Украинская школа и детский сад во Вроцлаве" data-en="Case: Ukrainian School and Kindergarten in Wrocław">
-          Кейс: Украинская школа и детский сад во Вроцлаве
+        <span data-ru="Украинская школа и детский сад во Вроцлаве" data-en="Ukrainian School and Kindergarten in Wrocław">
+          Украинская школа и детский сад во Вроцлаве
         </span>
       </h1>
-      <p class="hero-description">
-        <span data-ru="Набор детей в детский сад и школу перед новым учебным годом с ограниченным бюджетом!" data-en="Recruiting children for kindergarten and school before the new school year with a limited budget!">
-          Набор детей в детский сад и школу перед новым учебным годом с ограниченным бюджетом!
-        </span>
-      </p>
     </div>
   </section>
 
-  <section class="case-content animate-on-scroll">
+  <section class="case-content animate-on-scroll animated" style="padding-bottom: 20px;">
     <div class="case-text">
       <h2 data-ru="Исходные данные" data-en="Initial Data">Исходные данные</h2>
       <ul>
@@ -465,7 +491,7 @@
       </p>
     </div>
     <div class="case-screenshot">
-      <img src="image (5).webp" alt="Скриншот кейса Украинская школа и детский сад во Вроцлаве">
+      <img src="image (5).webp" alt="Скриншот кейса Украинская школа и детский сад во Вроцлаве" style="cursor: pointer;" onclick="openModal(this.src)">
     </div>
   </section>
 
@@ -494,6 +520,53 @@
     </div>
   </div>
 
+<!-- Image Modal -->
+<div id="imageModal" class="image-modal">
+  <span class="close-modal" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+
 <script src="script.js"></script>
+<script>
+function openModal(src) {
+  document.getElementById('modalImage').src = src;
+  document.getElementById('imageModal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('imageModal').classList.remove('show');
+}
+
+// Close modal when clicking outside
+document.getElementById('imageModal').addEventListener('click', function(event) {
+  if (event.target === this) {
+    closeModal();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Add event listeners for images to support both click and touch
+  document.querySelectorAll('img[onclick*="openModal"]').forEach(img => {
+    img.removeAttribute('onclick'); // Remove inline onclick
+    img.addEventListener('click', function() {
+      openModal(this.src);
+    });
+    img.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      openModal(this.src);
+    });
+  });
+
+  // Add event listeners for close buttons to support both click and touch
+  document.querySelectorAll('.close-modal').forEach(close => {
+    close.removeAttribute('onclick'); // Remove inline onclick
+    close.addEventListener('click', closeModal);
+    close.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      closeModal();
+    });
+  });
+});
+</script>
 </body>
 </html>

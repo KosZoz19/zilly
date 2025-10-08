@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EdTech Agency - Кейс: Языковая школа Premium</title>
+  <title>EdTech Agency - Языковая школа Premium</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"> <!-- Assuming a shared stylesheet or inline styles -->
   <style>
@@ -14,7 +14,25 @@
       padding: 24px 48px;
       font-size: 1.5rem;
     }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 5px 5px;
+        height: 90px;
+      }
+    }
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mobile Menu
+      const menuBtn = document.querySelector('.menu-btn');
+      const navContainer = document.querySelector('.nav-container');
+
+      menuBtn.addEventListener('click', () => {
+        navContainer.classList.toggle('active');
+      });
+    });
+  </script>
 </head>
 <body>
   <header style="background-color: white;">
@@ -41,8 +59,8 @@
   <section class="hero" id="case-detail-hero" style="background-color: white; color: var(--text);">
     <div class="hero-content animate-on-scroll">
       <h1>
-        <span data-ru="Кейс: Языковая школа Premium" data-en="Case: Language School Premium">
-          Кейс: Языковая школа Premium
+        <span data-ru="Языковая школа Premium" data-en="Language School Premium">
+          Языковая школа Premium
         </span>
       </h1>
       <p class="hero-description">

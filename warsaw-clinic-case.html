@@ -3,10 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zilly Team - Кейс: Сеть клиник косметологии в Варшаве — NDA</title>
+  <title>Zilly Team - Сеть клиник косметологии в Варшаве — NDA</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
+    .hero-text-group{
+margin-bottom:200px;
+    }
+    .case-text{
+      margin-top:-350px !important;
+      padding-bottom:300px;
+    }
     .section-title {
       font-size: clamp(3rem, 7vw, 4rem);
     }
@@ -104,6 +111,15 @@
     }
 
     @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .case-text h2 {
+        font-size: 1.8rem;
+      }
+      .case-text p, .case-text ul, .case-text li {
+        font-size: 1rem;
+      }
       .cookie-consent-content {
         flex-direction: column;
         text-align: center;
@@ -128,12 +144,13 @@
 
     .case-text {
       flex: 1;
+      margin: -400px 0;
     }
 
     .case-text h2 {
       font-size: 2rem;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 0px;
       color: var(--text);
     }
 
@@ -162,9 +179,21 @@
     }
 
     @media (max-width: 768px) {
+      header {
+        padding: 5px 5px;
+        height: 90px;
+      }
+
       .case-content {
         flex-direction: column;
       }
+       .hero h1{
+        margin-top:50px !important;
+      }
+       .case-text {
+      flex: 1;
+      margin-top:-350px !important;
+    }
     }
   </style>
   <script>
@@ -258,6 +287,11 @@
 
   document.querySelectorAll('.animate-on-scroll').forEach(el => {
     observer.observe(el);
+  });
+
+  // Immediately animate close elements like case-content
+  document.querySelectorAll('.case-content.animate-on-scroll').forEach(el => {
+    el.classList.add('animated');
   });
 
   window.addEventListener('scroll', () => {
@@ -374,17 +408,19 @@
 
   <section class="hero" id="case-detail-hero" style="background-color: white; color: var(--text);">
     <div class="hero-content animate-on-scroll">
-      <h1>
-        <span data-ru="Кейс: Сеть клиник косметологии в Варшаве — NDA" data-en="Case: Network of cosmetic clinics in Warsaw — NDA">
-          Кейс: Сеть клиник косметологии в Варшаве — NDA
-        </span>
-      </h1>
-      <p class="hero-description">
-        <span data-ru="Элитная клиника эстетической косметологии: 250–300 лидов на каждую услугу, средняя цена лида 10–12,5 $!" 
-              data-en="Elite aesthetic cosmetology clinic: 250-300 leads per service, average lead cost 10-12.5 $!">
-          Элитная клиника эстетической косметологии: 250–300 лидов на каждую услугу, средняя цена лида 10–12,5 $!
-        </span>
-      </p>
+      <div class="hero-text-group">
+        <h1>
+          <span data-ru="Сеть клиник косметологии в Варшаве — NDA" data-en="Network of cosmetic clinics in Warsaw — NDA">
+            Сеть клиник косметологии в Варшаве — NDA
+          </span>
+        </h1>
+        <p class="hero-description">
+          <span data-ru="Элитная клиника эстетической косметологии: 250–300 лидов на каждую услугу, средняя цена лида 10–12,5 $!"
+                data-en="Elite aesthetic cosmetology clinic: 250-300 leads per service, average lead cost 10-12.5 $!">
+            Элитная клиника эстетической косметологии: 250–300 лидов на каждую услугу, средняя цена лида 10–12,5 $!
+          </span>
+        </p>
+      </div>
     </div>
   </section>
 

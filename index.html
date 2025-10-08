@@ -7,6 +7,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
+    .logo img{
+      max-width: 130px; /* Even further reduced desktop max width */
+    }
+   
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -560,15 +564,10 @@
       line-height: 1.2;
     }
 
-    .logo img { 
-      max-width: 150px; /* Even further reduced desktop max width */
-      height: 160px;
-      position:fixed;
-    }
 
     @media (max-width: 768px) {
       .logo img {
-        max-width: 120px; /* Further reduced mobile max width */
+        max-width: 130px; /* Further reduced mobile max width */
       }
     }
 
@@ -1261,6 +1260,7 @@
       .menu-btn {
         display: block;
       }
+      
 
       .hero h1 {
         font-size: 2rem;
@@ -1966,6 +1966,4 @@
 <script src="script.js"></script>
 </body>
 </html>
-
-
 

@@ -3,10 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zilly Team - Кейс: KORU Pharma B2B</title>
+  <title>Zilly Team - KORU Pharma B2B</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
+     .logo img{
+      max-width: 130px; /* Even further reduced desktop max width */
+    }
+    .hero h1 
+    {
+      margin-bottom:400px !important;
+    }
+.case-text{
+  margin-top:-400px !important;
+  margin-bottom:-600px !important;
+}
+
     .section-title {
       font-size: clamp(3rem, 7vw, 4rem);
     }
@@ -109,7 +121,8 @@
         flex-direction: column;
         text-align: center;
       }
-
+  
+   
       .cookie-consent-buttons {
         width: 100%;
         justify-content: center;
@@ -118,8 +131,9 @@
       .cookie-consent-banner {
         padding: 15px;
       }
-    }
-
+  
+}
+      
     @media (min-width: 768px) {
       .case-content {
         flex-direction: column;
@@ -133,14 +147,11 @@
       margin: 60px 0;
     }
 
-    .case-text {
-      flex: 1;
-    }
 
     .case-text h2 {
       font-size: 2rem;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 0px;
       color: var(--text);
     }
 
@@ -159,7 +170,8 @@
 
     .case-screenshot {
       flex: 1;
-      max-width: 500px;
+      max-width: 560px;
+      
     }
 
     .case-screenshot img {
@@ -169,7 +181,13 @@
     margin: 0 auto;
     border: 2px solid #10b981;
     position: relative;
-    left: 300px;
+    left: 250px;
+    margin-top: 200px;
+
+  }
+
+  .case-screenshot {
+    margin-top: 400px;
   }
 
     .image-caption {
@@ -187,9 +205,26 @@
     }
 
     @media (max-width: 768px) {
+      header {
+        padding: 5px 5px;
+        height: 90px;
+      }
+
       .case-content {
         flex-direction: column;
       }
+      .case-screenshot img {
+        left:0px;
+
+      }
+       .case-text {
+      flex: 1;
+      margin-top:-530px !important;
+    }
+
+    .case-screenshot img {
+      max-width: 250px !important;
+    }
     }
   </style>
   <script>
@@ -283,6 +318,11 @@
 
   document.querySelectorAll('.animate-on-scroll').forEach(el => {
     observer.observe(el);
+  });
+
+  // Immediately animate close elements like case-content
+  document.querySelectorAll('.case-content.animate-on-scroll').forEach(el => {
+    el.classList.add('animated');
   });
 
   window.addEventListener('scroll', () => {
@@ -397,20 +437,13 @@
   <section class="hero" id="case-detail-hero" style="background-color: white; color: var(--text);">
     <div class="hero-content animate-on-scroll">
       <h1>
-        <span data-ru="Кейс: KORU Pharma B2B" data-en="Case: KORU Pharma B2B">
-          Кейс: KORU Pharma B2B
-        </span>
+        <span data-ru="KORU Pharma B2B — компания по производству собственных товаров эстетической медицины" data-en="KORU Pharma B2B — company for the production of own aesthetic medicine products">
+          KORU Pharma B2B — компания по производству собственных товаров эстетической медицины
       </h1>
-      <p class="hero-description">
-        <span data-ru="B2B-компания по производству товаров эстетической медицины: более 600 лидов из 100 стран в месяц, средняя цена лида $16.40!" 
-              data-en="B2B company producing aesthetic medicine products: more than 600 leads from 100 countries per month, average lead cost $16.40!">
-          B2B-компания по производству товаров эстетической медицины: более 600 лидов из 100 стран в месяц, средняя цена лида $16.40!
-        </span>
-      </p>
     </div>
   </section>
 
-  <section class="case-content animate-on-scroll">
+  <section class="case-content animate-on-scroll" style="padding-bottom: 20px;">
     <div class="case-text">
       <h2 data-ru="Задача клиента" data-en="Client's Task">🎯 Задача клиента</h2>
       <p data-ru="KORU Pharma — B2B-компания из Южной Кореи, производитель инъекционных препаратов с оборотом более $40 млн. (филлеры, мезо-препараты, липолитики и др.). Цель — усилить лидогенерацию в определенных рынках и удерживать количество лидов (NDA)." data-en="KORU Pharma — B2B company from South Korea, manufacturer of injection preparations with a turnover of more than $40 million (fillers, meso-preparations, lipolytics, etc.). Goal — to strengthen lead generation in certain markets and maintain the number of leads (NDA).">
@@ -461,7 +494,7 @@
       </p>
     </div>
     <div class="case-screenshot">
-      <img src="image (3).webp" alt="Скриншот кейса KORU Pharma">
+      <img src="image (3).webp" alt="Скриншот кейса KORU Pharma" style="cursor: pointer;" onclick="openModal(this.src)">
     </div>
     <p class="image-description" style="font-size: 0.8rem; margin-top: 0cm;">
         <span data-ru="Пример продаж за месяц Июль, 2025. Валюта: Корейский вон. 429 конверсии по стоимости 35.9к за конверсию (25$) США, Европа, Южная Америка, Австралия."
@@ -496,5 +529,53 @@
     </div>
   </div>
 
+<!-- Image Modal -->
+<div id="imageModal" class="image-modal">
+  <span class="close-modal" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+
+<script>
+function openModal(src) {
+  document.getElementById('modalImage').src = src;
+  document.getElementById('imageModal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('imageModal').classList.remove('show');
+}
+
+// Close modal when clicking outside
+document.getElementById('imageModal').addEventListener('click', function(event) {
+  if (event.target === this) {
+    closeModal();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Add event listeners for images to support both click and touch
+  document.querySelectorAll('img[onclick*="openModal"]').forEach(img => {
+    img.removeAttribute('onclick'); // Remove inline onclick
+    img.addEventListener('click', function() {
+      openModal(this.src);
+    });
+    img.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      openModal(this.src);
+    });
+  });
+
+  // Add event listeners for close buttons to support both click and touch
+  document.querySelectorAll('.close-modal').forEach(close => {
+    close.removeAttribute('onclick'); // Remove inline onclick
+    close.addEventListener('click', closeModal);
+    close.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      closeModal();
+    });
+  });
+});
+</script>
 </body>
 </html>
+

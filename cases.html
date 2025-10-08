@@ -3,10 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zilly Team - Кейсы EdTech</title>
+  <title>Zilly Team - Комплексный маркетинг под ключ для ниши запуска Инфопродуктов | P2P, + NDA PROJECT</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
+    .logo img{
+      max-width: 130px; /* Even further reduced desktop max width */
+    }
+    .menu-btn {
+      color: black;
+    }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: left;
+      padding: 95px 20px 80px; /* Adjusted top padding for even smaller header */
+      background: var(--light);
+     position: relative;
+    margin-bottom: -400px !important;
+
+    }
+    .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    margin-bottom: 24px;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 300px;
+}
     .section-title {
       font-size: clamp(3rem, 7vw, 4rem);
     }
@@ -118,6 +145,23 @@
       .cookie-consent-banner {
         padding: 15px;
       }
+      .hero{
+        margin-bottom: -600px !important;
+      }
+       .hero h1{
+        margin-bottom: 500px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 5px 5px!important;
+        height:90px;
+      }
+
+      img[alt*="Скриншот"] {
+        max-width: 250px !important;
+      }
     }
 
     .case-content {
@@ -134,12 +178,12 @@
     .case-text h2 {
       font-size: 2rem;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 0px;
       color: var(--text);
     }
 
     .case-text p, .case-text ul {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       line-height: 1.6;
     }
 
@@ -161,7 +205,7 @@
 
     .case-screenshot img {
       width: 100%;
-      max-width: 600px;
+      max-width: 560px;
       border-radius: 12px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.15);
       border: 2px solid #10b981;
@@ -171,7 +215,13 @@
       .case-content {
         flex-direction: column;
       }
+      
     }
+
+    .logo img{
+      max-width: 130px; /* Even further reduced desktop max width */
+    }
+
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -215,13 +265,6 @@
     }
   });
 
-  // Mobile Menu
-  const menuBtn = document.querySelector('.menu-btn');
-  const navContainer = document.querySelector('.nav-container');
-
-  menuBtn.addEventListener('click', () => {
-    navContainer.classList.toggle('active');
-  });
 
   // Language Toggle
   const langButtons = document.querySelectorAll('.lang-btn');
@@ -251,7 +294,7 @@
   // Scroll Animation
   const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -400px 0px'
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -264,6 +307,11 @@
 
   document.querySelectorAll('.animate-on-scroll').forEach(el => {
     observer.observe(el);
+  });
+
+  // Trigger animations immediately for visible elements
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    el.classList.add('animated');
   });
 
   window.addEventListener('scroll', () => {
@@ -381,11 +429,8 @@
   <section class="hero" id="case-detail-hero" style="background-color: white; color: var(--text);">
     <div class="hero-content animate-on-scroll">
       <h1>
-        <span data-ru="Кейсы EdTech" data-en="EdTech Cases">Кейсы EdTech</span>
+        <span data-ru="Комплексный маркетинг под ключ для ниши запуска Инфопродуктов | P2P, + NDA PROJECT" data-en="Turnkey comprehensive marketing for the infoproducts launch niche | P2P, + NDA PROJECT">Комплексный маркетинг под ключ для ниши запуска Инфопродуктов | P2P, + NDA PROJECT</span>
       </h1>
-      <p class="hero-description">
-        <span data-ru="Комплексный маркетинг под ключ для ниши запуска Инфопродуктов | P2P, Vadym.AI" data-en="Turnkey comprehensive marketing for the infoproducts launch niche | P2P, Vadym.AI">Комплексный маркетинг под ключ для ниши запуска Инфопродуктов | P2P, Vadym.AI</span>
-      </p>
     </div>
   </section>
 
@@ -395,20 +440,20 @@
         В P2P-проекте мы выступали как продюсеры под ключ: вместе с командой мы подготовили полноценную продающую воронку, включая все элементы Facebook-рекламы — от креативов и контента для Telegram и Instagram до найма мини-команды под задачи проекта. За 5 месяцев слаженной работы при бюджете $500–600 в месяц мы привлекли 1800 активных подписчиков в Telegram и вывели ежемесячный чек на уровень $4 500. Так как клиент начинал с нуля, без базы и без раскрученного экспертного Instagram, результат оказался действительно впечатляющим. Его стабильный доход продолжает расти ежемесячно.
       </p>
 
-      <img src="image.webp" alt="Скриншот кейса P2P Vadym.AI" style="width: 100%; max-width: 600px; margin: 20px 0; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 2px solid #10b981;">
+      <img src="image.webp" alt="Скриншот кейса P2P NDA PROJECT" style="width: 100%; max-width: 800px; margin: 15px 0; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 2px solid #10b981; cursor: pointer;" onclick="openModal(this.src)">
 
       <p data-ru="Первичные лиды на Польшу в телеграм выходили с $0.80 - $2.5. Подписка в ТГ в среднем 1.5$ в нише P2P арбитража. На старте проекта мы собрали лучшее качество трафика, перебрали 35 рекламных креативов и нашли рабочий, дающий как качество так и количество на масштабе. До сих пор делаем все рекламные макеты в таком же формате." data-en="Primary leads to Poland in Telegram came out at $0.80 - $2.5. Subscription in TG averages $1.5 in the P2P arbitrage niche. At the start of the project, we collected the best traffic quality, went through 35 advertising creatives and found a working one that gives both quality and quantity on scale. We still make all advertising layouts in the same format.">
         <em>Первичные лиды на Польшу в телеграм выходили с $0.80 - $2.5. Подписка в ТГ в среднем 1.5$ в нише P2P арбитража. На старте проекта мы собрали лучшее качество трафика, перебрали 35 рекламных креативов и нашли рабочий, дающий как качество так и количество на масштабе. До сих пор делаем все рекламные макеты в таком же формате.</em>
       </p>
 
-      <h2 data-ru="Проект **«Эксперт в нише AI», часть информации под NDA**" data-en="Project **"Expert in the AI niche", part of the information under NDA**">Проект **«Эксперт в нише AI», часть информации под NDA**</h2>
+      <h2 data-ru="NDA PROJECT" data-en="NDA PROJECT">NDA PROJECT</h2>
 
-      <p data-ru="Профиль и наш рекламный креатив подготовленный совместно с его командой командой" data-en="Profile and our advertising creative prepared jointly with his team team">
-        <a href="https://www.instagram.com/reel/DE5OAm8Nt0Z/?igsh=bjdlczJxODlxN2c1" target="_blank">Профиль и наш рекламный креатив подготовленный совместно с его командой командой</a> (клик)
+      <p data-ru="<a href='https://www.instagram.com/reel/DE5OAm8Nt0Z/?igsh=bjdlczJxODlxN2c1' target='_blank'>Профиль и наш рекламный креатив подготовленный совместно с его командой</a>" data-en="<a href='https://www.instagram.com/reel/DE5OAm8Nt0Z/?igsh=bjdlczJxODlxN2c1' target='_blank'>Profile and our advertising creative prepared jointly with his team team</a>">
+        <a href="https://www.instagram.com/reel/DE5OAm8Nt0Z/?igsh=bjdlczJxODlxN2c1" target="_blank">Профиль и наш рекламный креатив подготовленный совместно с его командой</a>
       </p>
 
-      <p data-ru="Ко мне обратился украинский предприниматель, владелец технологической компании и лауреат списка **Forbes 30 Under 30 Украина**. Вместе с партнёром он запускал инфопродукт в нише AI-автоматизации и с самого начала обратился ко мне как к эксперту по трафику." data-en="A Ukrainian entrepreneur, owner of a technology company and laureate of the **Forbes 30 Under 30 Ukraine** list, approached me. Together with a partner, he was launching an infoproduct in the AI automation niche and from the very beginning turned to me as a traffic expert.">
-        Ко мне обратился украинский предприниматель, владелец технологической компании и лауреат списка **Forbes 30 Under 30 Украина**. Вместе с партнёром он запускал инфопродукт в нише AI-автоматизации и с самого начала обратился ко мне как к эксперту по трафику.
+      <p data-ru="Ко мне обратился украинский предприниматель, владелец технологической компании и лауреат списка <strong>Forbes 30 Under 30 Украина</strong>. Вместе с партнёром он запускал инфопродукт в нише AI-автоматизации и с самого начала обратился ко мне как к эксперту по трафику." data-en="A Ukrainian entrepreneur, owner of a technology company and laureate of the <strong>Forbes 30 Under 30 Ukraine</strong> list, approached me. Together with a partner, he was launching an infoproduct in the AI automation niche and from the very beginning turned to me as a traffic expert.">
+        Ко мне обратился украинский предприниматель, владелец технологической компании и лауреат списка <strong>Forbes 30 Under 30 Украина</strong>. Вместе с партнёром он запускал инфопродукт в нише AI-автоматизации и с самого начала обратился ко мне как к эксперту по трафику.
       </p>
 
       <p data-ru="Партнерство с таким высококлассным экспертом дала нам колоссальный опыт в понимание воронок и построение профитного инфопродукта. Со стороны таргетированной рекламы мы смогли не только привлечь покупающих лидов, но и масштабировать поток заявок вплоть до 800-1000$ рекламных затрат в день." data-en="Partnership with such a high-class expert gave us colossal experience in understanding funnels and building a profitable infoproduct. From the side of targeted advertising, we were able not only to attract buying leads, but also to scale the flow of applications up to 800-1000$ advertising costs per day.">
@@ -419,13 +464,13 @@
         Как это было? (ссылки и скрины ниже)
       </p>
 
-      <img src="image (1).webp" alt="Скриншот кейса Эксперт в нише AI 1" style="width: 100%; max-width: 600px; margin: 20px 0; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 2px solid #10b981;">
+      <img src="image (1).webp" alt="Скриншот кейса NDA PROJECT 1" style="width: 100%; max-width: 800px; margin: 15px 0; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 2px solid #10b981; cursor: pointer;" onclick="openModal(this.src)">
 
       <p data-ru="Здесь мы тестили вначале запуски через мини-продукт. Бюджет в 1232$ здесь как ежедневный." data-en="Here we initially tested launches through a mini-product. The budget of $1232 here is daily.">
         <em>Здесь мы тестили вначале запуски через мини-продукт. Бюджет в 1232$ здесь как ежедневный.</em>
       </p>
 
-      <img src="image (2).webp" alt="Скриншот кейса Эксперт в нише AI 2" style="width: 100%; max-width: 600px; margin: 20px 0; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 2px solid #10b981;">
+      <img src="image (2).webp" alt="Скриншот кейса NDA PROJECT 2" style="width: 100%; max-width: 800px; margin: 15px 0; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 2px solid #10b981; cursor: pointer;" onclick="openModal(this.src)">
 
       <p data-ru="Здесь видны вся математика за полтора месяца. Затраты на рекламу только вышли 19000$" data-en="Here you can see all the math for one and a half months. Advertising costs came out to only $19,000">
         Здесь видны вся математика за полтора месяца. Затраты на рекламу только вышли 19000$
@@ -452,11 +497,11 @@
         Проект получил мощный результат за счёт высокой экспертности, его глубоких знаний в сфере AI-автоматизаций и умения доносить практическую ценность информации до аудитории.
       </p>
 
-      <p data-ru="**Наша ЦА:** предприниматели, владельцы бизнеса, фрилансеры, а также люди, желающие освоить профессию в автоматизации бизнес-процессов и применении искусственного интеллекта. Контент крайне высокого качества, а воронка строилась исключительно через Telegram-бота и вебинар — без Instagram, сторис или прямых продаж от эксперта." data-en="**Our target audience:** entrepreneurs, business owners, freelancers, as well as people who want to master the profession in business process automation and artificial intelligence application. The content is extremely high quality, and the funnel was built exclusively through the Telegram bot and webinar — without Instagram, stories or direct sales from the expert.">
+      <p data-ru="<strong>Наша ЦА:</strong> предприниматели, владельцы бизнеса, фрилансеры, а также люди, желающие освоить профессию в автоматизации бизнес-процессов и применении искусственного интеллекта. Контент крайне высокого качества, а воронка строилась исключительно через Telegram-бота и вебинар — без Instagram, сторис или прямых продаж от эксперта." data-en="<strong>Our target audience:</strong> entrepreneurs, business owners, freelancers, as well as people who want to master the profession in business process automation and artificial intelligence application. The content is extremely high quality, and the funnel was built exclusively through the Telegram bot and webinar — without Instagram, stories or direct sales from the expert.">
         <strong>Наша ЦА:</strong> предприниматели, владельцы бизнеса, фрилансеры, а также люди, желающие освоить профессию в автоматизации бизнес-процессов и применении искусственного интеллекта. Контент крайне высокого качества, а воронка строилась исключительно через Telegram-бота и вебинар — без Instagram, сторис или прямых продаж от эксперта.
       </p>
 
-      <p data-ru="**ГЕО воронки:** Польша, Украина, Прибалтика, Франция, Германия." data-en="**Funnel GEO:** Poland, Ukraine, Baltics, France, Germany.">
+      <p data-ru="<strong>ГЕО воронки:</strong> Польша, Украина, Прибалтика, Франция, Германия." data-en="<strong>Funnel GEO:</strong> Poland, Ukraine, Baltics, France, Germany.">
         <strong>ГЕО воронки:</strong> Польша, Украина, Прибалтика, Франция, Германия.
       </p>
 
@@ -495,6 +540,56 @@
     </div>
   </div>
 
+<!-- Image Modal -->
+<div id="imageModal" class="image-modal">
+  <span class="close-modal" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+
 <script src="script.js"></script>
+<script>
+function openModal(src) {
+  document.getElementById('modalImage').src = src;
+  document.getElementById('imageModal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('imageModal').classList.remove('show');
+}
+
+// Close modal when clicking outside
+document.getElementById('imageModal').addEventListener('click', function(event) {
+  if (event.target === this) {
+    closeModal();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Add event listeners for images to support both click and touch
+  document.querySelectorAll('img[onclick*="openModal"]').forEach(img => {
+    img.removeAttribute('onclick'); // Remove inline onclick
+    img.addEventListener('click', function() {
+      openModal(this.src);
+    });
+    img.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      openModal(this.src);
+    });
+  });
+
+  // Add event listeners for close buttons to support both click and touch
+  document.querySelectorAll('.close-modal').forEach(close => {
+    close.removeAttribute('onclick'); // Remove inline onclick
+    close.addEventListener('click', closeModal);
+    close.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      closeModal();
+    });
+  });
+});
+</script>
 </body>
 </html>
+
+
+

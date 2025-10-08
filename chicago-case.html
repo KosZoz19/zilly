@@ -3,10 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zilly Team - Кейс: Чикаго</title>
+  <title>Zilly Team - Люксовая Стоматология в Чикаго, США</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
+    .logo img{
+      max-width: 130px; /* Even further reduced desktop max width */
+    }
+    .hero-text-group{
+      margin-bottom:200px;
+    }
+    .case-text{
+      margin-top:-350px !important;
+    }
     .section-title {
       font-size: clamp(3rem, 7vw, 4rem);
     }
@@ -105,6 +114,11 @@
     }
 
     @media (max-width: 768px) {
+      header {
+        padding: 5px 5px;
+        height: 90px;
+      }
+
       .cookie-consent-content {
         flex-direction: column;
         text-align: center;
@@ -118,59 +132,14 @@
       .cookie-consent-banner {
         padding: 15px;
       }
-    }
-
-    .case-content {
-      display: flex;
-      gap: 40px;
-      align-items: flex-start;
-      margin: 60px 0;
-    }
-
-    .case-text {
+       .case-text {
       flex: 1;
+      margin-top:-350px !important;
     }
 
-    .case-text h2 {
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: var(--text);
+    img[alt*="Скриншот"] {
+      max-width: 250px !important;
     }
-
-    .case-text p, .case-text ul {
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
-
-    .case-text ul {
-      padding-left: 20px;
-    }
-
-    .case-text li {
-      margin-bottom: 10px;
-    }
-
-    .case-screenshot {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .case-screenshot img {
-      width: 100%;
-      max-width: 600px;
-      border-radius: 12px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-      border: 2px solid #10b981;
-      margin: 0 auto;
-    }
-
-    @media (max-width: 768px) {
-      .case-content {
-        flex-direction: column;
-      }
     }
   </style>
   <script>
@@ -215,13 +184,6 @@
     }
   });
 
-  // Mobile Menu
-  const menuBtn = document.querySelector('.menu-btn');
-  const navContainer = document.querySelector('.nav-container');
-  
-  menuBtn.addEventListener('click', () => {
-    navContainer.classList.toggle('active');
-  });
 
   // Language Toggle
   const langButtons = document.querySelectorAll('.lang-btn');
@@ -250,8 +212,8 @@
 
   // Scroll Animation
   const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0,
+    rootMargin: '0px 0px -1000px 0px'
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -380,20 +342,22 @@
 
   <section class="hero" id="case-detail-hero" style="background-color: white; color: var(--text);">
     <div class="hero-content animate-on-scroll">
-      <h1>
-        <span data-ru="Кейс: Чикаго" data-en="Case: Chicago">
-          Кейс: Чикаго
-        </span>
-      </h1>
-      <p class="hero-description">
-        <span data-ru="Стоматологическая клиника: привлечение пациентов и заполнение расписания на месяц вперёд!" data-en="Dental clinic: attracting patients and filling the schedule a month in advance!">
-          Стоматологическая клиника: привлечение пациентов и заполнение расписания на месяц вперёд!
-        </span>
-      </p>
+      <div class="hero-text-group">
+        <h1>
+          <span data-ru="Люксовая Стоматология в Чикаго, США" data-en="Luxury Dentistry in Chicago, USA">
+            Люксовая Стоматология в Чикаго, США
+          </span>
+        </h1>
+        <p class="hero-description">
+          <span data-ru="Стоматологическая клиника: привлечение пациентов и заполнение расписания на месяц вперёд!" data-en="Dental clinic: attracting patients and filling the schedule a month in advance!">
+            Стоматологическая клиника: привлечение пациентов и заполнение расписания на месяц вперёд!
+          </span>
+        </p>
+      </div>
     </div>
   </section>
 
-  <section class="case-content animate-on-scroll">
+  <section class="case-content animate-on-scroll animated">
     <div class="case-text">
       <h2 data-ru="Задача клиента" data-en="Client's Task">🎯 Задача клиента</h2>
       <p data-ru="Клиника поставила задачу — сформировать стабильный поток новых пациентов и заполнить расписание на месяц вперёд. Ранее привлечение клиентов шло нерегулярно и зависело в основном от сарафанного радио и локальных акций. Бюджет на запуск был ограничен, поэтому важно было получить максимум результата за минимальные вложения." data-en="The clinic set the task — to form a stable flow of new patients and fill the schedule a month in advance. Previously, attracting clients was irregular and depended mainly on word of mouth and local promotions. The launch budget was limited, so it was important to get maximum results for minimal investments.">
@@ -402,17 +366,17 @@
       
       <h2 data-ru="Наш подход" data-en="Our Approach">🧠 Наш подход</h2>
       <ul>
-        <li data-ru="Мы запустили **несколько рекламных кампаний** в Facebook и Instagram, протестировав разные сегменты аудитории: локальных жителей Lincoln Park, семьи, а также предпринимателей и офисных сотрудников поблизости." data-en="We launched **several advertising campaigns** on Facebook and Instagram, testing different audience segments: local residents of Lincoln Park, families, as well as entrepreneurs and office employees nearby.">
-          Мы запустили **несколько рекламных кампаний** в Facebook и Instagram, протестировав разные сегменты аудитории: локальных жителей Lincoln Park, семьи, а также предпринимателей и офисных сотрудников поблизости.
+        <li data-ru="Мы запустили <strong>несколько рекламных кампаний</strong> в Facebook и Instagram, протестировав разные сегменты аудитории: локальных жителей Lincoln Park, семьи, а также предпринимателей и офисных сотрудников поблизости." data-en="We launched <strong>several advertising campaigns</strong> on Facebook and Instagram, testing different audience segments: local residents of Lincoln Park, families, as well as entrepreneurs and office employees nearby.">
+          Мы запустили <strong>несколько рекламных кампаний</strong> в Facebook и Instagram, протестировав разные сегменты аудитории: локальных жителей Lincoln Park, семьи, а также предпринимателей и офисных сотрудников поблизости.
         </li>
-        <li data-ru="В качестве оффера были использованы **консультации и процедуры со скидкой** для новых клиентов, что позволило привлечь внимание аудитории, которая обычно откладывает поход к стоматологу." data-en="As an offer, **consultations and procedures with a discount** were used for new clients, which allowed attracting the attention of the audience that usually postpones going to the dentist.">
-          В качестве оффера были использованы **консультации и процедуры со скидкой** для новых клиентов, что позволило привлечь внимание аудитории, которая обычно откладывает поход к стоматологу.
+        <li data-ru="В качестве оффера были использованы <strong>консультации и процедуры со скидкой</strong> для новых клиентов, что позволило привлечь внимание аудитории, которая обычно откладывает поход к стоматологу." data-en="As an offer, <strong>consultations and procedures with a discount</strong> were used for new clients, which allowed attracting the attention of the audience that usually postpones going to the dentist.">
+          В качестве оффера были использованы <strong>консультации и процедуры со скидкой</strong> для новых клиентов, что позволило привлечь внимание аудитории, которая обычно откладывает поход к стоматологу.
         </li>
         <li data-ru="Визуалы и тексты креативов делали акцент на результатах: «Улыбка до и после», «Регулярный уход = экономия в будущем», «Современные технологии и комфорт»." data-en="Visuals and creative texts emphasized results: "Smile before and after", "Regular care = savings in the future", "Modern technologies and comfort".">
           Визуалы и тексты креативов делали акцент на результатах: «Улыбка до и после», «Регулярный уход = экономия в будущем», «Современные технологии и комфорт».
         </li>
-        <li data-ru="Воронка была построена через **запись в один клик** → звонок → подтверждение администратора." data-en="The funnel was built through **one-click booking** → call → administrator confirmation.">
-          Воронка была построена через **запись в один клик** → звонок → подтверждение администратора.
+        <li data-ru="Воронка была построена через <strong>запись в один клик</strong> → звонок → подтверждение администратора." data-en="The funnel was built through <strong>one-click booking</strong> → call → administrator confirmation.">
+          Воронка была построена через <strong>запись в один клик</strong> → звонок → подтверждение администратора.
         </li>
         <li data-ru="Мы ежедневно анализировали метрики, отключали слабые объявления и усиливали те, что приносили лучший результат." data-en="We analyzed metrics daily, turned off weak ads and strengthened those that brought the best results.">
           Мы ежедневно анализировали метрики, отключали слабые объявления и усиливали те, что приносили лучший результат.
@@ -420,28 +384,28 @@
       </ul>
 
       <h2 data-ru="Ключевые метрики" data-en="Key Metrics">📊 Ключевые метрики</h2>
-      <img src="be313828-6d4e-46e8-a98a-f4c09e9934d1.webp" alt="Скриншот метрик кейса Чикаго" style="width: 100%; max-width: 600px; margin: 20px 0; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 2px solid #10b981;">
+      <img src="be313828-6d4e-46e8-a98a-f4c09e9934d1.webp" alt="Скриншот метрик кейса Чикаго" style="width: 100%; max-width: 560px; margin: 20px 0; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 2px solid #10b981; cursor: pointer;" onclick="openModal(this.src)">
       <ul>
-        <li data-ru="Более **1 100 кликов по объявлениям**" data-en="More than **1,100 clicks on ads**">
-          Более **1 100 кликов по объявлениям**
+        <li data-ru="Более <strong>1 100 кликов по объявлениям</strong>" data-en="More than <strong>1,100 clicks on ads</strong>">
+          Более <strong>1 100 кликов по объявлениям</strong>
         </li>
-        <li data-ru="Средняя цена за результат: **$2.56–$3.87** (по сегментам)" data-en="Average cost per result: **$2.56–$3.87** (by segments)">
-          Средняя цена за результат: **$2.56–$3.87** (по сегментам)
+        <li data-ru="Средняя цена за результат: <strong>$2.56–$3.87</strong> (по сегментам)" data-en="Average cost per result: <strong>$2.56–$3.87</strong> (by segments)">
+          Средняя цена за результат: <strong>$2.56–$3.87</strong> (по сегментам)
         </li>
-        <li data-ru="Лучшие кампании показали **CTR до 33%** и **Hook Rate более 40%**" data-en="The best campaigns showed **CTR up to 33%** and **Hook Rate over 40%**">
-          Лучшие кампании показали **CTR до 33%** и **Hook Rate более 40%**
+        <li data-ru="Лучшие кампании показали <strong>CTR до 33%</strong> и <strong>Hook Rate более 40%</strong>" data-en="The best campaigns showed <strong>CTR up to 33%</strong> and <strong>Hook Rate over 40%</strong>">
+          Лучшие кампании показали <strong>CTR до 33%</strong> и <strong>Hook Rate более 40%</strong>
         </li>
         <li data-ru="При бюджете от $50–150 в день удалось стабильно удерживать низкую цену за результат и масштабировать кампании" data-en="With a budget of $50–150 per day, it was possible to consistently maintain a low cost per result and scale campaigns">
           При бюджете от $50–150 в день удалось стабильно удерживать низкую цену за результат и масштабировать кампании
         </li>
-        <li data-ru="В результате за месяц было получено **несколько сотен заявок**, что позволило клинике полностью закрыть расписание и сформировать очередь вперёд" data-en="As a result, **several hundred applications** were received per month, which allowed the clinic to completely close the schedule and form a queue ahead">
-          В результате за месяц было получено **несколько сотен заявок**, что позволило клинике полностью закрыть расписание и сформировать очередь вперёд
+        <li data-ru="В результате за месяц было получено <strong>несколько сотен заявок</strong>, что позволило клинике полностью закрыть расписание и сформировать очередь вперёд" data-en="As a result, <strong>several hundred applications</strong> were received per month, which allowed the clinic to completely close the schedule and form a queue ahead">
+          В результате за месяц было получено <strong>несколько сотен заявок</strong>, что позволило клинике полностью закрыть расписание и сформировать очередь вперёд
         </li>
       </ul>
 
       <h2 data-ru="Вывод" data-en="Conclusion">✅ Вывод</h2>
-      <p data-ru="Правильная упаковка оффера и работа с визуалами, акцент на проблемах и страхах аудитории («боль зубов», «дорогое лечение без профилактики»), а также грамотная оптимизация кампаний позволили *The Chicago Dental Studio* достичь цели - **полная запись пациентов на месяц вперёд уже в первый месяц запуска рекламы**. Клиника осталась довольна результатом и планирует расширение кампаний на новые направления стоматологических услуг." data-en="Proper offer packaging and work with visuals, emphasis on the problems and fears of the audience ("tooth pain", "expensive treatment without prevention"), as well as competent campaign optimization allowed *The Chicago Dental Studio* to achieve the goal - **full patient booking a month in advance already in the first month of advertising launch**. The clinic was satisfied with the result and plans to expand campaigns to new areas of dental services.">
-        Правильная упаковка оффера и работа с визуалами, акцент на проблемах и страхах аудитории («боль зубов», «дорогое лечение без профилактики»), а также грамотная оптимизация кампаний позволили *The Chicago Dental Studio* достичь цели - **полная запись пациентов на месяц вперёд уже в первый месяц запуска рекламы**. Клиника осталась довольна результатом и планирует расширение кампаний на новые направления стоматологических услуг.
+      <p data-ru="Правильная упаковка оффера и работа с визуалами, акцент на проблемах и страхах аудитории («боль зубов», «дорогое лечение без профилактики»), а также грамотная оптимизация кампаний позволили *The Chicago Dental Studio* достичь цели - <strong>полная запись пациентов на месяц вперёд уже в первый месяц запуска рекламы</strong>. Клиника осталась довольна результатом и планирует расширение кампаний на новые направления стоматологических услуг." data-en="Proper offer packaging and work with visuals, emphasis on the problems and fears of the audience ("tooth pain", "expensive treatment without prevention"), as well as competent campaign optimization allowed *The Chicago Dental Studio* to achieve the goal - <strong>full patient booking a month in advance already in the first month of advertising launch</strong>. The clinic was satisfied with the result and plans to expand campaigns to new areas of dental services.">
+        Правильная упаковка оффера и работа с визуалами, акцент на проблемах и страхах аудитории («боль зубов», «дорогое лечение без профилактики»), а также грамотная оптимизация кампаний позволили *The Chicago Dental Studio* достичь цели - <strong>полная запись пациентов на месяц вперёд уже в первый месяц запуска рекламы</strong>. Клиника осталась довольна результатом и планирует расширение кампаний на новые направления стоматологических услуг.
       </p>
     </div>
   </section>
@@ -471,6 +435,53 @@
     </div>
   </div>
 
+<!-- Image Modal -->
+<div id="imageModal" class="image-modal">
+  <span class="close-modal" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+
 <script src="script.js"></script>
+<script>
+function openModal(src) {
+  document.getElementById('modalImage').src = src;
+  document.getElementById('imageModal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('imageModal').classList.remove('show');
+}
+
+// Close modal when clicking outside
+document.getElementById('imageModal').addEventListener('click', function(event) {
+  if (event.target === this) {
+    closeModal();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Add event listeners for images to support both click and touch
+  document.querySelectorAll('img[onclick*="openModal"]').forEach(img => {
+    img.removeAttribute('onclick'); // Remove inline onclick
+    img.addEventListener('click', function() {
+      openModal(this.src);
+    });
+    img.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      openModal(this.src);
+    });
+  });
+
+  // Add event listeners for close buttons to support both click and touch
+  document.querySelectorAll('.close-modal').forEach(close => {
+    close.removeAttribute('onclick'); // Remove inline onclick
+    close.addEventListener('click', closeModal);
+    close.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      closeModal();
+    });
+  });
+});
+</script>
 </body>
 </html>

@@ -3,10 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zilly Team - Кейс: L'AURUM Beauty Studio</title>
+  <title>Zilly Team - L'AURUM Beauty Studio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
+    .logo img{
+      max-width: 130px; /* Even further reduced desktop max width */
+    }
+    .hero h1 {
+      margin-bottom:200px !important;
+    }
+    .case-text{
+      margin-top: -300px !important;
+      margin-bottom:-400px;
+    }
     @media (min-width: 768px) {
       .case-content {
         flex-direction: column;
@@ -18,11 +28,13 @@
       flex-direction: column;
       gap: 20px;
       align-items: center;
+      margin-top: 400px;
+      padding-bottom:20px;
     }
 
     .case-screenshot img {
       width: 100%;
-      max-width: 400px;
+      max-width: 560px;
     }
 
     .case-screenshot video {
@@ -36,7 +48,52 @@
         justify-content: center;
       }
     }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 5px 5px;
+        height: 90px;
+      }
+       .hero h1{
+        margin-top:-100px !important;
+      }
+       .case-text {
+      flex: 1;
+      margin-top:-400px !important;
+    }
+
+    .case-screenshot img {
+      max-width: 250px !important;
+    }
+    }
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // Scroll Animation
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Immediately animate close elements like case-content
+      document.querySelectorAll('.case-content.animate-on-scroll').forEach(el => {
+        el.classList.add('animated');
+      });
+    });
+  </script>
 </head>
 <body>
   <header style="background-color: white;">
@@ -63,20 +120,14 @@
   <section class="hero" id="case-detail-hero" style="background-color: white; color: var(--text);">
     <div class="hero-content animate-on-scroll">
       <h1>
-        <span data-ru="Кейс: L'AURUM (USA) — студия перманентного макияжа в Калифорнии" data-en="Case: L'AURUM (USA) — Permanent Makeup Studio in California">
-          Кейс: L'AURUM (USA) — студия перманентного макияжа в Калифорнии
+        <span data-ru="L'AURUM (USA) — студия перманентного макияжа в Калифорнии" data-en="L'AURUM (USA) — Permanent Makeup Studio in California">
+          L'AURUM (USA) — студия перманентного макияжа в Калифорнии
         </span>
       </h1>
-      <p class="hero-description">
-        <span data-ru="L'AURUM — студия перманентного макияжа в Калифорнии, специализирующаяся на премиальных услугах. Цель — привлечь новых клиентов через таргетированную рекламу в Instagram, повысить узнаваемость бренда и увеличить количество записей на процедуры." 
-              data-en="L'AURUM — a permanent makeup studio in California specializing in premium services. Goal — attract new clients through targeted Instagram ads, increase brand awareness and boost appointment bookings.">
-          L'AURUM — студия перманентного макияжа в Калифорнии, специализирующаяся на премиальных услугах. Цель — привлечь новых клиентов через таргетированную рекламу в Instagram, повысить узнаваемость бренда и увеличить количество записей на процедуры.
-        </span>
-      </p>
     </div>
   </section>
 
-  <section class="case-content animate-on-scroll">
+  <section class="case-content animate-on-scroll" style="padding-bottom: 20px;">
     <div class="case-text">
       <h2 data-ru="Задача клиента" data-en="Client's Task">🎯 Задача клиента</h2>
       <p data-ru="L'AURUM — студия перманентного макияжа в Калифорнии, специализирующаяся на премиальных услугах. Цель — привлечь новых клиентов через таргетированную рекламу в Instagram, повысить узнаваемость бренда и увеличить количество записей на процедуры." data-en="L'AURUM — a permanent makeup studio in California specializing in premium services. Goal — attract new clients through targeted Instagram ads, increase brand awareness and boost appointment bookings.">
@@ -127,14 +178,14 @@
       </p>
     </div>
     <div class="case-screenshot">
-      <img src="image (4).webp" alt="Скриншот кейса L'AURUM">
+      <img src="image (4).webp" alt="Скриншот кейса L'AURUM" style="cursor: pointer;" onclick="openModal(this.src)">
       <p class="image-description">
         <span data-ru="Пример рекламного креатива" data-en="Example ad creative">
           Пример рекламного креатива
         </span>
       </p>
       <video controls style="width: 100%; max-height: 400px; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 2px solid #10b981; object-fit: contain;">
-        <source src="video-from-freeconvert_xgpu1Iu9.mp4" type="video/mp4">
+        <source src="Video_from_FreeConvert.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </div>
@@ -165,7 +216,53 @@
     </div>
   </div>
 
-<script src="script.js"></script>
-</body>
+<!-- Image Modal -->
+<div id="imageModal" class="image-modal">
+  <span class="close-modal" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
 
+<script src="script.js"></script>
+<script>
+function openModal(src) {
+  document.getElementById('modalImage').src = src;
+  document.getElementById('imageModal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('imageModal').classList.remove('show');
+}
+
+// Close modal when clicking outside
+document.getElementById('imageModal').addEventListener('click', function(event) {
+  if (event.target === this) {
+    closeModal();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Add event listeners for images to support both click and touch
+  document.querySelectorAll('img[onclick*="openModal"]').forEach(img => {
+    img.removeAttribute('onclick'); // Remove inline onclick
+    img.addEventListener('click', function() {
+      openModal(this.src);
+    });
+    img.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      openModal(this.src);
+    });
+  });
+
+  // Add event listeners for close buttons to support both click and touch
+  document.querySelectorAll('.close-modal').forEach(close => {
+    close.removeAttribute('onclick'); // Remove inline onclick
+    close.addEventListener('click', closeModal);
+    close.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      closeModal();
+    });
+  });
+});
+</script>
+</body>
 </html>
